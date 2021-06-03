@@ -9,14 +9,14 @@ public class Publicacion {
 	private Inmueble inmueble;
 	private Calendar fechaInicio;
 	private Calendar fechaFin;
-	private int checkIn;
-	private int checkOut;
+	private Calendar checkIn;
+	private Calendar checkOut;
 	private ArrayList<Foto> fotos;
 	private ArrayList<PrecioPeriodo> precio;
 	private ArrayList<Periodo> periodoOcupado;
 	private ArrayList<Observer> observadorBajaPrecio;
 	
-	public Publicacion(Inmueble inmueble, Calendar inicio, Calendar fin, Integer checkIn, Integer checkOut, ArrayList<Foto> fotos, ArrayList<PrecioPeriodo> precio) {
+	public Publicacion(Inmueble inmueble, Calendar inicio, Calendar fin, Calendar checkIn, Calendar checkOut, ArrayList<Foto> fotos, ArrayList<PrecioPeriodo> precio) {
 		this.inmueble = inmueble;
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;

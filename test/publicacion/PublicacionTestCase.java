@@ -22,8 +22,8 @@ class PublicacionTestCase {
 	Calendar fin;
 	ArrayList<Foto> fotos;
 	ArrayList<PrecioPeriodo> precio;
-	Integer checkIn;
-	Integer checkOut;
+	Calendar checkIn;
+	Calendar checkOut;
 	Calendar inicioOcupacion;
 	Calendar finOcupacion;
 	
@@ -41,8 +41,8 @@ class PublicacionTestCase {
 		fin = mock(Calendar.class);
 		fotos = new ArrayList<Foto>();
 		precio = new ArrayList<PrecioPeriodo>();
-		checkIn = 1000;
-		checkOut= 1800;
+		checkIn = mock(Calendar.class);
+		checkOut= mock(Calendar.class);
 		inicioOcupacion = mock(Calendar.class);
 		finOcupacion = mock(Calendar.class);
 		
