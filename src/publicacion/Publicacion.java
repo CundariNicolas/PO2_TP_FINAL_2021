@@ -37,7 +37,7 @@ public class Publicacion {
 	}
 
 	public ArrayList<Periodo> getPeriodosOcupados() {
-		// TODO Auto-generated method stub
+		
 		return periodoOcupado;
 	}
 	

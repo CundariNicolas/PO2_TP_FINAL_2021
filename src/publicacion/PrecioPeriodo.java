@@ -4,9 +4,9 @@ import java.util.Calendar;
 
 public class PrecioPeriodo {
 	
-	Calendar fechaInicio;
-	Calendar fechaFin;
-	Integer precio;
+	private Calendar fechaInicio;
+	private Calendar fechaFin;
+	private Integer precio;
 	
 	public PrecioPeriodo(Calendar inicio, Calendar fin,Integer precio) {
 		this.fechaInicio = inicio;
