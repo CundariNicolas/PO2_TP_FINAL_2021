@@ -12,25 +12,43 @@ import org.junit.jupiter.api.Test;
 import inmueble.Inmueble;
 
 class PublicacionTestCase {
-	/* DOC */
-	Inmueble inmueble1 = mock(Inmueble.class);
-	Calendar inicio = mock(Calendar.class);
-	Calendar fin = mock(Calendar.class);
-	ArrayList<Foto> fotos = new ArrayList<Foto>();
-	ArrayList<PrecioPeriodo> precio = new ArrayList<PrecioPeriodo>();
-	Integer checkIn = 1000;
-	Integer checkOut= 1800;
-	Calendar inicioOcupacion = mock(Calendar.class);
-	Calendar finOcupacion = mock(Calendar.class);
 	
 	/*SUT*/
-	Publicacion publicacion1 = new Publicacion(inmueble1, inicio, fin,checkIn, checkOut, fotos, precio);
+	Publicacion publicacion1;
+	
+	/*DOC */
+	Inmueble inmueble1;
+	Calendar inicio;
+	Calendar fin;
+	ArrayList<Foto> fotos;
+	ArrayList<PrecioPeriodo> precio;
+	Integer checkIn;
+	Integer checkOut;
+	Calendar inicioOcupacion;
+	Calendar finOcupacion;
+	
+	
+	
 	@BeforeEach
 	void setUp() throws Exception {
 	}
 
 	@Test
 	void testRegistrarOcupacion() {
+		 // SUT
+		inmueble1 = mock(Inmueble.class);
+		inicio = mock(Calendar.class);
+		fin = mock(Calendar.class);
+		fotos = new ArrayList<Foto>();
+		precio = new ArrayList<PrecioPeriodo>();
+		checkIn = 1000;
+		checkOut= 1800;
+		inicioOcupacion = mock(Calendar.class);
+		finOcupacion = mock(Calendar.class);
+		
+		publicacion1 = new Publicacion(inmueble1, inicio, fin,checkIn, checkOut, fotos, precio);
+		
+		
 	//Excercise
 		publicacion1.registrarOcupacion(inicioOcupacion, finOcupacion);
 	//Verify
