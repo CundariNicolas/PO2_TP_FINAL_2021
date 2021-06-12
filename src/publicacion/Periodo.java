@@ -9,18 +9,27 @@ public class Periodo {
 	
 	
 	public Periodo(Calendar inicio, Calendar fin) {
-		
-		this.fechaInicio = inicio;
-		this.fechaFin = fin;
+		/**Crea un periodo a partir de dos fechas, si el primer parametro de las fechas es posterior al parametro fin,
+		 * los revierte para crear el periodo de inicio a fin.
+		 * 
+		 */
+		if(fin.before(inicio)) {
+			this.fechaInicio = inicio;
+			this.fechaFin = fin;
+		}
+		else {
+			this.fechaInicio = inicio;
+			this.fechaFin = fin;
+		}
 		
 	}
 	
-	public Calendar fechaInicio() {
+	public Calendar getFechaInicio() {
 		
 		return fechaInicio;
 		
 	}
-	public Calendar fechaFin() {
+	public Calendar getFechaFin() {
 		
 		return fechaFin;
 		

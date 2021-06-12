@@ -11,6 +11,7 @@ public class Foto {
 	private Integer alto;
 	
 	
+	
 	public Foto(String path, boolean marca360, Calendar fecha, Integer ancho, Integer alto) {
 		
 		this.path = path;

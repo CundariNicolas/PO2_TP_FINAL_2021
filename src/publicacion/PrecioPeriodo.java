@@ -9,11 +9,24 @@ public class PrecioPeriodo {
 	private Integer precio;
 	
 	public PrecioPeriodo(Calendar inicio, Calendar fin,Integer precio) {
-		this.fechaInicio = inicio;
+		this.fechaInicio= inicio;
 		this.fechaFin = fin;
 		this.precio = precio;
 	}
-	
+
+	public Calendar getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public Calendar getFechaFin() {
+		return fechaFin;
+	}
+
+	public Integer getPrecio() {
+		return precio;
+	}
+
+
 	
 	
 
