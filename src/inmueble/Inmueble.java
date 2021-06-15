@@ -3,11 +3,12 @@ package inmueble;
 import java.util.ArrayList;
 
 import formasDePago.FormaDePago;
+import tipoInmueble.TipoDeInmueble;
 
 public class Inmueble {
 	private ArrayList<FormaDePago> formaDePago;
 
-	public Inmueble() {
+	public Inmueble(TipoDeInmueble tipoInmueble,float superficie, String pais, String ciudad,String direccion, Servicios servicios, int capacidad, ) {
 		
 	}
 	
