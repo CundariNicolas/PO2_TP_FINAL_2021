@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import formasDePago.FormaDePago;
 import tipoInmueble.TipoDeInmueble;
+import servicios.Servicio;
 
 public class Inmueble {
 	private ArrayList<FormaDePago> formaDePago;
@@ -31,7 +32,7 @@ public class Inmueble {
 
 	private String direccion ;
 
-	private ArrayList <Servicios> servicios; //
+	private ArrayList <Servicio> servicios; //
 
 	private Integer capacidad; 
 
