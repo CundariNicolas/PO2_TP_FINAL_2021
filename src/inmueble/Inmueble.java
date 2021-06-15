@@ -21,7 +21,7 @@ public class Inmueble {
 	}
 	
 	
-	private TipoInmueble tipo; 
+	private TipoDeInmueble tipo; 
 
 	private Integer superficie;
 
