@@ -1,4 +1,4 @@
-package formasDePago;
+package politicaCancelacion;
 
 public class Intermedia extends PoliticaDeCancelacion {
 

@@ -1,4 +1,4 @@
-package formasDePago;
+package politicaCancelacion;
 
 public class Gratuita extends PoliticaDeCancelacion {
 
