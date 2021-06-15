@@ -1,4 +1,4 @@
-package inmueble;
+package formasDePago;
 
 public class Intermedia extends PoliticaDeCancelacion {
 

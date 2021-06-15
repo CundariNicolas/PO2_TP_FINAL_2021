@@ -2,6 +2,8 @@ package inmueble;
 
 import java.util.ArrayList;
 
+import formasDePago.FormaDePago;
+
 public class Inmueble {
 	private ArrayList<FormaDePago> formaDePago;
 
@@ -142,8 +144,6 @@ public class Inmueble {
 		this.politicaCancelacion = politicaCancelacion;
 	}
 	
-	/*
-	 * ===========================Setter Y Getters===============
-	 */
+	
 	
 }
