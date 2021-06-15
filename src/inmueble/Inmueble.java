@@ -3,24 +3,12 @@ package inmueble;
 import java.util.ArrayList;
 
 import formasDePago.FormaDePago;
+import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
 import servicios.Servicio;
 
 public class Inmueble {
 	private ArrayList<FormaDePago> formaDePago;
-
-	public Inmueble(TipoDeInmueble tipoInmueble,float superficie, String pais, String ciudad,String direccion, Servicios servicios, int capacidad, ) {
-		
-	}
-	
-	public void setModoDePago (ArrayList <FormaDePago> formasDePago) {
-		if (formasDePago.isEmpty()) {
-			throw new IllegalArgumentException("Tiene que haber Al menos una forma de Pago");
-		}
-		
-		this.formaDePago = formasDePago;
-	}
-	
 	
 	private TipoDeInmueble tipo; 
 
@@ -35,15 +23,34 @@ public class Inmueble {
 	private ArrayList <Servicio> servicios; //
 
 	private Integer capacidad; 
-
+/*
 	private Calendar checkIN;
-
+// Esto se va hacer en la publicacion
 	private Calendar checkOUT;
-
+*/
 	private Integer cantidadDeVecesAlquilado;
 
-	private PoliticaCancelacion politicaCancelacion;
+	private PoliticaDeCancelacion politicaCancelacion;
 
+	
+	public Inmueble(TipoDeInmueble tipoInmueble,float superficie, 
+			String pais, String ciudad,String direccion, 
+			Servicio servicios, int capacidad) {
+		
+	}
+	
+	
+	
+	public void setModoDePago (ArrayList <FormaDePago> formasDePago) {
+		if (formasDePago.isEmpty()) {
+			throw new IllegalArgumentException("Tiene que haber Al menos una forma de Pago");
+		}
+		
+		this.formaDePago = formasDePago;
+	}
+	public void aumentarCantidadVecesAlquilado() {
+		this.cantidadDeVecesAlquilado = this.getCantidadDeVecesAlquilado() + 1;
+	}
 
 
 	public Integer getCantidadVecesAlquilado() {
