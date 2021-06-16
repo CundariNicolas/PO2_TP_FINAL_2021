@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import publicacion.Publicacion;
+import reserva.Reserva;
 
 public class Usuario {
 	private String nombre;
