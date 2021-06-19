@@ -3,7 +3,7 @@ package publicacion;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import inmueble.FormaDePago;
+import formasDePago.FormaDePago;
 import inmueble.Inmueble;
 
 public class Publicacion {
@@ -32,8 +32,8 @@ public class Publicacion {
 	
 	public void registrarOcupacion(Periodo periodoOcupacion) {
 		/**
-		 * Registra una ocupación en un periodo dado
-		 * El periodo dado no debería estar ocupado para poder llevarse a cabo
+		 * Registra una ocupaciï¿½n en un periodo dado
+		 * El periodo dado no deberï¿½a estar ocupado para poder llevarse a cabo
 		 */
 		if(this.estaDisponibleEntre(periodoOcupacion)) {
 			periodoOcupado.add(periodoOcupacion);
@@ -41,7 +41,7 @@ public class Publicacion {
 		
 	}
 	private boolean estaDisponibleEntre(Periodo periodo) {
-		/** Indica si está disponible en el periodo dado
+		/** Indica si estï¿½ disponible en el periodo dado
 		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
 		 * 
 		 */
