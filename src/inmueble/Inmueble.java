@@ -98,6 +98,11 @@ public class Inmueble {
 	public void setFormaDePago(ArrayList<FormaDePago> formaDePago) {
 		this.formaDePago = formaDePago;
 	}
+
+	public String getCiudad() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	 /**
 	  * 
