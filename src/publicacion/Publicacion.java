@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import inmueble.FormaDePago;
 import inmueble.Inmueble;
+import sitio.Observer;
 
 public class Publicacion {
 	private Inmueble inmueble;
@@ -30,14 +31,12 @@ public class Publicacion {
 		
 	}
 	
-	public void registrarOcupacion(Periodo periodoOcupacion) {
+	public void registrarOcupacion(Calendar fechainicio, Calendar fechaFoin) {
 		/**
 		 * Registra una ocupación en un periodo dado
 		 * El periodo dado no debería estar ocupado para poder llevarse a cabo
 		 */
-		if(this.estaDisponibleEntre(periodoOcupacion)) {
-			periodoOcupado.add(periodoOcupacion);
-		}
+		
 		
 	}
 	private boolean estaDisponibleEntre(Periodo periodo) {

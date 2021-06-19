@@ -30,4 +30,11 @@ public class EstadoCondicional extends EstadoReserva{
 		enviarMail(mailDestino, asunto, mensaje);
 		*/
 	}
+
+	@Override
+	protected Boolean esCondicional() {
+		return true;
+	}
+	
+	
 }

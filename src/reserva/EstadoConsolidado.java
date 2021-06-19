@@ -1,5 +1,7 @@
 package reserva;
 
+import sitio.Sitio;
+
 public class EstadoConsolidado extends EstadoReserva{
     static EstadoConsolidado estado;
 	
@@ -26,8 +28,7 @@ public class EstadoConsolidado extends EstadoReserva{
 	}
 	
 	private void notificarCancelacion(Reserva reserva) {
-		String mensaje = "Se ha cancelado una resserva en " + reserva.getPublicacion().getInmueble().getCiudad();
-		reserva.getObservadorCancelacion().forEach(observador -> observador.popUp(mensaje, "Azul", 14));
+		Sitio.procesarReservaCancelada(reserva);
 	}
 
 }

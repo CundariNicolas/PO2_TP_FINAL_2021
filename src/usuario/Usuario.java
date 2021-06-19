@@ -2,7 +2,6 @@ package usuario;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import publicacion.Publicacion;
 import reserva.Reserva;
 
@@ -17,25 +16,39 @@ public class Usuario {
 	private ArrayList<Reserva> reserva;
 	
 	public Usuario (String nombre, String apellido, String domicilio, String eMail, Integer telefono) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.domicilio = domicilio;
-		this.eMail = eMail;
-		this.telefono = telefono;	
-		this.fechaDeIngreso = Calendar.getInstance();
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setDomicilio(domicilio);
+		this.seteMail(eMail);
+		this.setTelefono(telefono);
+		this.setReserva(new ArrayList<>());
+		this.setPublicacion(new ArrayList<>());
+		this.setFechaDeIngreso(Calendar.getInstance());
 	}
-	
+			
+	private void setReserva(ArrayList<Reserva> reserva) {
+		this.reserva = reserva;
+	}
+
+	private void setFechaDeIngreso(Calendar fechaDeIngreso) {
+		this.fechaDeIngreso = fechaDeIngreso;
+	}
+
+	private void setPublicacion(ArrayList<Publicacion> publicacion) {
+		this.publicacion = publicacion;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
+	private void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	public String getApellido() {
 		return apellido;
 	}
-	public void setApellido(String apellido) {
+	private void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 	
@@ -46,21 +59,21 @@ public class Usuario {
 	public String getDomicilio() {
 		return domicilio;
 	}
-	public void setDomicilio(String domicilio) {
+	private void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
 
 	public String geteMail() {
 		return eMail;
 	}
-	public void seteMail(String eMail) {
+	private void seteMail(String eMail) {
 		this.eMail = eMail;
 	}
 
 	public Integer getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(Integer telefono) {
+	private void setTelefono(Integer telefono) {
 		this.telefono = telefono;
 	}
 
@@ -83,24 +96,15 @@ public class Usuario {
 	}
 	
 	public ArrayList<Reserva> reservasFuturas(){
-		// FALTA HACER QUE SE FILTRN LAS
-		// RESEVAS FUTURAS
-		return reserva;
+		return (ArrayList<Reserva>) this.reserva.stream().filter(reserva -> reserva.esFutura());
 	}
 
 	public ArrayList<Reserva> reservasEnCiudad(String ciudad){
-		// FALTA HACER QUE SE FILTRN LAS
-		// RESEVAS PARA LA CIUDAD
-		return reserva;
+		return (ArrayList<Reserva>) this.reserva.stream().filter(reserva -> reserva.esDeCiudad(ciudad));
 	}
 	
 	public ArrayList<String> ciudadesDondeReservo(){
-		// FALTA HACER RECUPERAR LA 
-		// LISTA DE CIUDADES
-		ArrayList<String> lista = new ArrayList<String>();
-		lista.add("Cordoba");
-		lista.add("Rosario");
-		return lista; /* reserva; */
+		return (ArrayList<String>) this.reserva.stream().map(reserva -> reserva.getPublicacion().getInmueble().getCiudad()).distinct();
 	}
 	
 	// Agrega una Reserva a la lista
@@ -108,7 +112,7 @@ public class Usuario {
 		this.reserva.add(reserva);
 	}
 
-	// Devuelve la antiguedad del usuario en días desde 
+	// Devuelve la antiguedad del usuario en DIAS desde 
 	// su  ingreso al sitio hasta hoy
 	public Integer antiguedadComoUsuario() {
 		long milisegundos = Calendar.getInstance().getTimeInMillis() - this.getFechaDeIngreso().getTimeInMillis(); 

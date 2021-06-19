@@ -1,56 +1,43 @@
 package reserva;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
 import inmueble.FormaDePago;
-import publicacion.Observer;
-import publicacion.Periodo;
-import publicacion.PrecioPeriodo;
+import publicacion.PrecioDiaOcupacion;
 import publicacion.Publicacion;
 import usuario.Usuario;
 
 public class Reserva {
 	private Calendar fecgaHoraReserva;
 	private Publicacion publicacion;
-	private Periodo periodo;
-	private PrecioPeriodo precio;
+	private Calendar fechaInicio;
+	private Calendar fechaFin;
+	private PrecioDiaOcupacion precio;
 	private FormaDePago formaDePago;
 	private Usuario inquilino;
-	private List<Observer> observadorCancelacion;
 	private EstadoReserva estado;
 	
-	public Reserva(Publicacion publicacion, Periodo periodo, PrecioPeriodo precio,
+	public Reserva(Publicacion publicacion, Calendar fechaInicio, Calendar fechaFin, PrecioDiaOcupacion precio,
 			FormaDePago formaDePago, Usuario inquilino) {
 		super();
 		this.fecgaHoraReserva = Calendar.getInstance();
 		this.publicacion = publicacion;
-		this.periodo = periodo;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 		this.precio = precio;
 		this.formaDePago = formaDePago;
 		this.inquilino = inquilino;
 		this.estado = EstadoInicial.getInstance();
-		this.observadorCancelacion = new ArrayList<Observer>();
 	}
 	
-	public Reserva reservaCondicional(Publicacion publicacion, Periodo periodo, PrecioPeriodo precio,
+	public static Reserva reservaCondicional(Publicacion publicacion, Calendar fechaInicio, Calendar FechaFin, PrecioDiaOcupacion precio,
 			FormaDePago formaDePago, Usuario inquilino) {
-		Reserva reserva = new Reserva(publicacion, periodo, precio, formaDePago, inquilino);
+		Reserva reserva = new Reserva(publicacion, fechaInicio, FechaFin, precio, formaDePago, inquilino);
 		reserva.setEstado(EstadoCondicional.getInstance());
 		return reserva;
 	}
 	
 	protected void setEstado(EstadoReserva estado) {
 		this.estado = estado;
-	}
-
-	public List<Observer> getObservadorCancelacion() {
-		return observadorCancelacion;
-	}
-
-	public void suscribirCancelacionReserva(Observer observadorCancelacion) {
-		this.observadorCancelacion.add(observadorCancelacion);
 	}
 
 	public Calendar getFecgaHoraReserva() {
@@ -61,12 +48,16 @@ public class Reserva {
 		return publicacion;
 	}
 
-	public Periodo getPeriodo() {
-		return periodo;
+	public Calendar getFechaInicio() {
+		return this.fechaInicio;
+	}
+	
+	public Calendar getFechaFin() {
+		return this.fechaFin;
 	}
 
-	public PrecioPeriodo getPrecio() {
-		return precio;
+	public PrecioDiaOcupacion getPrecio() {
+		return this.precio;
 	}
 
 	public FormaDePago getFormaDePago() {
@@ -86,6 +77,8 @@ public class Reserva {
 	
 	private void aplicarCancelacion() {
 		// implementar
+		// que hace? que hay que hacer
+//		this.getPublicacion().aplicarPliticaCancelacion(this);
 	}
 	
 	public void aceptar() {
@@ -101,7 +94,19 @@ public class Reserva {
 	}
 	
 	protected void consolidar() {
-		this.getPublicacion().registrarOcupacion(this.getPeriodo());
+		this.getPublicacion().registrarOcupacion(this.getFechaInicio(), this.getFechaFin());
+	}
+
+	public Boolean esFutura() {
+		return this.getFechaInicio().after(Calendar.getInstance());
+	}
+
+	public Boolean esDeCiudad(String ciudad) {
+		return this.getPublicacion().getInmueble().getCiudad() == ciudad;
+	}
+
+	public Boolean esCondicional() {
+		return this.estado.esCondicional();
 	}
 	
 

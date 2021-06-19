@@ -23,6 +23,10 @@ public abstract class EstadoReserva  {
 
 	protected void cacelar(Reserva reserva) {
 		reserva.setEstado(EstadoCancelado.getInstance());
+	}
+
+	protected Boolean esCondicional() {
+		return false;
 	};
 
 }
