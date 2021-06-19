@@ -1,6 +1,7 @@
 package inmueble;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import formasDePago.FormaDePago;
 import politicaCancelacion.PoliticaDeCancelacion;
@@ -8,6 +9,8 @@ import tipoInmueble.TipoDeInmueble;
 import servicios.Servicio;
 
 public class Inmueble {
+	private ArrayList <Calificacion> calificaciones; 
+	
 	private ArrayList<FormaDePago> formaDePago;
 	
 	private TipoDeInmueble tipo; 
@@ -23,11 +26,11 @@ public class Inmueble {
 	private ArrayList <Servicio> servicios; //
 
 	private Integer capacidad; 
-/*
+
 	private Calendar checkIN;
-// Esto se va hacer en la publicacion
+
 	private Calendar checkOUT;
-*/
+	
 	private Integer cantidadDeVecesAlquilado;
 
 	private PoliticaDeCancelacion politicaCancelacion;
@@ -112,6 +115,10 @@ public class Inmueble {
 	public void setTipo(TipoDeInmueble tipo) {
 		this.tipo = tipo;
 	}
+	
+	public boolean estaOcupadoEn(Calendar fecha) {
+		return this.checkIN.after(fecha) && this.checkOUT.before(fecha);
+	}
 
 	/**
 	 * 
@@ -179,6 +186,16 @@ public class Inmueble {
 
 	public void setPoliticaCancelacion(PoliticaDeCancelacion politicaCancelacion) {
 		this.politicaCancelacion = politicaCancelacion;
+	}
+	
+	
+	/**
+	 * 
+	 * @param calificacion agregar una calificacion al inmueble
+	 */
+	
+	public void agregarCalificacion (Calificacion calificacion) {
+		calificaciones.add(calificacion);
 	}
 	
 	
