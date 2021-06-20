@@ -1,14 +1,10 @@
 package publicacion;
 
-<<<<<<< HEAD
+
 import java.util.Calendar;
-=======
-public class PrecioDiaOcupacion {
+
 	
-	public Double getPrecio() {
-		return 1.5;
-	}
->>>>>>> branch 'main' of https://github.com/gmauge/PO2_TP_FINAL_2021.git
+
 
 public class PrecioDiaOcupacion {
 	private Calendar fecha;
