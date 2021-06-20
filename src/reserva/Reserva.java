@@ -1,5 +1,6 @@
 package reserva;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import inmueble.FormaDePago;
 import publicacion.PrecioDiaOcupacion;
@@ -11,7 +12,7 @@ public class Reserva {
 	private Publicacion publicacion;
 	private Calendar fechaInicio;
 	private Calendar fechaFin;
-	private PrecioDiaOcupacion precio;
+	private ArrayList<PrecioDiaOcupacion> precios;
 	private FormaDePago formaDePago;
 	private Usuario inquilino;
 	private EstadoReserva estado;
@@ -23,7 +24,7 @@ public class Reserva {
 		this.publicacion = publicacion;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.precio = precio;
+		this.precios.add(precio);
 		this.formaDePago = formaDePago;
 		this.inquilino = inquilino;
 		this.estado = EstadoInicial.getInstance();
@@ -35,6 +36,21 @@ public class Reserva {
 		reserva.setEstado(EstadoCondicional.getInstance());
 		return reserva;
 	}
+	
+	public Double precioTotalReserva() {
+		double precioAcumulado = 0.0;
+		precios.stream().forEach(dia -> precioAcumulado += dia.getPrecio());
+		
+	}
+
+	public double valorEnCantidadDeDias(int cantidadDeDias) {
+		double precioAcumulado = 0.0;
+		for(int inicio=0; inicio < cantidadDeDias ; inicio++) {
+			precioAcumulado += this.precios.get(inicio).getPrecio();	
+		}
+		return precioAcumulado;
+	}
+	
 	
 	protected void setEstado(EstadoReserva estado) {
 		this.estado = estado;
