@@ -1,7 +1,8 @@
 package reserva;
 
 import java.util.Calendar;
-import inmueble.FormaDePago;
+
+import formasDePago.FormaDePago;
 import publicacion.PrecioDiaOcupacion;
 import publicacion.Publicacion;
 import usuario.Usuario;
@@ -93,9 +94,9 @@ public class Reserva {
 		this.estado.cacelar(this);
 	}
 	
-	protected void consolidar() {
-		this.getPublicacion().registrarOcupacion(this.getFechaInicio(), this.getFechaFin());
-	}
+	//protected void consolidar() {
+	//	this.getPublicacion().registrarOcupacion(this.getFechaInicio(), this.getFechaFin());
+	//}
 
 	public Boolean esFutura() {
 		return this.getFechaInicio().after(Calendar.getInstance());
@@ -109,5 +110,8 @@ public class Reserva {
 		return this.estado.esCondicional();
 	}
 	
+	public Boolean estaFinalizada() {
+		return this.estado.estaFinalizada(this);
+	}
 
 }

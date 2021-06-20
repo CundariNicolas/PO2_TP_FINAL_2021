@@ -202,6 +202,11 @@ public class Inmueble {
 	public void agregarCalificacion (Calificacion calificacion) {
 		calificaciones.add(calificacion);
 	}
+
+	public int getCheckOUT() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	

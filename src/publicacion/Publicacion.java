@@ -5,7 +5,9 @@ import java.util.Calendar;
 
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
+import reserva.Reserva;
 import sitio.Observer;
+import usuario.Usuario;
 
 public class Publicacion {
 	private Inmueble inmueble;
@@ -173,6 +175,21 @@ public class Publicacion {
 
 	public void setPrecio(ArrayList<PrecioPeriodo> precio) {
 		this.precio = precio;
+	}
+
+	public void registrarCancelacion(Calendar fechaInicio2, Calendar fechaFin2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Usuario getPropietario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void aplicarPoliticaCancelacion(Reserva reserva) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
