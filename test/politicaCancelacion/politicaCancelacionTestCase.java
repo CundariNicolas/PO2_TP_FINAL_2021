@@ -1,23 +1,16 @@
-package inmueble;
+package politicaCancelacion;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tipoInmueble.TipoDeInmueble;
+class politicaCancelacionTestCase {
 
-class InmuebleTestCase {
-
-	Inmueble casa; //SUT
-	TipoInmueble tipoInmueble;
-	
-	
+	PoliticaDeCancelacion gratiuta;
 	@BeforeEach
 	void setUp() throws Exception {
-		this.casa = new Inmueble ();
-		this.tipoInmueble = mock(TipoDeInmueble.class);
-		
+		this.gratiuta = new Gratuita();
 	}
 
 	@Test
