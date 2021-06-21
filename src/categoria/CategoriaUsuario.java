@@ -8,7 +8,7 @@ import usuario.Usuario;
 
 public class CategoriaUsuario extends Categoria implements Calificable {
 
-	CategoriaUsuario(String nombre) {
+	public CategoriaUsuario(String nombre) {
 		super(nombre);
 	}
 

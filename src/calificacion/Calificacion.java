@@ -2,8 +2,8 @@ package calificacion;
 
 public class Calificacion  {
 	
-	public int puntaje;
-	public String comentario;
+	private int puntaje;
+	private String comentario;
 	
 	Calificacion (int puntaje, String comentario) {
 		this.puntaje= puntaje;

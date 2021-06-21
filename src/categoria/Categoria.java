@@ -1,5 +1,6 @@
 package categoria;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +22,9 @@ public abstract class Categoria {
 	return this.nombreDeCategoria;
 	}
 	
-	Categoria(String nombre){
+	public Categoria(String nombre){
 		this.nombreDeCategoria = nombre;
+		calificaciones= new HashMap<Usuario,Calificacion>();
 	}
 	
 	public Double promedioDePuntaje() {
@@ -33,7 +35,7 @@ public abstract class Categoria {
 		double sumaDeCalificaciones=0;
 		Iterator<Usuario> usuarios = calificaciones.keySet().iterator();
 		while(usuarios.hasNext()) {
-			sumaDeCalificaciones=  calificaciones.get(usuarios.next()).puntaje;
+			sumaDeCalificaciones=  calificaciones.get(usuarios.next()).getPuntaje();
 		}
 		return sumaDeCalificaciones;
 	}
