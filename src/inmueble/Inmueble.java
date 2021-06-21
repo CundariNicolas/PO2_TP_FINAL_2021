@@ -1,5 +1,6 @@
 package inmueble;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
@@ -14,7 +15,7 @@ import tipoInmueble.TipoDeInmueble;
 import usuario.Usuario;
 import servicios.Servicio;
 
-public class Inmueble {
+public class Inmueble implements Calificable{
 	
 	private Set<Categoria> categorias; 
 	
@@ -82,7 +83,7 @@ public class Inmueble {
 	
 	public void setTipo(TipoDeInmueble tipo) {
 		this.tipo = tipo;
-	}
+	} 
 	
 	public boolean estaOcupadoEn(Calendar fecha) {
 		return this.checkIN.after(fecha) && this.checkOUT.before(fecha);
@@ -152,6 +153,20 @@ public class Inmueble {
 	public void setPoliticaCancelacion(PoliticaDeCancelacion politicaCancelacion) {
 		this.politicaCancelacion = politicaCancelacion;
 	}
+	
+	@Override
+	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
+		Categoria categoriaACalificar = unaCategoria.estasEn(this.categorias);
+		categoriaACalificar.addCalificacion(unUsuario, UnaCalificacion);
+		
+	}
+
+	@Override
+	public Map<Usuario, Calificacion> getCalificaciones(Categoria unaCategoria)  {
+		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);		
+		return categoriaBuscada.getCalificaciones();
+	}
+
 
 /*
 	@Override

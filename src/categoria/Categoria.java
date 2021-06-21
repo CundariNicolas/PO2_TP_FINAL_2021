@@ -16,8 +16,6 @@ public abstract class Categoria {
 	
 	private Map<Usuario,Calificacion> calificaciones;
 	
-	public abstract String aplicableA();
-	
 	public String nombre() {
 	return this.nombreDeCategoria;
 	}

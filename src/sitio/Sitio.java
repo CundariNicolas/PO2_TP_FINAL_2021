@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
 
+import calificacion.Calificable;
+import calificacion.Calificacion;
 import categoria.Categoria;
+import formasDePago.FormaDePago;
 import publicacion.Publicacion;
 import reserva.EstadoConsolidado;
 import reserva.Reserva;
@@ -15,6 +18,7 @@ public class Sitio {
 	private static ObserverManager gestorDeNotificaciones;
 	private static ArrayList<Usuario> usuario;
 	private Set<Categoria> categorias; 
+	private Set<FormaDePago> formasDePago;
 	
 	
 	public Sitio() {
@@ -66,11 +70,28 @@ public class Sitio {
 
 	public static void procesarBajaDePrecio(Publicacion publicacion) {
 		gestorDeNotificaciones.alertarBajaDePrecio(publicacion);
-	}
+	} 
 	
 	public void addCategoria(Categoria categoria) {
 		categorias.add(categoria);
 	}
+	public void  calificar (Calificable unaCategoria,Reserva unaReserva, Calificacion unaCalificacion ) {
+		if(unaReserva.estaFinalizada()) {
+			unaCategoria.setCalificacion(unaReserva.inquilino(), unaCalificacion);
+		}
+	}
+	public void addFormaDePago(FormaDePago unaFormaDePago) {
+		this.formasDePago.add(unaFormaDePago);
+	}
 	
+	public double promedioGeneralCalificaciones(Categoria unaCategoria) {
+		return unaCategoria.promedioDePuntaje();
+	}
+	
+	public Map<Categoria, Double> promedioPorCategoriaPara(Categoria unaCategoria){
+		
+	}
+
+
 
 }
