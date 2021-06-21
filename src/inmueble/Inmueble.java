@@ -14,7 +14,7 @@ import tipoInmueble.TipoDeInmueble;
 import usuario.Usuario;
 import servicios.Servicio;
 
-public class Inmueble implements Calificable{
+public class Inmueble {
 	
 	private Set<Categoria> categorias; 
 	
@@ -153,7 +153,7 @@ public class Inmueble implements Calificable{
 		this.politicaCancelacion = politicaCancelacion;
 	}
 
-
+/*
 	@Override
 	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
 		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);
@@ -166,5 +166,5 @@ public class Inmueble implements Calificable{
 		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);
 		return categoriaBuscada.getCalificaciones();
 	}
-
+*/
 }
