@@ -1,6 +1,5 @@
 package inmueble;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
@@ -18,50 +17,33 @@ import servicios.Servicio;
 public class Inmueble implements Calificable{
 	
 	private Set<Categoria> categorias; 
-	
 	private ArrayList<FormaDePago> formaDePago;
-	
 	private TipoDeInmueble tipo; 
-
 	private Integer superficie;
-
-	private  String pais;
-
+	private String pais;
 	private String ciudad;
-
 	private String direccion ;
-
-	private ArrayList <Servicio> servicios; //
-
+	private ArrayList <Servicio> servicios;
 	private Integer capacidad; 
-
 	private Calendar checkIN;
-
 	private Calendar checkOUT;
-	
 	private Integer cantidadDeVecesAlquilado;
-
 	private PoliticaDeCancelacion politicaCancelacion;
 
-	
 	public Inmueble(TipoDeInmueble tipoInmueble,float superficie, 
 			String pais, String ciudad,String direccion, 
 			ArrayList<Servicio> servicios, int capacidad) {
-		
 	}
-	
 	
 	public void setModoDePago (ArrayList <FormaDePago> formasDePago) {
 			
 		this.formaDePago = formasDePago;
 	}
 	
-	
 	public void aumentarCantidadVecesAlquilado() {
 		this.cantidadDeVecesAlquilado = this.getCantidadDeVecesAlquilado() + 1;
 	}
 
-	
 	public Integer getCantidadVecesAlquilado() {
 		return this.cantidadDeVecesAlquilado;
 	}
@@ -152,7 +134,7 @@ public class Inmueble implements Calificable{
 
 	public void setPoliticaCancelacion(PoliticaDeCancelacion politicaCancelacion) {
 		this.politicaCancelacion = politicaCancelacion;
-	}
+	} 
 	
 	@Override
 	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
@@ -166,20 +148,4 @@ public class Inmueble implements Calificable{
 		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);		
 		return categoriaBuscada.getCalificaciones();
 	}
-
-
-/*
-	@Override
-	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
-		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);
-		categoriaBuscada.addCalificacion(unUsuario, UnaCalificacion);
-	}
-
-
-	@Override
-	public Map<Usuario, Calificacion> getCalificaciones(Categoria unaCategoria) {
-		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);
-		return categoriaBuscada.getCalificaciones();
-	}
-*/
 }

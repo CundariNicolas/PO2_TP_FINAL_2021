@@ -31,7 +31,7 @@ public abstract class PoliticaDeCancelacion {
 	
 	PoliticaDeCancelacion () {
 		super();
-		this.multaAplicada = 0.0;
+		this.multaAplicada = 0.0; 
 	}
 	
 	abstract protected void setMulta(Reserva reserva);

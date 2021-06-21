@@ -2,6 +2,9 @@ package usuario;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import publicacion.Publicacion;
 import reserva.Reserva;
 
@@ -85,7 +88,7 @@ public class Usuario {
 		return publicacion;
 	}
 
-	// Agrega una Publicación a la lista
+	// Agrega una Publicaciï¿½n a la lista
 	public void addPublicacion(Publicacion publicacion) {
 		this.publicacion.add(publicacion);
 	}
@@ -118,6 +121,14 @@ public class Usuario {
 		long milisegundos = Calendar.getInstance().getTimeInMillis() - this.getFechaDeIngreso().getTimeInMillis(); 
 		return (int) (milisegundos / 1000 / 60 / 60 / 24);
 	}
+	
+	public Collection<Reserva> reservasCondicionales() {
+		return this.reserva.stream()
+				.filter(unaReserva -> unaReserva.esCondicional())
+				.collect(Collectors.toList());
+	}
+	
+	
 	
 
 }
