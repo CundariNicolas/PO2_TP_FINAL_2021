@@ -60,16 +60,16 @@ class CategoriaInmuebleTestCase {
 	void calculaBienElPromedioDeCalificaciones() {
 		int puntaje1 = 8;
 		int puntaje2 = 5;
-		double promedioBuscado = (puntaje1 + puntaje2) / 2;  
-		when(otraCalificacion.getPuntaje()).thenReturn(puntaje1);
-		when(unaCalificacion.getPuntaje()).thenReturn(puntaje2);
+		double promedioBuscado = ((double)puntaje1 + (double)puntaje2) / 2;  
+		when(otraCalificacion.getPuntaje()).thenReturn(puntaje2);
+		when(unaCalificacion.getPuntaje()).thenReturn(puntaje1);
 		puntualidad.addCalificacion(otroUsuario, otraCalificacion);
 		puntualidad.addCalificacion(unUsuario, unaCalificacion);
 		
-		//assertEquals(2, puntualidad.getCalificaciones().size());
-		
 		assertEquals(promedioBuscado,puntualidad.promedioDePuntaje());
 	}
+	@Test
+	void
 	
 	
 

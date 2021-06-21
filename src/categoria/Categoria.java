@@ -32,10 +32,10 @@ public abstract class Categoria {
 	}
 	
 	private double sumaDeCalificaciones() {
-		double sumaDeCalificaciones=0;
+		double sumaDeCalificaciones=0.0;
 		Iterator<Usuario> usuarios = calificaciones.keySet().iterator();
 		while(usuarios.hasNext()) {
-			sumaDeCalificaciones=  calificaciones.get(usuarios.next()).getPuntaje();
+			sumaDeCalificaciones +=  calificaciones.get(usuarios.next()).getPuntaje();
 		}
 		return sumaDeCalificaciones;
 	}
