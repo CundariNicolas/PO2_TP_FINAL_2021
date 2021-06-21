@@ -15,6 +15,8 @@ public abstract class Categoria {
 	
 	private Map<Usuario,Calificacion> calificaciones;
 	
+	public abstract String aplicableA();
+	
 	public String nombre() {
 	return this.nombreDeCategoria;
 	}
@@ -44,15 +46,10 @@ public abstract class Categoria {
 		return this.calificaciones.get(unUsuario);
 	}
 	
-	public String verCategoria() {
-		return this.nombreDeCategoria;
-	}
 	public boolean esIgualA(Categoria otraCategoria) {
 		return this.nombre() == otraCategoria.nombre();
 	}
 
-	public abstract String aplicableA();
-	
 	public Categoria estasEn(Set<Categoria> categorias) {
 		Categoria categoriaBuscada = null;
 		for (Categoria categoria:categorias) {
@@ -62,8 +59,10 @@ public abstract class Categoria {
 		}
 		return categoriaBuscada;
 	}
+	
 	public Map<Usuario,Calificacion> getCalificaciones () {
 		return this.calificaciones;
 		
 	}
+	
 }
