@@ -41,7 +41,7 @@ public class Publicacion {
 		
 	}
 	
-	pu
+	
 	/** private boolean estaDisponibleEntre(Periodo periodo) {
 		/** Indica si est� disponible en el periodo dado
 		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
