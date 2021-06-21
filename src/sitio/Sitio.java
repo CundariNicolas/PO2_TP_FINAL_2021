@@ -62,6 +62,7 @@ public class Sitio {
 		}
 	}
 
+	
 	public static void procesarBajaDePrecio(Publicacion publicacion) {
 		gestorDeNotificaciones.alertarBajaDePrecio(publicacion);
 	}
