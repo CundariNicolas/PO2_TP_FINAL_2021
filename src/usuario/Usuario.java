@@ -3,6 +3,9 @@ package usuario;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import inmueble.Inmueble;
 import publicacion.Publicacion;
@@ -114,16 +117,16 @@ public class Usuario implements Calificable{
 		return reservas;
 	}
 	
-	public ArrayList<Reserva> reservasFuturas(){
-		return (ArrayList<Reserva>) this.reservas.stream().filter(reserva -> reserva.esFutura());
+	public List<Reserva> reservasFuturas(){
+		return this.reservas.stream().filter(reserva -> reserva.esFutura()).collect(Collectors.toList());
 	}
 
 	public ArrayList<Reserva> reservasEnCiudad(String ciudad){
 		return (ArrayList<Reserva>) this.reservas.stream().filter(reserva -> reserva.esDeCiudad(ciudad));
 	}
 	
-	public ArrayList<String> ciudadesDondeReservo(){
-		return (ArrayList<String>) this.reservas.stream().map(reserva -> reserva.getPublicacion().getInmueble().getCiudad()).distinct();
+	public List<String> ciudadesDondeReservo(){
+		return this.reservas.stream().map(reserva -> reserva.getPublicacion().getInmueble().getCiudad()).distinct().collect(Collectors.toList());
 	}
 	
 	// Agrega una Reserva a la lista

@@ -1,5 +1,6 @@
 package reserva;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import formasDePago.FormaDePago;
@@ -12,27 +13,27 @@ public class Reserva {
 	private Publicacion publicacion;
 	private Calendar fechaInicio;
 	private Calendar fechaFin;
-	private PrecioDiaOcupacion precio;
+	private ArrayList<PrecioDiaOcupacion> precios;
 	private FormaDePago formaDePago;
 	private Usuario inquilino;
 	private EstadoReserva estado;
 	
-	public Reserva(Publicacion publicacion, Calendar fechaInicio, Calendar fechaFin, PrecioDiaOcupacion precio,
+	public Reserva(Publicacion publicacion, Calendar fechaInicio, Calendar fechaFin, ArrayList<PrecioDiaOcupacion> precios,
 			FormaDePago formaDePago, Usuario inquilino) {
 		super();
 		this.fecgaHoraReserva = Calendar.getInstance();
 		this.publicacion = publicacion;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.precio = precio;
+		this.precios = precios;
 		this.formaDePago = formaDePago;
 		this.inquilino = inquilino;
 		this.estado = EstadoInicial.getInstance();
 	}
 	
-	public static Reserva reservaCondicional(Publicacion publicacion, Calendar fechaInicio, Calendar FechaFin, PrecioDiaOcupacion precio,
+	public static Reserva reservaCondicional(Publicacion publicacion, Calendar fechaInicio, Calendar FechaFin, ArrayList<PrecioDiaOcupacion> precios,
 			FormaDePago formaDePago, Usuario inquilino) {
-		Reserva reserva = new Reserva(publicacion, fechaInicio, FechaFin, precio, formaDePago, inquilino);
+		Reserva reserva = new Reserva(publicacion, fechaInicio, FechaFin, precios, formaDePago, inquilino);
 		reserva.setEstado(EstadoCondicional.getInstance());
 		return reserva;
 	}
@@ -57,8 +58,8 @@ public class Reserva {
 		return this.fechaFin;
 	}
 
-	public PrecioDiaOcupacion getPrecio() {
-		return this.precio;
+	public ArrayList<PrecioDiaOcupacion> getPrecios() {
+		return this.precios;
 	}
 
 	public FormaDePago getFormaDePago() {
@@ -75,13 +76,7 @@ public class Reserva {
 		 Se envia la reserva por mail al email 
 		*/
 	}
-	
-	private void aplicarCancelacion() {
-		// implementar
-		// que hace? que hay que hacer
-//		this.getPublicacion().aplicarPliticaCancelacion(this);
-	}
-	
+		
 	public void aceptar() {
 		this.estado.aceptar(this);
 	}
@@ -94,10 +89,6 @@ public class Reserva {
 		this.estado.cacelar(this);
 	}
 	
-	//protected void consolidar() {
-	//	this.getPublicacion().registrarOcupacion(this.getFechaInicio(), this.getFechaFin());
-	//}
-
 	public Boolean esFutura() {
 		return this.getFechaInicio().after(Calendar.getInstance());
 	}
@@ -114,4 +105,25 @@ public class Reserva {
 		return this.estado.estaFinalizada(this);
 	}
 
+	public Double precioTotalReserva() {
+		Double precioAcumulado = 0.0;
+		for (PrecioDiaOcupacion precio : this.getPrecios()) {
+			precioAcumulado += precio.getPrecio();
+		}
+		return precioAcumulado;
+			
+	}
+
+	public double valorEnCantidadDeDias(int cantidadDeDias) {
+		double precioAcumulado = 0.0;
+		for(int inicio=0; inicio < cantidadDeDias ; inicio++) {
+			precioAcumulado += this.getPrecios().get(inicio).getPrecio();	
+		}
+		return precioAcumulado;
+	}
+
+	public EstadoReserva getEstado() {
+		return this.estado;
+	}
+	
 }

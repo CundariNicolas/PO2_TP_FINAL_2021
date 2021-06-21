@@ -7,6 +7,7 @@ import formasDePago.FormaDePago;
 import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
 import servicios.Servicio;
+import sitio.Calificacion;
 
 public class Inmueble {
 	private ArrayList <Calificacion> calificaciones; 
@@ -97,11 +98,6 @@ public class Inmueble {
 	 */
 	public void setFormaDePago(ArrayList<FormaDePago> formaDePago) {
 		this.formaDePago = formaDePago;
-	}
-
-	public String getCiudad() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	 /**

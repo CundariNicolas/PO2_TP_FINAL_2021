@@ -6,7 +6,7 @@ import java.util.Calendar;
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
 import reserva.Reserva;
-import sitio.Observer;
+import sitio.Observador;
 import usuario.Usuario;
 
 public class Publicacion {
@@ -18,7 +18,7 @@ public class Publicacion {
 	private ArrayList<Foto> fotos;
 	private ArrayList<PrecioPeriodo> precio;
 	private ArrayList<Periodo> periodoOcupado;
-	private ArrayList<Observer> observadorBajaPrecio;
+	private ArrayList<Observador> observadorBajaPrecio;
 	
 	public Publicacion(Inmueble inmueble, Calendar inicio, Calendar fin, Calendar checkIn, Calendar checkOut, ArrayList<Foto> fotos, ArrayList<PrecioPeriodo> precio) {
 		this.inmueble = inmueble;
@@ -29,7 +29,7 @@ public class Publicacion {
 		this.setFotos(fotos);
 		this.setPrecio(precio);
 		this.periodoOcupado = new ArrayList<Periodo>();
-		this.observadorBajaPrecio = new ArrayList<Observer>();
+		this.observadorBajaPrecio = new ArrayList<Observador>();
 		
 	}
 	
@@ -118,21 +118,15 @@ public class Publicacion {
 	
 	
 	
-
+/*
 	public void notificarBajaDePrecio() {
 		this.observadorBajaPrecio.stream().forEach(obs -> obs.publish("Bajo el precio"));
 		
 	}
-	
-	public void suscribirBajaDePrecio(Observer observador1) {
+*/
+	public void suscribirBajaDePrecio(Observador observador1) {
 		this.observadorBajaPrecio.add(observador1);
 	}
-	
-	
-
-	
-	
-	
 	
 	
 	// GETTERS AND SETTERS
