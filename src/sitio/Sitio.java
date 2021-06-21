@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import calificacion.Calificable;
 import calificacion.Calificacion;
@@ -64,21 +65,34 @@ public class Sitio {
 	}
 
 	public static void procesarReservaCancelada(Reserva reserva) {
+		reserva.getPublicacion().aplicarPoliticaCancelacion(reserva);
 		gestorDeNotificaciones.alertarCancelacion(reserva);
 		asignarProximaReservaCondicional(reserva);
 	}
 	
 	private static void asignarProximaReservaCondicional(Reserva reserva) {
-		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
+		ArrayList<Reserva> reservaCoincide = new ArrayList<>();
 		Reserva reservaSiguiente;
-		usuario.forEach(usuario -> reservaCondicional.addAll(usuario.reservasCondicionales())) ;
-		usuario.forEach(usuario -> reservaCondicional.addAll( (ArrayList<Reserva>) usuario.todasLasReservas().stream().filter(res -> res.esCondicional()) )) ;
-		if (reservaCondicional.size() > 0) {
-			reservaSiguiente = reservaCondicional.stream().min((Comparator<? super Reserva>) reservaCondicional.stream().map(res -> res.getFecgaHoraReserva())).get();
+		reservaCoincide = getReservasCondicionalesQueCoincidenCon(reserva);
+		if (reservaCoincide.size() > 0) {
+			reservaSiguiente = reservaCoincide.stream().min((Comparator<? super Reserva>) reservaCoincide.stream().map(res -> res.getFecgaHoraReserva())).get();
 			reservaSiguiente.aceptar();
 		}
 	}
 
+	private static ArrayList<Reserva> getReservasCondicionales(){
+		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
+		usuario.forEach(usuario -> reservaCondicional.addAll( (ArrayList<Reserva>) usuario.todasLasReservas().stream().filter(res -> res.esCondicional()) )) ;
+		return reservaCondicional;
+	}
+	
+	private static ArrayList<Reserva> getReservasCondicionalesQueCoincidenCon(Reserva reserva){
+		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
+		reservaCondicional = getReservasCondicionales();
+		return  (ArrayList<Reserva>) reservaCondicional.stream().filter(res -> res.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble())  && res.getFechaInicio().equals(reserva.getFechaInicio())  && res.getFechaFin().equals(reserva.getFechaFin()) );
+		
+	}
+	
 	public static void procesarBajaDePrecio(Publicacion publicacion) {
 		gestorDeNotificaciones.alertarBajaDePrecio(publicacion);
 	} 
@@ -115,4 +129,9 @@ public class Sitio {
 	public Collection<Servicio> getServicios(){
 		return this.servicios;
 	}
+
+	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
+		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicacion().stream()).collect(Collectors.toCollection(ArrayList::new)));
+	}
+	
 }

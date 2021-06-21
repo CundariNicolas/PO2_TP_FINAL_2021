@@ -22,4 +22,34 @@ public class Foto {
 		
 	}
 
+
+
+	public String getPath() {
+		return path;
+	}
+
+
+
+	public boolean isMarca360() {
+		return marca360;
+	}
+
+
+
+	public Calendar getFechaCaptura() {
+		return fechaCaptura;
+	}
+
+
+
+	public Integer getAncho() {
+		return ancho;
+	}
+
+
+
+	public Integer getAlto() {
+		return alto;
+	}
+
 }

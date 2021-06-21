@@ -13,6 +13,7 @@ import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
 import usuario.Usuario;
 import servicios.Servicio;
+import sitio.Calificacion;
 
 public class Inmueble implements Calificable{
 	
@@ -148,4 +149,10 @@ public class Inmueble implements Calificable{
 		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);		
 		return categoriaBuscada.getCalificaciones();
 	}
+
+	public int getCheckOUT() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 }
