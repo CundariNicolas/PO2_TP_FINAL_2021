@@ -2,130 +2,77 @@ package inmueble;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
+import java.util.Set;
 
+import calificacion.Calificable;
 import calificacion.Calificacion;
+import categoria.Categoria;
 import formasDePago.FormaDePago;
 import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
+import usuario.Usuario;
 import servicios.Servicio;
 import sitio.Calificacion;
 
-public class Inmueble {
-	private ArrayList <Calificacion> calificaciones; 
+public class Inmueble implements Calificable{
 	
+	private Set<Categoria> categorias; 
 	private ArrayList<FormaDePago> formaDePago;
-	
 	private TipoDeInmueble tipo; 
-
 	private Integer superficie;
-
-	private  String pais;
-
+	private String pais;
 	private String ciudad;
-
 	private String direccion ;
-
-	private ArrayList <Servicio> servicios; //
-
+	private ArrayList <Servicio> servicios;
 	private Integer capacidad; 
-
 	private Calendar checkIN;
-
 	private Calendar checkOUT;
-	
 	private Integer cantidadDeVecesAlquilado;
-
 	private PoliticaDeCancelacion politicaCancelacion;
 
-	/**
-	 * 
-	 * @param tipoInmueble &#60;TipoDeInmueble &#62
-	 * @param superficie Superficie total del inmueble en M2 tipo Floar
-	 * @param pais Pais de Residencia del Inmueble
-	 * @param ciudad  Ciudad de Residencia del Inmueble
-	 * @param direccion Direccion del inmueble ej: "Ricardo Gutierrez 1320"
-	 * @param servicios &#60;Servicio &#62 una lista del los servicios que contiene el inmuelbe 
-	 * @param capacidad capacidad de personas que entrar en inmuble Int
-	 */
 	public Inmueble(TipoDeInmueble tipoInmueble,float superficie, 
 			String pais, String ciudad,String direccion, 
 			ArrayList<Servicio> servicios, int capacidad) {
-		
 	}
 	
-	/**
-	 *  Almacena una forma de pago para el inmueble
-	 * 
-	 * @param formasDePago un ArrayList con object &#60;FormaDePago &#62;
-	 */
 	public void setModoDePago (ArrayList <FormaDePago> formasDePago) {
-		if (formasDePago.isEmpty()) {
-			throw new IllegalArgumentException("Tiene que haber Al menos una forma de Pago");
-		}
-		
+			
 		this.formaDePago = formasDePago;
 	}
 	
-	/**
-	* Aumenta mas uno la cantidad de alquiles que tuvo el inmueble en uno
-	* 
-	* @param  Ninguno
-	* @return void
-	* 
-	*/
 	public void aumentarCantidadVecesAlquilado() {
 		this.cantidadDeVecesAlquilado = this.getCantidadDeVecesAlquilado() + 1;
 	}
 
-	/**
-	 *  Getter de Cantidad de veces Alquilado
-	 * @return un entero que representa la cantidad de veces que se alquilo el inmueble
-	 */
 	public Integer getCantidadVecesAlquilado() {
 		return this.cantidadDeVecesAlquilado;
 	}
 	
-	/**
-	 *  formas de pago aceptadas por el inmuble
-	 * @return &#60;Forma de Pago&#62 Array del tipo FormaPago con los pago que acepta el inmuble
-	 */
+
 	public ArrayList<FormaDePago> getFormaDePago() {
 		return formaDePago;
 	}
 	
-	/**
-	 * 
-	 * @param formaDePago &#60;FormaDePago &#62 Array no vacio;
-	 */
+	
 	public void setFormaDePago(ArrayList<FormaDePago> formaDePago) {
 		this.formaDePago = formaDePago;
 	}
 	
-	 /**
-	  * 
-	  * @return Strig que representa el tipo de inmueble
-	  */
 	public TipoDeInmueble getTipo() {
 		return tipo;
 	}
 
-	/**
-	 *  configura el tipo de inmuble que es el tipo de inmuble tiene que ser uno solo
-	 * @param tipo &#60;TipoDeInmueble &#62
-	 */
 	
 	public void setTipo(TipoDeInmueble tipo) {
 		this.tipo = tipo;
-	}
+	} 
 	
 	public boolean estaOcupadoEn(Calendar fecha) {
 		return this.checkIN.after(fecha) && this.checkOUT.before(fecha);
 	}
 
-	/**
-	 * 
-	 * @return superfieces en M2 del inmueble
-	 */
+	
 	public Integer getSuperficie() {
 		return superficie;
 	}
@@ -188,23 +135,24 @@ public class Inmueble {
 
 	public void setPoliticaCancelacion(PoliticaDeCancelacion politicaCancelacion) {
 		this.politicaCancelacion = politicaCancelacion;
+	} 
+	
+	@Override
+	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
+		Categoria categoriaACalificar = unaCategoria.estasEn(this.categorias);
+		categoriaACalificar.addCalificacion(unUsuario, UnaCalificacion);
+		
 	}
-	
-	
-	/**
-	 * 
-	 * @param calificacion agregar una calificacion al inmueble
-	 */
-	
-	public void agregarCalificacion (Calificacion calificacion) {
-		calificaciones.add(calificacion);
+
+	@Override
+	public Map<Usuario, Calificacion> getCalificaciones(Categoria unaCategoria)  {
+		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);		
+		return categoriaBuscada.getCalificaciones();
 	}
 
 	public int getCheckOUT() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
 	
 }

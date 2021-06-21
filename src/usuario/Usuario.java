@@ -107,7 +107,7 @@ public class Usuario implements Calificable{
 		this.calificaciones = calificaciones;
 	}
 
-	// Agrega una Publicación a la lista
+	// Agrega una Publicaciï¿½n a la lista
 	public void addPublicacion(Publicacion publicacion) {
 		this.publicaciones.add(publicacion);
 	}
