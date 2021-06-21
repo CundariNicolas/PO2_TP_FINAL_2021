@@ -34,12 +34,13 @@ public class Publicacion {
 		 * Registra una ocupaci�n en un periodo dado
 		 * El periodo dado no deber�a estar ocupado para poder llevarse a cabo
 		 */
-		preciopordiaocupado.forEach(dia );
 		
 		
 		
 		
 	}
+	
+	pu
 	/** private boolean estaDisponibleEntre(Periodo periodo) {
 		/** Indica si est� disponible en el periodo dado
 		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
@@ -157,6 +158,15 @@ public class Publicacion {
 
 	public void setPrecio(ArrayList<PrecioDiaOcupacion> precio2) {
 		this.preciopordiaocupado = precio2;
+	}
+	
+	public String getCiudadInmueble() {
+		return this.inmueble.getCiudad();
+	}
+
+	public boolean estaLibreEntre(Calendar fechaDesde, Calendar fechaHasta) {
+		// TODO
+		return preciopordiaocupado.stream().filter(p -> p.getFecha().after(fechaDesde) || p.getFecha().equals(fechaDesde) && p.getFecha().before(fechaHasta) || p.getFecha().equals(fechaHasta)).allMatch( p -> !p.estaOcupado());
 	}
 	
 
