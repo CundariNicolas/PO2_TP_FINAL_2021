@@ -2,7 +2,9 @@ package sitio;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Set;
 
+import categoria.Categoria;
 import publicacion.Publicacion;
 import reserva.EstadoConsolidado;
 import reserva.Reserva;
@@ -12,6 +14,7 @@ public class Sitio {
 	private static Sitio sitio;
 	private static ObserverManager gestorDeNotificaciones;
 	private static ArrayList<Usuario> usuario;
+	private Set<Categoria> categorias; 
 	
 	
 	public Sitio() {
@@ -63,6 +66,10 @@ public class Sitio {
 
 	public static void procesarBajaDePrecio(Publicacion publicacion) {
 		gestorDeNotificaciones.alertarBajaDePrecio(publicacion);
+	}
+	
+	public void addCategoria(Categoria categoria) {
+		categorias.add(categoria);
 	}
 	
 
