@@ -4,28 +4,44 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calificacion.Calificacion;
+import categoria.Categoria;
 import categoria.CategoriaUsuario;
 import usuario.Usuario;
 
 class CategoriaInmuebleTestCase {
 
 	CategoriaUsuario puntualidad;//SUT
+	CategoriaUsuario vestimenta;//DOC
+	CategoriaUsuario prolijidad;
+
 	Calificacion unaCalificacion;//DOC
 	Calificacion otraCalificacion;//DOC
-	Usuario unUsuario;
-	Usuario otroUsuario;
+	Calificacion calificacionDamian;//DOC
+	
+	Usuario unUsuario;//DOC
+	Usuario otroUsuario;//DOC
+	Usuario damian;//DOC
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		puntualidad = new CategoriaUsuario("puntualidad");
 		unaCalificacion = mock (Calificacion.class);
 		otraCalificacion = mock (Calificacion.class);
+		calificacionDamian = mock (Calificacion.class);
 		unUsuario = mock (Usuario.class);
 		otroUsuario = mock (Usuario.class);
+		damian = mock (Usuario.class);
+		
+		vestimenta = mock (CategoriaUsuario.class);
+		prolijidad = mock(CategoriaUsuario.class);
 	}
 
 	@Test
@@ -69,7 +85,49 @@ class CategoriaInmuebleTestCase {
 		assertEquals(promedioBuscado,puntualidad.promedioDePuntaje());
 	}
 	@Test
-	void
+	void veoCorrectamenteLaCalificacionDeUnUsuario() {
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
+		assertEquals(unaCalificacion,puntualidad.verCalificacionDeUn(unUsuario));
+	}
+	
+	@Test
+	void unaCategoriaEsIgualASiMisma() {
+		assertTrue(puntualidad.esIgualA(puntualidad));
+	}
+	@Test
+	void unaCategoriaEsDiferenteAOtra() {
+		assertFalse(puntualidad.esIgualA(vestimenta));
+	}
+	
+	@Test
+	void enUnArrayDeCategoriasDevuelveALaCategoriaBuscada() {
+		Set <Categoria> listaCategoria;
+		listaCategoria = new HashSet<Categoria>();
+		listaCategoria.add(vestimenta);
+		listaCategoria.add(puntualidad);
+		
+		assertEquals(puntualidad,puntualidad.estasEn(listaCategoria));
+		assertNotEquals(prolijidad, puntualidad.estasEn(listaCategoria));	
+	}
+	
+	@Test
+	void sePuedeTomarLasCalificacionesLasCalificaciones() {
+		
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
+		puntualidad.addCalificacion(otroUsuario, otraCalificacion);
+		
+		Map<Usuario,Calificacion> resultado = puntualidad.getCalificaciones();
+		
+		assertTrue(resultado.containsKey(unUsuario));
+		assertEquals(unaCalificacion,resultado.get(unUsuario));
+		
+		assertTrue(resultado.containsKey(otroUsuario));
+		assertEquals(otraCalificacion,resultado.get(otroUsuario));
+
+		assertFalse(resultado.containsKey(damian));
+		
+	}
+	
 	
 	
 

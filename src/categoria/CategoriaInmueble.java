@@ -20,7 +20,7 @@ public class CategoriaInmueble extends Categoria implements Calificable{
 
 	@Override
 	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
-		//ver si se puede evitar Categoria
+		//TODO ver si puedeevitar el parametro unaCategoria
 			if (unaCategoria.nombre() == this.nombre()) {
 				this.addCalificacion(unUsuario, UnaCalificacion);
 			}
