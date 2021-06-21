@@ -2,6 +2,7 @@ package sitio;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import publicacion.Publicacion;
 import reserva.EstadoConsolidado;
@@ -77,6 +78,10 @@ public class Sitio {
 	
 	public static void procesarBajaDePrecio(Publicacion publicacion) {
 		gestorDeNotificaciones.alertarBajaDePrecio(publicacion);
+	}
+	
+	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
+		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicacion().stream()).collect(Collectors.toCollection(ArrayList::new)));
 	}
 	
 

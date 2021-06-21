@@ -13,48 +13,49 @@ public class Publicacion {
 	private Inmueble inmueble;
 	private Calendar fechaInicio;
 	private Calendar fechaFin;
-	private Calendar checkIn;
-	private Calendar checkOut;
 	private ArrayList<Foto> fotos;
-	private ArrayList<PrecioPeriodo> precio;
-	private ArrayList<Periodo> periodoOcupado;
+	private ArrayList<PrecioDiaOcupacion> preciopordiaocupado;
 	private ArrayList<Observador> observadorBajaPrecio;
+	private Usuario propietario;
 	
-	public Publicacion(Inmueble inmueble, Calendar inicio, Calendar fin, Calendar checkIn, Calendar checkOut, ArrayList<Foto> fotos, ArrayList<PrecioPeriodo> precio) {
+	public Publicacion(Usuario propietario, Inmueble inmueble, Calendar inicio, Calendar fin, ArrayList<Foto> fotos, ArrayList<PrecioDiaOcupacion> precio) {
+		this.propietario = propietario;
 		this.inmueble = inmueble;
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
 		this.setFotos(fotos);
 		this.setPrecio(precio);
-		this.periodoOcupado = new ArrayList<Periodo>();
+		this.preciopordiaocupado = new ArrayList<PrecioDiaOcupacion>();
 		this.observadorBajaPrecio = new ArrayList<Observador>();
 		
 	}
 	
-	public void registrarOcupacion(Calendar fechainicio, Calendar fechaFoin) {
+	public void registrarOcupacion(Calendar fechainicio, Calendar fechaFin) {
 		/**
 		 * Registra una ocupaci�n en un periodo dado
 		 * El periodo dado no deber�a estar ocupado para poder llevarse a cabo
 		 */
 		
 		
+		
+		
 	}
-	private boolean estaDisponibleEntre(Periodo periodo) {
+	
+	pu
+	/** private boolean estaDisponibleEntre(Periodo periodo) {
 		/** Indica si est� disponible en el periodo dado
 		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
 		 * 
-		 */
+		 
 		return this.getPeriodosOcupados().stream().allMatch(ocupado -> this.estaLibreAntes(ocupado, periodo) || this.estaLibreDespues(ocupado, periodo));
 	}
 	
 	
-	/* estaLibreAntes */
+	/* estaLibreAntes 
 	boolean estaLibreAntes(Periodo ocupado, Periodo periodo) {
 		/**Indica si el periodo a ocupar esta libre antes del periodo ocupado, que no exista una interseccion entre los dias de los periodos
 		 * 
-		 */
+		 
 		return  this.elInicioAOcuparEstaAntesOElMismoDia(ocupado, periodo) && this.elFinEstaAntesDelInicioOcupado(ocupado, periodo) ;
 	}
 	
@@ -68,7 +69,7 @@ public class Publicacion {
 	}
 	
 	
-	
+	*/
 	
 	
 	public ArrayList<FormaDePago> medioDePagoHabilitado(){
@@ -79,18 +80,16 @@ public class Publicacion {
 	
 	
 	
-	/* estaLibreDespues */
+	/* estaLibreDespues 
 	
 	boolean estaLibreDespues(Periodo ocupado, Periodo periodo) {
 		/**
 		 * indica si el periodo a ocupare sta libre despues del periodo ocupado, si es el mismo dia
 		 * se asume como desocupado, que no exista interseccion entre los dias de ambos periodos
-		 */
+		 
 		return this.elInicioAOcuparEstaDespuesOElMismoDia(ocupado, periodo) && this.elFinAOcuparEstaDespuesOElMismoDia(ocupado, periodo);
 	}
 	
-	/*  asd asd aasdads */
-	/** asd*/
 	
 	private boolean elFinAOcuparEstaDespuesOElMismoDia(Periodo ocupado, Periodo periodo) {
 		
@@ -105,36 +104,27 @@ public class Publicacion {
 	private boolean elInicioAOcuparEstaDespuesOElMismoDia(Periodo ocupado, Periodo periodo) {
 		/**
 		 * Indica si la fecha del fin del periodo ocupado esta antes del inicio del periodo o es el mismo dia
-		 */
+		 
 		return (ocupado.getFechaFin().before(periodo.getFechaInicio()) );
 	}
 	
 	
 	
 	
+	*/
 	
 	
 	
 	
-	
-	
-/*
-	public void notificarBajaDePrecio() {
-		this.observadorBajaPrecio.stream().forEach(obs -> obs.publish("Bajo el precio"));
+
+	public void notificarBajaEnPrecio() {
 		
-	}
-*/
-	public void suscribirBajaDePrecio(Observador observador1) {
-		this.observadorBajaPrecio.add(observador1);
+		
 	}
 	
 	
 	// GETTERS AND SETTERS
-	public ArrayList<Periodo> getPeriodosOcupados() {
-		
-		return periodoOcupado;
-	}
-
+	
 	public Inmueble getInmueble() {
 		return inmueble;
 	}
@@ -147,14 +137,6 @@ public class Publicacion {
 		return fechaFin;
 	}
 
-	public Calendar getCheckIn() {
-		return checkIn;
-	}
-
-	public Calendar getCheckOut() {
-		return checkOut;
-	}
-
 	public ArrayList<Foto> getFotos() {
 		return fotos;
 	}
@@ -163,12 +145,21 @@ public class Publicacion {
 		this.fotos = fotos;
 	}
 
-	public ArrayList<PrecioPeriodo> getPrecio() {
-		return precio;
+	public ArrayList<PrecioDiaOcupacion> getPrecio() {
+		return preciopordiaocupado;
 	}
 
-	public void setPrecio(ArrayList<PrecioPeriodo> precio) {
-		this.precio = precio;
+	public void setPrecio(ArrayList<PrecioDiaOcupacion> precio2) {
+		this.preciopordiaocupado = precio2;
+	}
+	
+	public String getCiudadInmueble() {
+		return this.inmueble.getCiudad();
+	}
+
+	public boolean estaLibreEntre(Calendar fechaDesde, Calendar fechaHasta) {
+		// TODO
+		return preciopordiaocupado.stream().filter(p -> p.getFecha().after(fechaDesde) || p.getFecha().equals(fechaDesde) && p.getFecha().before(fechaHasta) || p.getFecha().equals(fechaHasta)).allMatch( p -> !p.estaOcupado());
 	}
 
 	public void registrarCancelacion(Calendar fechaInicio2, Calendar fechaFin2) {

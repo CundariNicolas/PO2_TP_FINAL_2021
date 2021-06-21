@@ -38,6 +38,23 @@ public class Reserva {
 		return reserva;
 	}
 	
+	public Double precioTotalReserva() {
+		double precioAcumulado = 0.0;
+		for (PrecioDiaOcupacion unPrecio: precios) {
+			precioAcumulado += unPrecio.getPrecio();
+		}
+		return precioAcumulado;
+	}
+
+	public double valorEnCantidadDeDias(int cantidadDeDias) {
+		double precioAcumulado = 0.0;
+		for(int inicio=0; inicio < cantidadDeDias ; inicio++) {
+			precioAcumulado += this.precios.get(inicio).getPrecio();	
+		}
+		return precioAcumulado;
+	}
+	
+	
 	protected void setEstado(EstadoReserva estado) {
 		this.estado = estado;
 	}

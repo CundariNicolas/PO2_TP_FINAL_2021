@@ -3,6 +3,7 @@ package inmueble;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import calificacion.Calificacion;
 import formasDePago.FormaDePago;
 import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
