@@ -2,7 +2,8 @@ package reserva;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import inmueble.FormaDePago;
+
+import formasDePago.FormaDePago;
 import publicacion.PrecioDiaOcupacion;
 import publicacion.Publicacion;
 import usuario.Usuario;
@@ -39,8 +40,10 @@ public class Reserva {
 	
 	public Double precioTotalReserva() {
 		double precioAcumulado = 0.0;
-		precios.stream().forEach(dia -> precioAcumulado += dia.getPrecio());
-		
+		for (PrecioDiaOcupacion unPrecio: precios) {
+			precioAcumulado += unPrecio.getPrecio();
+		}
+		return precioAcumulado;
 	}
 
 	public double valorEnCantidadDeDias(int cantidadDeDias) {
