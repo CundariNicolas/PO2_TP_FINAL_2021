@@ -1,10 +1,6 @@
 package publicacion;
 
-
 import java.util.Calendar;
-
-	
-
 
 public class PrecioDiaOcupacion {
 	private Calendar fecha;

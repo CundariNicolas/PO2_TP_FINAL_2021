@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
+import reserva.Reserva;
 import sitio.Observador;
 import usuario.Usuario;
 
@@ -115,19 +116,11 @@ public class Publicacion {
 	
 	
 	
-	
 
 	public void notificarBajaEnPrecio() {
 		
 		
 	}
-
-	
-	
-
-	
-	
-	
 	
 	
 	// GETTERS AND SETTERS
@@ -167,6 +160,21 @@ public class Publicacion {
 	public boolean estaLibreEntre(Calendar fechaDesde, Calendar fechaHasta) {
 		// TODO
 		return preciopordiaocupado.stream().filter(p -> p.getFecha().after(fechaDesde) || p.getFecha().equals(fechaDesde) && p.getFecha().before(fechaHasta) || p.getFecha().equals(fechaHasta)).allMatch( p -> !p.estaOcupado());
+	}
+
+	public void registrarCancelacion(Calendar fechaInicio2, Calendar fechaFin2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Usuario getPropietario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void aplicarPoliticaCancelacion(Reserva reserva) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -13,7 +13,7 @@ public abstract class EstadoReserva  {
 
 	protected void aceptar(Reserva reserva) {
 		// Consolida --> Cambia estado
-		reserva.consolidar();
+		reserva.getPublicacion().registrarOcupacion(reserva.getFechaInicio(), reserva.getFechaFin());
 		reserva.setEstado(EstadoConsolidado.getInstance());
 	};
 
@@ -27,6 +27,10 @@ public abstract class EstadoReserva  {
 
 	protected Boolean esCondicional() {
 		return false;
-	};
+	}
+
+	protected Boolean estaFinalizada(Reserva reserva) {
+		return false;
+	}
 
 }
