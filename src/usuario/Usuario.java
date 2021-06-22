@@ -4,8 +4,10 @@ package usuario;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import categoria.Categoria;
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
@@ -98,9 +100,7 @@ public class Usuario implements Calificable{
 		return calificaciones;
 	}
 	
-	public void addCalificacion(Calificacion calificacion) {
-		this.getCalificaciones().add(calificacion);
-	}
+	
 	
 	private void setCalificaciones(List<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
@@ -152,6 +152,16 @@ public class Usuario implements Calificable{
 			cuenta += inmueble.getCantidadDeVecesAlquilado();
 		}
 		return cuenta;
+	}
+
+	@Override
+	public Map<Usuario, calificacion.Calificacion> getCalificaciones(Categoria unaCategoria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addCalificacion(Calificacion calificacion) {
+		this.getCalificaciones().add(calificacion);
 	}
 
 }
