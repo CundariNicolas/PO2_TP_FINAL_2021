@@ -3,7 +3,7 @@ package categoria;
 
 public class CategoriaInmueble extends Categoria{
 
-	public CategoriaInmueble(String nombre) {
-		super(nombre);
+	public CategoriaInmueble(String descripcion) {
+		super(descripcion);
 	}
 }
