@@ -103,7 +103,7 @@ public class Sitio {
 	
 	public void  calificar (Calificable unaCategoria,Reserva unaReserva, Calificacion unaCalificacion ) {
 		if(unaReserva.estaFinalizada()) {
-			unaCategoria.setCalificacion(unaReserva.inquilino(), unaCalificacion);
+			unaCategoria.setCalificacion(unaReserva.getInquilino(), unaCalificacion);
 		}
 	}
 	
@@ -131,7 +131,7 @@ public class Sitio {
 	}
 
 	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
-		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicacion().stream()).collect(Collectors.toCollection(ArrayList::new)));
+		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
 	}
 	
 }

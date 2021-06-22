@@ -2,7 +2,7 @@ package politicaCancelacion;
 
 import java.util.ArrayList;
 
-import publicacion.PrecioPeriodo;
+import publicacion.PrecioDiaOcupacion;
 import reserva.Reserva;
 
 public class Gratuita extends PoliticaDeCancelacion {
@@ -22,7 +22,7 @@ public class Gratuita extends PoliticaDeCancelacion {
 		int cantidadDeDiasDeMulta=2;
 		Double precioAcumulado = 0.0;
 		
-		ArrayList<PrecioPeriodo> diasDeReserva = reserva.getPublicacion().getPrecio();
+		ArrayList<PrecioDiaOcupacion> diasDeReserva = reserva.getPublicacion().getPrecio();
 		for (int pocicion = 0; pocicion < cantidadDeDiasDeMulta ; pocicion ++ ) {
 			precioAcumulado += diasDeReserva.get(pocicion).getPrecio();
 		}

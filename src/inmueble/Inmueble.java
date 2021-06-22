@@ -13,7 +13,6 @@ import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
 import usuario.Usuario;
 import servicios.Servicio;
-import sitio.Calificacion;
 
 public class Inmueble implements Calificable{
 	
