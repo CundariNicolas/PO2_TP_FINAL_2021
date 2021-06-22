@@ -8,7 +8,6 @@ import formasDePago.FormaDePago;
 import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
 import servicios.Servicio;
-import sitio.Calificacion;
 
 public class Inmueble {
 	private ArrayList <Calificacion> calificaciones; 

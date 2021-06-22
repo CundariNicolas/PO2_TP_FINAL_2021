@@ -20,7 +20,7 @@ public class EstadoCancelado extends EstadoReserva{
 	}
 
 	@Override
-	protected void cacelar(Reserva reserva) {
+	protected void cancelar(Reserva reserva) {
 		// nada para hacer ya esta cancelada	
 	}
 

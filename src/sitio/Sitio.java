@@ -2,25 +2,25 @@ package sitio;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import publicacion.Publicacion;
-import reserva.EstadoConsolidado;
 import reserva.Reserva;
 import usuario.Usuario;
 
 public class Sitio {
 	private static Sitio sitio;
 	private static ObserverManager gestorDeNotificaciones;
-	private static ArrayList<Usuario> usuario;
+	private static List<Usuario> usuario;
 	
 	
-	public Sitio() {
+	private Sitio() {
 		this.setGestorDeNotificaciones( ObserverManager.getInstance() );
 		this.setUsuario( new ArrayList<>());
 	}
 	
-	private static Sitio getInstance() {
+	public static Sitio getInstance() {
 		if (sitio == null) {
 			sitio = new Sitio();
 		}
@@ -35,7 +35,7 @@ public class Sitio {
 		this.gestorDeNotificaciones = gestorDeNotificaciones;
 	}
 
-	private ArrayList<Usuario> getUsuario() {
+	private List<Usuario> getUsuario() {
 		return usuario;
 	}
 
@@ -54,7 +54,7 @@ public class Sitio {
 	}
 	
 	private static void asignarProximaReservaCondicional(Reserva reserva) {
-		ArrayList<Reserva> reservaCoincide = new ArrayList<>();
+		List<Reserva> reservaCoincide = new ArrayList<>();
 		Reserva reservaSiguiente;
 		reservaCoincide = getReservasCondicionalesQueCoincidenCon(reserva);
 		if (reservaCoincide.size() > 0) {
@@ -63,16 +63,16 @@ public class Sitio {
 		}
 	}
 
-	private static ArrayList<Reserva> getReservasCondicionales(){
-		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
-		usuario.forEach(usuario -> reservaCondicional.addAll( (ArrayList<Reserva>) usuario.todasLasReservas().stream().filter(res -> res.esCondicional()) )) ;
+	private static List<Reserva> getReservasCondicionales(){
+		List<Reserva> reservaCondicional = new ArrayList<>();
+		usuario.forEach(usuario -> reservaCondicional.addAll( usuario.todasLasReservas().stream().filter(res -> res.esCondicional()).collect(Collectors.toList()) )) ;
 		return reservaCondicional;
 	}
 	
-	private static ArrayList<Reserva> getReservasCondicionalesQueCoincidenCon(Reserva reserva){
-		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
+	private static List<Reserva> getReservasCondicionalesQueCoincidenCon(Reserva reserva){
+		List<Reserva> reservaCondicional = new ArrayList<>();
 		reservaCondicional = getReservasCondicionales();
-		return  (ArrayList<Reserva>) reservaCondicional.stream().filter(res -> res.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble())  && res.getFechaInicio().equals(reserva.getFechaInicio())  && res.getFechaFin().equals(reserva.getFechaFin()) );
+		return  reservaCondicional.stream().filter(res -> res.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble())  && res.getFechaInicio().equals(reserva.getFechaInicio())  && res.getFechaFin().equals(reserva.getFechaFin()) ).collect(Collectors.toList());
 		
 	}
 	
@@ -81,7 +81,7 @@ public class Sitio {
 	}
 	
 	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
-		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicacion().stream()).collect(Collectors.toCollection(ArrayList::new)));
+		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
 	}
 	
 

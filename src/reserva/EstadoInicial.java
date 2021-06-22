@@ -29,7 +29,7 @@ public class EstadoInicial extends EstadoReserva{
 		String mailDestino = reserva.getInquilino().geteMail();
 		String asunto = "Reserva confirmada";
 		String mensaje =   "Su reserva en " 
-		                 + reserva.getPublicacion().getInmueble().getCiudad()
+		                 + reserva.getPublicacion().getCiudadInmueble()
 		                 + " ha sido confirmada.";
 		
 		/* se envia el mail de notificacion

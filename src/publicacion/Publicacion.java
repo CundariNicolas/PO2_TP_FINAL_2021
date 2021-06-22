@@ -41,7 +41,7 @@ public class Publicacion {
 		
 	}
 	
-	pu
+	
 	/** private boolean estaDisponibleEntre(Periodo periodo) {
 		/** Indica si est� disponible en el periodo dado
 		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
@@ -175,6 +175,11 @@ public class Publicacion {
 	public void aplicarPoliticaCancelacion(Reserva reserva) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getDescripcionTipoInmueble() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

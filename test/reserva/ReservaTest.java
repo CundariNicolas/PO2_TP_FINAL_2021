@@ -21,12 +21,12 @@ import usuario.Usuario;
 class ReservaTest {
 	private Reserva reserva1;
 	private Reserva reservaCondicional;
-	private Publicacion publicacion1;
+	private Publicacion publicacion1 = mock(Publicacion.class);
 	private Calendar fechaIN;
 	private Calendar fechaOUT;
-	private ArrayList<PrecioDiaOcupacion> precio;
-	private FormaDePago formaDePago;
-	private Usuario inquilino;
+	private ArrayList<PrecioDiaOcupacion> precio = new ArrayList<PrecioDiaOcupacion>();
+	private FormaDePago formaDePago = mock(FormaDePago.class);
+	private Usuario inquilino = mock(Usuario.class);
 	
 
 	@BeforeEach
@@ -55,7 +55,7 @@ class ReservaTest {
 	@Test
 	void testSetEstado() {
 		reserva1.setEstado(EstadoCancelado.getInstance());
-		assertEquals(reservaCondicional.getEstado().getClass(), EstadoCancelado.class);
+		assertEquals(reserva1.getEstado().getClass(), EstadoCancelado.class);
 	}
 
 	@Test
@@ -88,11 +88,14 @@ class ReservaTest {
 
 	@Test
 	void testGetPrecios() {
+		PrecioDiaOcupacion precioDia = mock(PrecioDiaOcupacion.class);
+		precio.add(precioDia);
 		assertEquals(reserva1.getPrecios().get(0).getClass(), PrecioDiaOcupacion.class);
 	}
 
 	@Test
 	void testGetFormaDePago() {
+		formaDePago = mock(FormaDePago.class);
 		assertEquals(reserva1.getFormaDePago().getClass(), FormaDePago.class);
 	}
 
@@ -104,31 +107,27 @@ class ReservaTest {
 	@Test
 	void testEnviarA() {
 		Reserva reservaMock = mock(Reserva.class);
-		reservaMock.enviarA("pepe@gmail.com");
+		reservaMock .enviarA("pepe@gmail.com");
 		verify(reservaMock).enviarA("pepe@gmail.com");		
 	}
 
 	@Test
 	void testAceptar() {
-		EstadoInicial estado = mock(EstadoInicial.class);
+		Inmueble inmueble = mock(Inmueble.class);
+		when(publicacion1.getInmueble()).thenReturn(inmueble);
 		reserva1.aceptar();
-		verify(estado).aceptar(reserva1);
 		assertEquals(reserva1.getEstado().getClass(), EstadoConsolidado.class);
 	}
 
 	@Test
 	void testRechazar() {
-		EstadoInicial estado = mock(EstadoInicial.class);
 		reserva1.rechazar();
-		verify(estado).rechazar(reserva1);
 		assertEquals(reserva1.getEstado().getClass(), EstadoRechazado.class);		
 	}
 
 	@Test
 	void testCancelar() {
-		EstadoInicial estado = mock(EstadoInicial.class);
 		reserva1.cancelar();
-		verify(estado).cacelar(reserva1);
 		assertEquals(reserva1.getEstado().getClass(), EstadoCancelado.class);	
 	}
 
@@ -139,12 +138,8 @@ class ReservaTest {
 
 	@Test
 	void testEsDeCiudad() {
-		Inmueble inmueble = mock(Inmueble.class);
-		publicacion1 = mock(Publicacion.class);
-		
-		when(publicacion1.getInmueble()).thenReturn(inmueble);
-		when(inmueble.getCiudad()).thenReturn("Cordoba");
-		
+		when(publicacion1.getCiudadInmueble()).thenReturn("Cordoba");
+				
 		assertTrue(reserva1.esDeCiudad("Cordoba"));
 		assertFalse(reserva1.esDeCiudad("Rio"));
 	}
@@ -171,7 +166,13 @@ class ReservaTest {
 
 	@Test
 	void testValorEnCantidadDeDias() {
-		fail("Not yet implemented");
+		PrecioDiaOcupacion precioDia = mock(PrecioDiaOcupacion.class);
+		when(precioDia.getPrecio()).thenReturn(333.33);
+		precio.add(precioDia);
+		precio.add(precioDia);
+		
+		assertEquals(reserva1.valorEnCantidadDeDias(1), 333.33);
+		assertEquals(reserva1.valorEnCantidadDeDias(2), 666.66);
 	}
 
 }
