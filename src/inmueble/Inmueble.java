@@ -24,8 +24,8 @@ public class Inmueble implements Calificable{
 	private String direccion ;
 	private ArrayList <Servicio> servicios;
 	private Integer capacidad; 
-	private Calendar checkIN;
-	private Calendar checkOUT;
+	private int checkIN;
+	private int checkOUT;
 	private Integer cantidadDeVecesAlquilado;
 	private PoliticaDeCancelacion politicaCancelacion;
 
@@ -65,12 +65,7 @@ public class Inmueble implements Calificable{
 	public void setTipo(TipoDeInmueble tipo) {
 		this.tipo = tipo;
 	} 
-	
-	public boolean estaOcupadoEn(Calendar fecha) {
-		return this.checkIN.after(fecha) && this.checkOUT.before(fecha);
-	}
-
-	
+		
 	public Integer getSuperficie() {
 		return superficie;
 	}
@@ -153,8 +148,9 @@ public class Inmueble implements Calificable{
 		
 	}
 
-	public Calendar getCheckOUT() {
+	public int getCheckOUT() {
 		return this.checkOUT;
 	}
+	
 	
 }

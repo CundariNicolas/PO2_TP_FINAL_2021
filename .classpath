@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/Nico/Mockito Framework/byte-buddy-1.10.18.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nico/Mockito Framework/byte-buddy-agent-1.10.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nico/Mockito Framework/mockito-core-3.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nico/Mockito Framework/mockito-inline-3.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nico/Mockito Framework/objenesis-3.1.jar"/>
+	<classpathentry kind="lib" path="/home/kratopscp/Escritorio/POO Framaworks/Mokito/ahora/objenesis-3.2.jar"/>
+	<classpathentry kind="lib" path="/home/kratopscp/Escritorio/POO Framaworks/Mokito/ahora/byte-buddy-agent-1.11.5.jar"/>
+	<classpathentry kind="lib" path="/home/kratopscp/Escritorio/POO Framaworks/Mokito/ahora/byte-buddy-1.11.5.jar"/>
+	<classpathentry kind="lib" path="/home/kratopscp/Escritorio/POO Framaworks/Mokito/ahora/mockito-core-3.6.0 (1).jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
