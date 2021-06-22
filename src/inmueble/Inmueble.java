@@ -2,22 +2,20 @@ package inmueble;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Map;
-import java.util.Set;
-
+import java.util.List;
+import java.util.stream.Collectors;
 import calificacion.Calificable;
 import calificacion.Calificacion;
-import categoria.Categoria;
 import formasDePago.FormaDePago;
 import politicaCancelacion.PoliticaDeCancelacion;
 import tipoInmueble.TipoDeInmueble;
 import usuario.Usuario;
 import servicios.Servicio;
-import sitio.Calificacion;
+
 
 public class Inmueble implements Calificable{
 	
-	private Set<Categoria> categorias; 
+	private ArrayList<Calificacion> calificaciones; 
 	private ArrayList<FormaDePago> formaDePago;
 	private TipoDeInmueble tipo; 
 	private Integer superficie;
@@ -31,7 +29,7 @@ public class Inmueble implements Calificable{
 	private Integer cantidadDeVecesAlquilado;
 	private PoliticaDeCancelacion politicaCancelacion;
 
-	public Inmueble(TipoDeInmueble tipoInmueble,float superficie, 
+	public Inmueble(TipoDeInmueble tipoInmueble,double superficie, 
 			String pais, String ciudad,String direccion, 
 			ArrayList<Servicio> servicios, int capacidad) {
 	}
@@ -138,16 +136,21 @@ public class Inmueble implements Calificable{
 	} 
 	
 	@Override
-	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion) {
-		Categoria categoriaACalificar = unaCategoria.estasEn(this.categorias);
-		categoriaACalificar.addCalificacion(unUsuario, UnaCalificacion);
+	public void setCalificacion(Usuario unUsuario, String comentario, int puntaje) {
+
+		Calificacion calificacionDeUsuario;				
+		calificacionDeUsuario = this.calificaciones.stream()
+							.filter(unaCalificacion -> unaCalificacion.getOrigen() == unUsuario)
+							.collect(Collectors.toList()).get(0);
+		calificacionDeUsuario.setComentario(comentario);
+		calificacionDeUsuario.setPuntaje(puntaje);
 		
 	}
-
+	
 	@Override
-	public Map<Usuario, Calificacion> getCalificaciones(Categoria unaCategoria)  {
-		Categoria categoriaBuscada = unaCategoria.estasEn(this.categorias);		
-		return categoriaBuscada.getCalificaciones();
+	public List <Calificacion> getCalificaciones() {
+		return this.getCalificaciones();
+		
 	}
 
 	public int getCheckOUT() {

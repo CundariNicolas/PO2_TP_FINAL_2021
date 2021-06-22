@@ -1,14 +1,12 @@
 package calificacion;
 
-import java.util.Map;
-
-import categoria.Categoria;
+import java.util.List;
 import usuario.Usuario;
 
 public interface Calificable {
 	
-	public void setCalificacion(Usuario unUsuario, Categoria unaCategoria, Calificacion UnaCalificacion);
+	public void setCalificacion(Usuario unUsuario, String comentario, int puntaje);
 
-	public Map<Usuario,Calificacion> getCalificaciones(Categoria unaCategoria);
+	public List <Calificacion> getCalificaciones();
 
 }

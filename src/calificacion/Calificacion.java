@@ -1,22 +1,42 @@
 package calificacion;
 
+import categoria.Categoria;
+import usuario.Usuario;
+
 public class Calificacion  {
 	
-	private int puntaje;
-	private String comentario;
+	Categoria categoria;
+	Integer puntaje;
+	String comentario;
+	Usuario origen;
 	
-	Calificacion (int puntaje, String comentario) {
-		this.puntaje= puntaje;
-		this.comentario = comentario;
+	
+	public Categoria getCategoria() {
+		return categoria;
 	}
-
-	public int getPuntaje() {
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	public Integer getPuntaje() {
 		return puntaje;
 	}
-
+	public void setPuntaje(Integer puntaje) {
+		this.puntaje = puntaje;
+	}
 	public String getComentario() {
 		return comentario;
 	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	public Usuario getOrigen() {
+		return origen;
+	}
+	public void setOrigen(Usuario origen) {
+		this.origen = origen;
+	}
+	
+	
 	
 }
 	/*

@@ -3,10 +3,13 @@ package sitio;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.List;
+
 
 import calificacion.Calificable;
 import calificacion.Calificacion;
@@ -101,9 +104,9 @@ public class Sitio {
 		categorias.add(categoria);
 	}
 	
-	public void  calificar (Calificable unaCategoria,Reserva unaReserva, Calificacion unaCalificacion ) {
+	public void  calificar (Calificable calificable ,Reserva unaReserva, Calificacion unaCalificacion ) {
 		if(unaReserva.estaFinalizada()) {
-			unaCategoria.setCalificacion(unaReserva.inquilino(), unaCalificacion);
+			calificable.setCalificacion(unaReserva.getInquilino(), unaCalificacion.getComentario(), unaCalificacion.getPuntaje());
 		}
 	}
 	
@@ -111,9 +114,45 @@ public class Sitio {
 		this.formasDePago.add(unaFormaDePago);
 	}
 	
-	public double promedioGeneralCalificaciones(Categoria unaCategoria) {
-		return unaCategoria.promedioDePuntaje();
+	public double promedioGeneralCalificaciones(Calificable unCalificable) {
+		double suma = 0.0;
+		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
+		calificaciones  = unCalificable.getCalificaciones();
+		for (Calificacion calificacion:calificaciones) {
+			suma += calificacion.getPuntaje();
+		}
+		return suma/calificaciones.size();
 	}	
+	
+	
+	public Map<Categoria,Double> promedioPorCategoria (Calificable calificable) {
+		Map<Categoria,Double> categorias = new HashMap<Categoria,Double>();
+		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
+		
+		calificaciones = calificable.getCalificaciones();
+		
+		for (Calificacion calificacion:calificaciones) {
+			categorias.put(calificacion.getCategoria(),this.promedioDe(calificable, calificacion.getCategoria())); 
+		}
+		return categorias;
+	
+	}
+	
+	private double promedioDe(Calificable calificable, Categoria unaCategoria) {
+		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
+		double acumuladorDePuntaje = 0.0;
+		calificaciones = calificable.getCalificaciones().stream().
+				filter(filtroCategoria-> filtroCategoria.getCategoria() == unaCategoria)
+				.collect(Collectors.toList());
+		for (Calificacion unaCalificacion : calificaciones) {
+			acumuladorDePuntaje += unaCalificacion.getPuntaje();
+		}
+		return acumuladorDePuntaje / calificaciones.size();
+			
+	}
+	
+	
+	
 	public void addTipoInmueble (TipoDeInmueble unTipoDeInmueble) {
 		tiposDeInmuebles.add(unTipoDeInmueble);
 	}
