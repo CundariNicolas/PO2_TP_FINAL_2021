@@ -5,10 +5,7 @@ import publicacion.Publicacion;
 public class AppMobile implements Observador{
 	private Publicacion publicacion;
 
-	
-	
 	public AppMobile(Publicacion publicacion) {
-		super();
 		this.publicacion = publicacion;
 	}
 

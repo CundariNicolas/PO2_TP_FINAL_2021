@@ -14,9 +14,9 @@ public class ObserverManager {
 	private static List<Observador> observadoresReserva;
 	
 	private ObserverManager() {
-		this.setObservadoresCancelacion( new ArrayList<>() );
-		this.setObservadoresPrecio( new ArrayList<>() );
-		this.setObservadoresReserva( new ArrayList<>() );
+		ObserverManager.setObservadoresCancelacion( new ArrayList<>() );
+		ObserverManager.setObservadoresPrecio( new ArrayList<>() );
+		ObserverManager.setObservadoresReserva( new ArrayList<>() );
 	}
 	
 	public static ObserverManager getInstance() {
@@ -30,52 +30,52 @@ public class ObserverManager {
 		return observadoresCancelacion;
 	}
 
-	private static void setObservadoresCancelacion(List<Observador> observadoresCancelacion) {
-		ObserverManager.observadoresCancelacion = observadoresCancelacion;
+	private static void setObservadoresCancelacion(List<Observador> observadores) {
+		observadoresCancelacion = observadores;
 	}
 
 	private static List<Observador> getObservadoresPrecio() {
 		return observadoresPrecio;
 	}
 
-	private static void setObservadoresPrecio(List<Observador> observadoresPrecio) {
-		ObserverManager.observadoresPrecio = observadoresPrecio;
+	private static void setObservadoresPrecio(List<Observador> observadores) {
+		observadoresPrecio = observadores;
 	}
 
 	private static List<Observador> getObservadoresReserva() {
 		return observadoresReserva;
 	}
 
-	private static void setObservadoresReserva(List<Observador> observadoresReservan) {
-		ObserverManager.observadoresReserva = observadoresReserva;
+	private static void setObservadoresReserva(List<Observador> observadores) {
+		observadoresReserva = observadores;
 	}
 	
 	public void suscribirACancelacion(Observador observador) {
-		this.observadoresCancelacion.add(observador);
+		ObserverManager.observadoresCancelacion.add(observador);
 	}
 	
 	public void suscribirABajaDePrecio(Observador observador) {
-		this.observadoresPrecio.add(observador);
+		ObserverManager.observadoresPrecio.add(observador);
 	}
 	
 	public void suscribirReserva(Observador observador) {
-		this.observadoresReserva.add(observador);
+		ObserverManager.observadoresReserva.add(observador);
 	}
 	
 	public void alertarCancelacion(Reserva reserva) {
-		List<Observador> subList; 
-		subList = this.getObservadoresCancelacion().stream().filter(observador -> observador.getPublicacion().getInmueble() == reserva.getPublicacion().getInmueble()).collect(Collectors.toList());
+		List<Observador> subList = new ArrayList<>(); 
+		subList = ObserverManager.getObservadoresCancelacion().stream().filter(observador -> observador.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble()) ).collect(Collectors.toList());
 		this.notificarCambio(subList);
 	}
 	
 	public void alertarBajaDePrecio(Publicacion publicacion) {
-		List<Observador> subList; 
-		subList = this.getObservadoresPrecio().stream().filter(observador -> observador.getPublicacion().getInmueble() == publicacion.getInmueble()).collect(Collectors.toList());
+		List<Observador> subList = new ArrayList<>(); 
+		subList = ObserverManager.getObservadoresPrecio().stream().filter(observador -> observador.getPublicacion().getInmueble().equals( publicacion.getInmueble()) ).collect(Collectors.toList());
 		this.notificarCambio(subList);
 	}
 	
 	public void alertarReserva(Publicacion publicacion) {
-		this.notificarCambio(this.getObservadoresReserva());
+		this.notificarCambio(ObserverManager.getObservadoresReserva());
 	}
 	
 	private void notificarCambio(List<Observador> observador) {

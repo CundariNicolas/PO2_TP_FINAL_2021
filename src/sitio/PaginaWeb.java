@@ -1,15 +1,11 @@
 package sitio;
 
-import java.util.Comparator;
-
 import publicacion.Publicacion;
-import reserva.Reserva;
 
 public class PaginaWeb implements Observador{
 	private Publicacion publicacion;
 
 	public PaginaWeb(Publicacion publicacion) {
-		super();
 		this.publicacion = publicacion;
 	}
 
