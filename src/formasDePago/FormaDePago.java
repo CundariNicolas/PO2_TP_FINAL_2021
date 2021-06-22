@@ -5,7 +5,7 @@ public class FormaDePago {
 	private String codigo;
 	private String descripcion;
 	
-	FormaDePago (String codigo, String descripcion) {
+	public FormaDePago (String codigo, String descripcion) {
 		this.setDescripcion(descripcion);
 		this.setSetCodigo(codigo);
 	}
