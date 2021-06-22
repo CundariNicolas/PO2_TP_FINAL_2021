@@ -172,6 +172,25 @@ class PublicacionTestCase {
 		assertEquals(fin, publicacion1.getFechaFin());
 	}
 	
+	@Test
+	void getFotos() {
+		assertEquals(fotos, publicacion1.getFotos());
+	}
 	
-
+	@Test
+	void getPrecio() {
+		assertEquals(precioPorDia, publicacion1.getPrecio());
+	}
+	@Test
+	void getCiudadInmueble() {
+		when(inmueble.getCiudad()).thenReturn("Quilmes");
+		publicacion1.getCiudadInmueble();
+		verify(inmueble,atLeast(1)).getCiudad();
+		assertEquals("Quilmes", publicacion1.getCiudadInmueble());
+	}
+	
+	@Test
+	void getPropietario() {
+		assertEquals(usuario, publicacion1.getPropietario());
+	}
 }
