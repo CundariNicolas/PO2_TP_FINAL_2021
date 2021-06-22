@@ -10,10 +10,14 @@ public class Calificacion  {
 	String comentario;
 	Usuario origen;
 	
+	Calificacion (Categoria unaCategoria) {
+		this.setCategoria(unaCategoria);
+	}
 	
 	public Categoria getCategoria() {
 		return categoria;
 	}
+	
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
@@ -35,9 +39,7 @@ public class Calificacion  {
 	public void setOrigen(Usuario origen) {
 		this.origen = origen;
 	}
-	
-	
-	
+
 }
 	/*
 	public boolean esDelMismoUsuario(Usuario unUsuario){

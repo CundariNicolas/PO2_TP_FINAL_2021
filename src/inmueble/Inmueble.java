@@ -153,9 +153,8 @@ public class Inmueble implements Calificable{
 		
 	}
 
-	public int getCheckOUT() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Calendar getCheckOUT() {
+		return this.checkOUT;
 	}
 	
 }

@@ -8,4 +8,7 @@ public abstract class Categoria {
 	Categoria (String descripcion){
 		this.descripcion = descripcion;
 	}
+	public String getDescripcion() {
+		return this.descripcion;
+	}
 }
