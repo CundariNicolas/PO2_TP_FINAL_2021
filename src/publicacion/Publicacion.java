@@ -2,6 +2,7 @@ package publicacion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.stream.Stream;
 
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
@@ -24,52 +25,38 @@ public class Publicacion {
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
 		this.setFotos(fotos);
-		this.setPrecio(precio);
-		this.preciopordiaocupado = new ArrayList<PrecioDiaOcupacion>();
+		this.preciopordiaocupado = precio;
 		this.observadorBajaPrecio = new ArrayList<Observador>();
 		
 	}
 	
 	public void registrarOcupacion(Calendar fechainicio, Calendar fechaFin) {
 		/**
-		 * Registra una ocupaci�n en un periodo dado
-		 * El periodo dado no deber�a estar ocupado para poder llevarse a cabo
+		 *
 		 */
 		
+		this.preciopordiaocupado.forEach(dia -> {
+			if((dia.getFecha().after(fechainicio) || dia.getFecha().equals(fechainicio)) && (dia.getFecha().before(fechaFin) || dia.getFecha().equals(fechaFin))) {
+				dia.setOcupado();
+			}
+		});
 		
+	}
+	
+	
+	public void registrarCancelacion(Calendar fechaInicio2, Calendar fechaFin2) {
+		preciopordiaocupado.forEach(dia -> {
+			if((dia.getFecha().after(fechaInicio2) || dia.getFecha().equals(fechaInicio2)) && (dia.getFecha().before(fechaFin2) || dia.getFecha().equals(fechaFin2))) {
+				dia.setLibre();
+			}
+		});
 		
+	}
+	
+	public boolean estaLibreEntre(Calendar fechaDesde, Calendar fechaHasta) {
 		
+		return getPeriodoEspecificado(fechaDesde, fechaHasta).allMatch( p -> !p.estaOcupado());
 	}
-	
-	pu
-	/** private boolean estaDisponibleEntre(Periodo periodo) {
-		/** Indica si est� disponible en el periodo dado
-		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
-		 * 
-		 
-		return this.getPeriodosOcupados().stream().allMatch(ocupado -> this.estaLibreAntes(ocupado, periodo) || this.estaLibreDespues(ocupado, periodo));
-	}
-	
-	
-	/* estaLibreAntes 
-	boolean estaLibreAntes(Periodo ocupado, Periodo periodo) {
-		/**Indica si el periodo a ocupar esta libre antes del periodo ocupado, que no exista una interseccion entre los dias de los periodos
-		 * 
-		 
-		return  this.elInicioAOcuparEstaAntesOElMismoDia(ocupado, periodo) && this.elFinEstaAntesDelInicioOcupado(ocupado, periodo) ;
-	}
-	
-	
-	
-	boolean elFinEstaAntesDelInicioOcupado(Periodo ocupado, Periodo periodo) {
-		return ocupado.getFechaInicio().after(periodo.getFechaFin());
-	}
-	boolean elInicioAOcuparEstaAntesOElMismoDia(Periodo ocupado, Periodo periodo) {
-		return ocupado.getFechaInicio().after(periodo.getFechaInicio());
-	}
-	
-	
-	*/
 	
 	
 	public ArrayList<FormaDePago> medioDePagoHabilitado(){
@@ -77,50 +64,39 @@ public class Publicacion {
 	}
 	
 	
-	
-	
-	
-	/* estaLibreDespues 
-	
-	boolean estaLibreDespues(Periodo ocupado, Periodo periodo) {
-		/**
-		 * indica si el periodo a ocupare sta libre despues del periodo ocupado, si es el mismo dia
-		 * se asume como desocupado, que no exista interseccion entre los dias de ambos periodos
-		 
-		return this.elInicioAOcuparEstaDespuesOElMismoDia(ocupado, periodo) && this.elFinAOcuparEstaDespuesOElMismoDia(ocupado, periodo);
-	}
-	
-	
-	private boolean elFinAOcuparEstaDespuesOElMismoDia(Periodo ocupado, Periodo periodo) {
-		
-		return ocupado.getFechaFin().before(periodo.getFechaFin()) ;
-	}
-	
-	
-	
-	
-	
-
-	private boolean elInicioAOcuparEstaDespuesOElMismoDia(Periodo ocupado, Periodo periodo) {
-		/**
-		 * Indica si la fecha del fin del periodo ocupado esta antes del inicio del periodo o es el mismo dia
-		 
-		return (ocupado.getFechaFin().before(periodo.getFechaInicio()) );
-	}
-	
-	
-	
-	
-	*/
-	
-	
-	
-	
-
 	public void notificarBajaEnPrecio() {
 		
 		
 	}
+	
+	public void setPrecioPeriodo(ArrayList<PrecioDiaOcupacion> precio2) {
+		this.preciopordiaocupado = precio2; // revisar
+	}
+	
+	
+	public boolean disponibleHoy(Calendar fechaActual) {
+		return !this.preciopordiaocupado.stream().filter(d -> d.getFecha().equals(fechaActual)).findFirst().get().estaOcupado();
+	}
+	
+	public double precioEnPeriodo(Calendar inicio, Calendar fin) {
+		return getPeriodoEspecificado(inicio, fin).map(p -> p.getPrecio()).reduce((double) 0, (a,b) -> a+b);
+	}
+	
+	public void aplicarPoliticaCancelacion(Reserva reserva) {
+		this.inmueble.getPoliticaCancelacion().aplicar(reserva);		
+	}
+	
+
+	private Stream<PrecioDiaOcupacion> getPeriodoEspecificado(Calendar inicio, Calendar fin){
+		return this.preciopordiaocupado.stream().filter(p -> p.getFecha().after(inicio) || p.getFecha().equals(inicio) && p.getFecha().before(fin) || p.getFecha().equals(fin));
+	}
+	
+
+	
+
+	
+
+
 	
 	
 	// GETTERS AND SETTERS
@@ -149,33 +125,20 @@ public class Publicacion {
 		return preciopordiaocupado;
 	}
 
-	public void setPrecio(ArrayList<PrecioDiaOcupacion> precio2) {
-		this.preciopordiaocupado = precio2;
-	}
 	
 	public String getCiudadInmueble() {
 		return this.inmueble.getCiudad();
 	}
 
-	public boolean estaLibreEntre(Calendar fechaDesde, Calendar fechaHasta) {
-		// TODO
-		return preciopordiaocupado.stream().filter(p -> p.getFecha().after(fechaDesde) || p.getFecha().equals(fechaDesde) && p.getFecha().before(fechaHasta) || p.getFecha().equals(fechaHasta)).allMatch( p -> !p.estaOcupado());
-	}
+	
 
-	public void registrarCancelacion(Calendar fechaInicio2, Calendar fechaFin2) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public Usuario getPropietario() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return propietario;
 	}
 
-	public void aplicarPoliticaCancelacion(Reserva reserva) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 
 }

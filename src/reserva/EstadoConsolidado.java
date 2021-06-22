@@ -24,8 +24,8 @@ public class EstadoConsolidado extends EstadoReserva{
 	}
 
 	@Override
-	protected void cacelar(Reserva reserva) {
-		super.cacelar(reserva);
+	protected void cancelar(Reserva reserva) {
+		super.cancelar(reserva);
 		Sitio.procesarReservaCancelada(reserva);
 		reserva.getPublicacion().registrarCancelacion(reserva.getFechaInicio(), reserva.getFechaFin());
 		this.notificarCancelacion(reserva);

@@ -1,3 +1,4 @@
+
 package sitio;
 
 import java.util.ArrayList;
@@ -5,7 +6,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -16,7 +17,6 @@ import calificacion.Calificacion;
 import categoria.Categoria;
 import formasDePago.FormaDePago;
 import publicacion.Publicacion;
-import reserva.EstadoConsolidado;
 import reserva.Reserva;
 import usuario.Usuario;
 import servicios.Servicio;
@@ -25,7 +25,7 @@ import tipoInmueble.TipoDeInmueble;
 public class Sitio {
 	private static Sitio sitio;
 	private static ObserverManager gestorDeNotificaciones;
-	private static ArrayList<Usuario> usuario;
+	private static List<Usuario> usuario;
 	private Set<Categoria> categorias; 
 	private Set<FormaDePago> formasDePago;
 	private Set<Servicio> servicios;
@@ -47,7 +47,7 @@ public class Sitio {
 		return sitio;
 	}
 
-	private ObserverManager getGestorDeNotificaciones() {
+	private static ObserverManager getGestorDeNotificaciones() {
 		return gestorDeNotificaciones;
 	}
 
@@ -55,11 +55,11 @@ public class Sitio {
 		Sitio.gestorDeNotificaciones = gestorDeNotificaciones;
 	}
 
-	private ArrayList<Usuario> getUsuario() {
+	private List<Usuario> getUsuario() {
 		return usuario;
 	}
 
-	private void setUsuario(ArrayList<Usuario> usuario) {
+	private void setUsuario(List<Usuario> usuario) {
 		Sitio.usuario = usuario;
 	}
 	
@@ -69,12 +69,12 @@ public class Sitio {
 
 	public static void procesarReservaCancelada(Reserva reserva) {
 		reserva.getPublicacion().aplicarPoliticaCancelacion(reserva);
-		gestorDeNotificaciones.alertarCancelacion(reserva);
+		getGestorDeNotificaciones().alertarCancelacion(reserva);
 		asignarProximaReservaCondicional(reserva);
 	}
 	
 	private static void asignarProximaReservaCondicional(Reserva reserva) {
-		ArrayList<Reserva> reservaCoincide = new ArrayList<>();
+		List<Reserva> reservaCoincide = new ArrayList<>();
 		Reserva reservaSiguiente;
 		reservaCoincide = getReservasCondicionalesQueCoincidenCon(reserva);
 		if (reservaCoincide.size() > 0) {
@@ -83,21 +83,21 @@ public class Sitio {
 		}
 	}
 
-	private static ArrayList<Reserva> getReservasCondicionales(){
-		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
-		usuario.forEach(usuario -> reservaCondicional.addAll( (ArrayList<Reserva>) usuario.todasLasReservas().stream().filter(res -> res.esCondicional()) )) ;
+	private static List<Reserva> getReservasCondicionales(){
+		List<Reserva> reservaCondicional = new ArrayList<>();
+		usuario.forEach(usuario -> reservaCondicional.addAll( usuario.todasLasReservas().stream().filter(res -> res.esCondicional()).collect(Collectors.toList()) )) ;
 		return reservaCondicional;
 	}
 	
-	private static ArrayList<Reserva> getReservasCondicionalesQueCoincidenCon(Reserva reserva){
-		ArrayList<Reserva> reservaCondicional = new ArrayList<>();
+	private static List<Reserva> getReservasCondicionalesQueCoincidenCon(Reserva reserva){
+		List<Reserva> reservaCondicional = new ArrayList<>();
 		reservaCondicional = getReservasCondicionales();
-		return  (ArrayList<Reserva>) reservaCondicional.stream().filter(res -> res.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble())  && res.getFechaInicio().equals(reserva.getFechaInicio())  && res.getFechaFin().equals(reserva.getFechaFin()) );
+		return  reservaCondicional.stream().filter(res -> res.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble())  && res.getFechaInicio().equals(reserva.getFechaInicio())  && res.getFechaFin().equals(reserva.getFechaFin()) ).collect(Collectors.toList());
 		
 	}
 	
 	public static void procesarBajaDePrecio(Publicacion publicacion) {
-		gestorDeNotificaciones.alertarBajaDePrecio(publicacion);
+		getGestorDeNotificaciones().alertarBajaDePrecio(publicacion);
 	} 
 	
 	public void addCategoria(Categoria categoria) {
@@ -106,7 +106,8 @@ public class Sitio {
 	
 	public void  calificar (Calificable calificable ,Reserva unaReserva, Calificacion unaCalificacion ) {
 		if(unaReserva.estaFinalizada()) {
-			calificable.setCalificacion(unaReserva.getInquilino(), unaCalificacion.getComentario(), unaCalificacion.getPuntaje());
+
+			/** unaCategoria.setCalificacion(unaReserva.getInquilino(), unaCalificacion); */
 		}
 	}
 	
@@ -170,7 +171,8 @@ public class Sitio {
 	}
 
 	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
-		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicacion().stream()).collect(Collectors.toCollection(ArrayList::new)));
+		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
 	}
 	
 }
+

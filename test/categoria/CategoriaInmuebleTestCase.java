@@ -2,8 +2,10 @@ package categoria;
 
 import static org.junit.Assert.assertEquals;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 
 
@@ -20,5 +22,6 @@ class CategoriaInmuebleTestCase {
 	void seCreaUnaCategoriaCorrectamente() {
 		assertEquals("Limpieza",categoria.getDescripcion());
 	}
+
 
 }

@@ -1,12 +1,13 @@
+
 package usuario;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import categoria.Categoria;
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
@@ -20,9 +21,9 @@ public class Usuario implements Calificable{
 	private String eMail;
 	private Integer telefono;
 	private Calendar fechaDeIngreso;
-	private ArrayList<Publicacion> publicaciones;
-	private ArrayList<Reserva> reservas;
-	private ArrayList<Calificacion> calificaciones;
+	private List<Publicacion> publicaciones;
+	private List<Reserva> reservas;
+	private List<Calificacion> calificaciones;
 	
 	public Usuario (String nombre, String apellido, String domicilio, String eMail, Integer telefono) {
 		this.setNombre(nombre);
@@ -91,19 +92,17 @@ public class Usuario implements Calificable{
 		return fechaDeIngreso;
 	}
 
-	public ArrayList<Publicacion> getPublicaciones() {
+	public List<Publicacion> getPublicaciones() {
 		return publicaciones;
 	}
 	
-	public ArrayList<Calificacion> getCalificaciones(){
+	public List<Calificacion> getCalificaciones(){
 		return calificaciones;
 	}
 	
-	public void addCAlificacion(Calificacion calificacion) {
-		this.getCalificaciones().add(calificacion);
-	}
 	
-	private void setCalificaciones(ArrayList<Calificacion> calificaciones) {
+	
+	private void setCalificaciones(List<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
 
@@ -113,7 +112,7 @@ public class Usuario implements Calificable{
 	}
 
 	// devuelve todas las reservas
-	public ArrayList<Reserva> todasLasReservas() {
+	public List<Reserva> todasLasReservas() {
 		return reservas;
 	}
 	
@@ -121,12 +120,12 @@ public class Usuario implements Calificable{
 		return this.reservas.stream().filter(reserva -> reserva.esFutura()).collect(Collectors.toList());
 	}
 
-	public ArrayList<Reserva> reservasEnCiudad(String ciudad){
-		return (ArrayList<Reserva>) this.reservas.stream().filter(reserva -> reserva.esDeCiudad(ciudad));
+	public List<Reserva> reservasEnCiudad(String ciudad){
+		return this.reservas.stream().filter(reserva -> reserva.esDeCiudad(ciudad)).collect(Collectors.toList());
 	}
 	
 	public List<String> ciudadesDondeReservo(){
-		return this.reservas.stream().map(reserva -> reserva.getPublicacion().getInmueble().getCiudad()).distinct().collect(Collectors.toList());
+		return this.reservas.stream().map(reserva -> reserva.getPublicacion().getCiudadInmueble()).distinct().collect(Collectors.toList());
 	}
 	
 	// Agrega una Reserva a la lista
@@ -147,12 +146,23 @@ public class Usuario implements Calificable{
 	
 	public Integer cantidadTotalDeAlquileres() {
 		Integer cuenta = 0;
-		ArrayList<Inmueble> inmuebles = new ArrayList<>();
-		inmuebles.addAll( (ArrayList<Inmueble>) this.getPublicaciones().stream().map(publicacion -> publicacion.getInmueble() ).distinct());
+		List<Inmueble> inmuebles = new ArrayList<Inmueble>();
+		inmuebles.addAll( this.getPublicaciones().stream().map(publicacion -> publicacion.getInmueble() ).distinct().collect(Collectors.toList()));
 		for(Inmueble inmueble : inmuebles) {
 			cuenta += inmueble.getCantidadDeVecesAlquilado();
 		}
 		return cuenta;
 	}
 
+	@Override
+	public Map<Usuario, calificacion.Calificacion> getCalificaciones(Categoria unaCategoria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addCalificacion(Calificacion calificacion) {
+		this.getCalificaciones().add(calificacion);
+	}
+
 }
+

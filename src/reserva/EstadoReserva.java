@@ -21,7 +21,7 @@ public abstract class EstadoReserva  {
 		// No hace nada salvo en el estado Inicial
 	};
 
-	protected void cacelar(Reserva reserva) {
+	protected void cancelar(Reserva reserva) {
 		reserva.setEstado(EstadoCancelado.getInstance());
 	}
 
