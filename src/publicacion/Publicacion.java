@@ -25,20 +25,18 @@ public class Publicacion {
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
 		this.setFotos(fotos);
-		this.setPrecioPeriodo(precio);
-		this.preciopordiaocupado = new ArrayList<PrecioDiaOcupacion>();
+		this.preciopordiaocupado = precio;
 		this.observadorBajaPrecio = new ArrayList<Observador>();
 		
 	}
 	
 	public void registrarOcupacion(Calendar fechainicio, Calendar fechaFin) {
 		/**
-		 * Registra una ocupaci�n en un periodo dado
-		 * El periodo dado no deber�a estar ocupado para poder llevarse a cabo
+		 *
 		 */
 		
-		preciopordiaocupado.forEach(dia -> {
-			if(dia.getFecha().after(fechainicio) || dia.getFecha().equals(fechaFin) && dia.getFecha().before(fechainicio) || dia.getFecha().equals(fechaFin)) {
+		this.preciopordiaocupado.forEach(dia -> {
+			if((dia.getFecha().after(fechainicio) || dia.getFecha().equals(fechainicio)) && (dia.getFecha().before(fechaFin) || dia.getFecha().equals(fechaFin))) {
 				dia.setOcupado();
 			}
 		});
@@ -48,7 +46,7 @@ public class Publicacion {
 	
 	public void registrarCancelacion(Calendar fechaInicio2, Calendar fechaFin2) {
 		preciopordiaocupado.forEach(dia -> {
-			if(dia.getFecha().after(fechaInicio2) || dia.getFecha().equals(fechaFin2) && dia.getFecha().before(fechaInicio2) || dia.getFecha().equals(fechaFin2)) {
+			if((dia.getFecha().after(fechaInicio2) || dia.getFecha().equals(fechaInicio2)) && (dia.getFecha().before(fechaFin2) || dia.getFecha().equals(fechaFin2))) {
 				dia.setLibre();
 			}
 		});
@@ -72,12 +70,12 @@ public class Publicacion {
 	}
 	
 	public void setPrecioPeriodo(ArrayList<PrecioDiaOcupacion> precio2) {
-		this.preciopordiaocupado = precio2;
+		this.preciopordiaocupado = precio2; // revisar
 	}
 	
 	
 	public boolean disponibleHoy(Calendar fechaActual) {
-		return this.preciopordiaocupado.stream().filter(d -> d.getFecha().equals(fechaActual)).findFirst().get().estaOcupado();
+		return !this.preciopordiaocupado.stream().filter(d -> d.getFecha().equals(fechaActual)).findFirst().get().estaOcupado();
 	}
 	
 	public double precioEnPeriodo(Calendar inicio, Calendar fin) {
@@ -96,76 +94,6 @@ public class Publicacion {
 
 	
 
-	
-	/** private boolean estaDisponibleEntre(Periodo periodo) {
-		/** Indica si est� disponible en el periodo dado
-		 * Verdadero si el periodo a ocupar esta disponible, no debe coincidir con ningun periodo ocupado ya reservado
-		 * 
-		 
-		return this.getPeriodosOcupados().stream().allMatch(ocupado -> this.estaLibreAntes(ocupado, periodo) || this.estaLibreDespues(ocupado, periodo));
-	}
-	
-	
-	/* estaLibreAntes 
-	boolean estaLibreAntes(Periodo ocupado, Periodo periodo) {
-		/**Indica si el periodo a ocupar esta libre antes del periodo ocupado, que no exista una interseccion entre los dias de los periodos
-		 * 
-		 
-		return  this.elInicioAOcuparEstaAntesOElMismoDia(ocupado, periodo) && this.elFinEstaAntesDelInicioOcupado(ocupado, periodo) ;
-	}
-	
-	
-	
-	boolean elFinEstaAntesDelInicioOcupado(Periodo ocupado, Periodo periodo) {
-		return ocupado.getFechaInicio().after(periodo.getFechaFin());
-	}
-	boolean elInicioAOcuparEstaAntesOElMismoDia(Periodo ocupado, Periodo periodo) {
-		return ocupado.getFechaInicio().after(periodo.getFechaInicio());
-	}
-	
-	
-	*/
-	
-	
-	
-	
-	
-	
-	/* estaLibreDespues 
-	
-	boolean estaLibreDespues(Periodo ocupado, Periodo periodo) {
-		/**
-		 * indica si el periodo a ocupare sta libre despues del periodo ocupado, si es el mismo dia
-		 * se asume como desocupado, que no exista interseccion entre los dias de ambos periodos
-		 
-		return this.elInicioAOcuparEstaDespuesOElMismoDia(ocupado, periodo) && this.elFinAOcuparEstaDespuesOElMismoDia(ocupado, periodo);
-	}
-	
-	
-	private boolean elFinAOcuparEstaDespuesOElMismoDia(Periodo ocupado, Periodo periodo) {
-		
-		return ocupado.getFechaFin().before(periodo.getFechaFin()) ;
-	}
-	
-	
-	
-	
-	
-
-	private boolean elInicioAOcuparEstaDespuesOElMismoDia(Periodo ocupado, Periodo periodo) {
-		/**
-		 * Indica si la fecha del fin del periodo ocupado esta antes del inicio del periodo o es el mismo dia
-		 
-		return (ocupado.getFechaFin().before(periodo.getFechaInicio()) );
-	}
-	
-	
-	
-	
-	*/
-	
-	
-	
 	
 
 
