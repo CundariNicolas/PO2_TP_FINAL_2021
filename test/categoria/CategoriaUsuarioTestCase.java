@@ -1,4 +1,4 @@
-package Categoria;
+package categoria;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -13,14 +13,14 @@ import org.junit.jupiter.api.Test;
 
 import calificacion.Calificacion;
 import categoria.Categoria;
-import categoria.CategoriaInmueble;
+import categoria.CategoriaUsuario;
 import usuario.Usuario;
 
-class CategoriaInmuebleTestCase {
+class CategoriaUsuarioTestCase {
 
-	CategoriaInmueble limpieza;//SUT
-	CategoriaInmueble instalaciones;//DOC
-	CategoriaInmueble matenimiento;
+	CategoriaUsuario puntualidad;//SUT
+	CategoriaUsuario vestimenta;//DOC
+	CategoriaUsuario prolijidad;
 
 	Calificacion unaCalificacion;//DOC
 	Calificacion otraCalificacion;//DOC
@@ -32,7 +32,7 @@ class CategoriaInmuebleTestCase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		limpieza = new CategoriaInmueble("limpieza");
+		puntualidad = new CategoriaUsuario("puntualidad");
 		unaCalificacion = mock (Calificacion.class);
 		otraCalificacion = mock (Calificacion.class);
 		calificacionDamian = mock (Calificacion.class);
@@ -40,36 +40,36 @@ class CategoriaInmuebleTestCase {
 		otroUsuario = mock (Usuario.class);
 		damian = mock (Usuario.class);
 		
-		instalaciones = mock (CategoriaInmueble.class);
-		matenimiento = mock(CategoriaInmueble.class);
+		vestimenta = mock (CategoriaUsuario.class);
+		prolijidad = mock(CategoriaUsuario.class);
 	}
 
 	@Test
 	void inicioSinCalificaciones() {
-		assertEquals(0, limpieza.getCalificaciones().size());
+		assertEquals(0, puntualidad.getCalificaciones().size());
 	}
 	
 	@Test
 	void sePuedeAgregarCalificaciones () {
-		limpieza.addCalificacion(unUsuario, unaCalificacion);
-		assertEquals(1, limpieza.getCalificaciones().size());
-		limpieza.addCalificacion(otroUsuario, unaCalificacion);
-		assertEquals(2, limpieza.getCalificaciones().size());
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
+		assertEquals(1, puntualidad.getCalificaciones().size());
+		puntualidad.addCalificacion(otroUsuario, unaCalificacion);
+		assertEquals(2, puntualidad.getCalificaciones().size());
 	}
 	
 	@Test
 	void unMismoUsuarioNoPuedeAgregarMasDeUnaCalificacion() {
-		assertEquals(0, limpieza.getCalificaciones().size());
+		assertEquals(0, puntualidad.getCalificaciones().size());
 
-		limpieza.addCalificacion(unUsuario, unaCalificacion);
-		limpieza.addCalificacion(unUsuario, otraCalificacion);
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
+		puntualidad.addCalificacion(unUsuario, otraCalificacion);
 		
-		assertEquals(1, limpieza.getCalificaciones().size());		
+		assertEquals(1, puntualidad.getCalificaciones().size());		
 	} 
 	
 	@Test
 	 void seguardaCorrectamenteElNombreDeLaCategoria() {
-		assertEquals("limpieza", limpieza.nombre());
+		assertEquals("puntualidad", puntualidad.nombre());
 	}
 	
 	@Test
@@ -79,44 +79,44 @@ class CategoriaInmuebleTestCase {
 		double promedioBuscado = ((double)puntaje1 + (double)puntaje2) / 2;  
 		when(otraCalificacion.getPuntaje()).thenReturn(puntaje2);
 		when(unaCalificacion.getPuntaje()).thenReturn(puntaje1);
-		limpieza.addCalificacion(otroUsuario, otraCalificacion);
-		limpieza.addCalificacion(unUsuario, unaCalificacion);
+		puntualidad.addCalificacion(otroUsuario, otraCalificacion);
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
 		
-		assertEquals(promedioBuscado,limpieza.promedioDePuntaje());
+		assertEquals(promedioBuscado,puntualidad.promedioDePuntaje());
 	}
 	@Test
 	void veoCorrectamenteLaCalificacionDeUnUsuario() {
-		limpieza.addCalificacion(unUsuario, unaCalificacion);
-		assertEquals(unaCalificacion,limpieza.verCalificacionDeUn(unUsuario));
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
+		assertEquals(unaCalificacion,puntualidad.verCalificacionDeUn(unUsuario));
 	}
 	
 	@Test
 	void unaCategoriaEsIgualASiMisma() {
-		assertTrue(limpieza.esIgualA(limpieza));
+		assertTrue(puntualidad.esIgualA(puntualidad));
 	}
 	@Test
 	void unaCategoriaEsDiferenteAOtra() {
-		assertFalse(limpieza.esIgualA(instalaciones));
+		assertFalse(puntualidad.esIgualA(vestimenta));
 	}
 	
 	@Test
 	void enUnArrayDeCategoriasDevuelveALaCategoriaBuscada() {
 		Set <Categoria> listaCategoria;
 		listaCategoria = new HashSet<Categoria>();
-		listaCategoria.add(instalaciones);
-		listaCategoria.add(limpieza);
+		listaCategoria.add(vestimenta);
+		listaCategoria.add(puntualidad);
 		
-		assertEquals(limpieza,limpieza.estasEn(listaCategoria));
-		assertNotEquals(matenimiento, limpieza.estasEn(listaCategoria));	
+		assertEquals(puntualidad,puntualidad.estasEn(listaCategoria));
+		assertNotEquals(prolijidad, puntualidad.estasEn(listaCategoria));	
 	}
 	
 	@Test
 	void sePuedeTomarLasCalificacionesLasCalificaciones() {
 		
-		limpieza.addCalificacion(unUsuario, unaCalificacion);
-		limpieza.addCalificacion(otroUsuario, otraCalificacion);
+		puntualidad.addCalificacion(unUsuario, unaCalificacion);
+		puntualidad.addCalificacion(otroUsuario, otraCalificacion);
 		
-		Map<Usuario,Calificacion> resultado = limpieza.getCalificaciones();
+		Map<Usuario,Calificacion> resultado = puntualidad.getCalificaciones();
 		
 		assertTrue(resultado.containsKey(unUsuario));
 		assertEquals(unaCalificacion,resultado.get(unUsuario));

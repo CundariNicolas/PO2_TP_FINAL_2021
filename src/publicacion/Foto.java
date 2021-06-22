@@ -19,6 +19,7 @@ public class Foto {
 		this.fechaCaptura = fecha;
 		this.ancho = ancho;
 		this.alto = alto;
+		 
 		
 	}
 
