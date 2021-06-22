@@ -35,9 +35,6 @@ class UsuarioTest {
     public void setUp() throws Exception {
 		//Se crea el usuario
         pedroRuiz = new Usuario("Pedro", "Ruiz","Av. Rivadavia 100", "pedroRuiz@gmail.com", 42229000);
-        //pedroRuiz.addReserva(reserva1);
-        pedroRuiz.addPublicacion(publicacion1);
-        pedroRuiz.addCAlificacion(calificacion1);
     }
 	
 	@Test
@@ -90,22 +87,26 @@ class UsuarioTest {
 
 	@Test
 	void testGetPublicaciones() {
+		pedroRuiz.addPublicacion(publicacion3);
 		assertEquals(pedroRuiz.getPublicaciones().size(), 1);
 	}
 
 	@Test
 	void testGetCalificaciones() {
+		pedroRuiz.addCalificacion(calificacion1);
 		assertEquals(pedroRuiz.getCalificaciones().size(), 1);
 	}
 
 	@Test
-	void testAddCAlificacion() {
-		pedroRuiz.addCAlificacion(calificacion2);
+	void testAddCalificacion() {
+		pedroRuiz.addCalificacion(calificacion1);
+		pedroRuiz.addCalificacion(calificacion2);
 		assertEquals(pedroRuiz.getCalificaciones().size(), 2);
 	}
 
 	@Test
 	void testAddPublicacion() {
+		pedroRuiz.addPublicacion(publicacion1);
 		pedroRuiz.addPublicacion(publicacion2);
 		assertEquals(pedroRuiz.getPublicaciones().size(), 2);
 	}
@@ -137,20 +138,13 @@ class UsuarioTest {
 		publicacion1 = mock(Publicacion.class);
 		publicacion2 = mock(Publicacion.class);
 		publicacion3 = mock(Publicacion.class);
-		inmueble1 = mock(Inmueble.class);
-		inmueble2 = mock(Inmueble.class);
-		inmueble3 = mock(Inmueble.class);
 		reserva1 = mock(Reserva.class);
 		reserva2 = mock(Reserva.class);
 		reserva3 = mock(Reserva.class);
 		
-		when(inmueble1.getCiudad()).thenReturn("Cordoba");
-		when(inmueble2.getCiudad()).thenReturn("Rosario");
-		when(inmueble3.getCiudad()).thenReturn("Cordoba");
-		
-		when(publicacion1.getInmueble()).thenReturn(inmueble1);
-		when(publicacion2.getInmueble()).thenReturn(inmueble2);
-		when(publicacion3.getInmueble()).thenReturn(inmueble3);
+		when(publicacion1.getCiudadInmueble()).thenReturn("Cordoba");
+		when(publicacion2.getCiudadInmueble()).thenReturn("Rosario");
+		when(publicacion3.getCiudadInmueble()).thenReturn("Rio");
 				
 		when(reserva1.getPublicacion()).thenReturn(publicacion1);
 		when(reserva2.getPublicacion()).thenReturn(publicacion2);
@@ -159,7 +153,7 @@ class UsuarioTest {
 		pedroRuiz.addReserva(reserva1);
 		pedroRuiz.addReserva(reserva2);
 		pedroRuiz.addReserva(reserva3);
-		assertEquals(pedroRuiz.ciudadesDondeReservo().size(), 2);
+		assertEquals(pedroRuiz.ciudadesDondeReservo().size(), 3);
 	}
 
 	@Test
@@ -167,20 +161,13 @@ class UsuarioTest {
 		publicacion1 = mock(Publicacion.class);
 		publicacion2 = mock(Publicacion.class);
 		publicacion3 = mock(Publicacion.class);
-		inmueble1 = mock(Inmueble.class);
-		inmueble2 = mock(Inmueble.class);
-		inmueble3 = mock(Inmueble.class);
 		reserva1 = mock(Reserva.class);
 		reserva2 = mock(Reserva.class);
 		reserva3 = mock(Reserva.class);
 		
-		when(inmueble1.getCiudad()).thenReturn("Cordoba");
-		when(inmueble2.getCiudad()).thenReturn("Rosario");
-		when(inmueble3.getCiudad()).thenReturn("Cordoba");
-		
-		when(publicacion1.getInmueble()).thenReturn(inmueble1);
-		when(publicacion2.getInmueble()).thenReturn(inmueble2);
-		when(publicacion3.getInmueble()).thenReturn(inmueble3);
+		when(publicacion1.getCiudadInmueble()).thenReturn("Cordoba");
+		when(publicacion2.getCiudadInmueble()).thenReturn("Rio");
+		when(publicacion3.getCiudadInmueble()).thenReturn("Cordoba");
 				
 		when(reserva1.getPublicacion()).thenReturn(publicacion1);
 		when(reserva2.getPublicacion()).thenReturn(publicacion2);
@@ -207,12 +194,30 @@ class UsuarioTest {
 
 	@Test
 	void testCantidadDeVecesAlquilado() {
-		fail("Not yet implemented");
+		publicacion1 = mock(Publicacion.class);
+		inmueble1 = mock(Inmueble.class);
+		when(inmueble1.getCantidadDeVecesAlquilado()).thenReturn(15);
+		when(publicacion1.getInmueble()).thenReturn(inmueble1);
+		
+		pedroRuiz.addPublicacion(publicacion1);
+
+		assertEquals(pedroRuiz.cantidadDeVecesAlquilado(inmueble1), 15);
 	}
 
 	@Test
 	void testCantidadTotalDeAlquileres() {
-		fail("Not yet implemented");
+		publicacion1 = mock(Publicacion.class);
+		publicacion2 = mock(Publicacion.class);
+		inmueble1 = mock(Inmueble.class);
+		inmueble2 = mock(Inmueble.class);
+		when(inmueble1.getCantidadDeVecesAlquilado()).thenReturn(15);
+		when(inmueble2.getCantidadDeVecesAlquilado()).thenReturn(18);
+		when(publicacion1.getInmueble()).thenReturn(inmueble1);
+		when(publicacion2.getInmueble()).thenReturn(inmueble2);
+		
+		pedroRuiz.addPublicacion(publicacion1);
+		pedroRuiz.addPublicacion(publicacion2);
+		assertEquals(pedroRuiz.cantidadTotalDeAlquileres(), 33);
 	}
 
 }

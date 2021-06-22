@@ -23,7 +23,7 @@ public class EstadoCondicional extends EstadoReserva{
 		String mailDestino = reserva.getInquilino().geteMail();
 		String asunto = "Reserva Condicional confirmada";
 		String mensaje =   "Su reserva condicional en " 
-		                 + reserva.getPublicacion().getInmueble().getCiudad()
+		                 + reserva.getPublicacion().getCiudadInmueble()
 		                 + " ha sido confirmada.";
 		
 		/* se envia el mail de notificacion

@@ -88,6 +88,7 @@ public class Publicacion {
 		this.inmueble.getPoliticaCancelacion().aplicar(reserva);		
 	}
 	
+
 	private Stream<PrecioDiaOcupacion> getPeriodoEspecificado(Calendar inicio, Calendar fin){
 		return this.preciopordiaocupado.stream().filter(p -> p.getFecha().after(inicio) || p.getFecha().equals(inicio) && p.getFecha().before(fin) || p.getFecha().equals(fin));
 	}
@@ -95,7 +96,6 @@ public class Publicacion {
 
 	
 
-	
 	
 	/** private boolean estaDisponibleEntre(Periodo periodo) {
 		/** Indica si est� disponible en el periodo dado
@@ -209,6 +209,7 @@ public class Publicacion {
 		
 		return propietario;
 	}
+
 
 	
 

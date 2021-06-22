@@ -38,23 +38,6 @@ public class Reserva {
 		return reserva;
 	}
 	
-	public Double precioTotalReserva() {
-		double precioAcumulado = 0.0;
-		for (PrecioDiaOcupacion unPrecio: precios) {
-			precioAcumulado += unPrecio.getPrecio();
-		}
-		return precioAcumulado;
-	}
-
-	public double valorEnCantidadDeDias(int cantidadDeDias) {
-		double precioAcumulado = 0.0;
-		for(int inicio=0; inicio < cantidadDeDias ; inicio++) {
-			precioAcumulado += this.precios.get(inicio).getPrecio();	
-		}
-		return precioAcumulado;
-	}
-	
-	
 	protected void setEstado(EstadoReserva estado) {
 		this.estado = estado;
 	}
@@ -103,7 +86,7 @@ public class Reserva {
 	}
 	
 	public void cancelar() {
-		this.estado.cacelar(this);
+		this.estado.cancelar(this);
 	}
 	
 	public Boolean esFutura() {
@@ -111,7 +94,7 @@ public class Reserva {
 	}
 
 	public Boolean esDeCiudad(String ciudad) {
-		return this.getPublicacion().getInmueble().getCiudad() == ciudad;
+		return this.getPublicacion().getCiudadInmueble() == ciudad;
 	}
 
 	public Boolean esCondicional() {

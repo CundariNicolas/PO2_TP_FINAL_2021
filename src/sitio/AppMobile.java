@@ -5,6 +5,13 @@ import publicacion.Publicacion;
 public class AppMobile implements Observador{
 	private Publicacion publicacion;
 
+	
+	
+	public AppMobile(Publicacion publicacion) {
+		super();
+		this.publicacion = publicacion;
+	}
+
 	@Override
 	public Publicacion getPublicacion() {
 		return this.publicacion;
@@ -12,7 +19,7 @@ public class AppMobile implements Observador{
 
 	@Override
 	public void notificar() {
-		String mensaje = "Se ha cancelado una resserva en " + this.getPublicacion().getInmueble().getCiudad();
+		String mensaje = "Se ha cancelado una resserva en " + this.getPublicacion().getCiudadInmueble();
 		String color = "Azul";
 		Integer fontSize = 14;
 		/*
