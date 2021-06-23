@@ -6,12 +6,18 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import inmueble.Inmueble;
+import publicacion.Foto;
+import publicacion.PrecioDiaOcupacion;
 import publicacion.Publicacion;
 import reserva.Reserva;
+import usuario.Usuario;
 
 class ObserverManagerTest {
 	ObserverManager manager;
@@ -49,6 +55,7 @@ class ObserverManagerTest {
 
 	@Test
 	void testAlertarCancelacion() {
+		 
 		when(app.getPublicacion()).thenReturn(publicacion);
 		when(reserva.getPublicacion()).thenReturn(publicacion);
 		when(publicacion.getInmueble()).thenReturn(inmueble);

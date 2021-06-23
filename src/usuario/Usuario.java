@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import calificacion.Calificable;
+import calificacion.Calificacion;
 import categoria.Categoria;
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
-import sitio.Calificable;
-import sitio.Calificacion;
+
 
 public class Usuario implements Calificable{
 	private String nombre;
@@ -155,14 +156,8 @@ public class Usuario implements Calificable{
 	}
 
 	@Override
-	public Map<Usuario, calificacion.Calificacion> getCalificaciones(Categoria unaCategoria) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setCalificacion(Calificacion unaCalificacion) {
+		this.getCalificaciones().add(unaCalificacion);
 	}
-
-	public void addCalificacion(Calificacion calificacion) {
-		this.getCalificaciones().add(calificacion);
-	}
-
 }
 

@@ -131,15 +131,8 @@ public class Inmueble implements Calificable{
 	} 
 	
 	@Override
-	public void setCalificacion(Usuario unUsuario, String comentario, int puntaje) {
-
-		Calificacion calificacionDeUsuario;				
-		calificacionDeUsuario = this.calificaciones.stream()
-							.filter(unaCalificacion -> unaCalificacion.getOrigen() == unUsuario)
-							.collect(Collectors.toList()).get(0);
-		calificacionDeUsuario.setComentario(comentario);
-		calificacionDeUsuario.setPuntaje(puntaje);
-		
+	public void setCalificacion(Calificacion unaCalificacion) {
+		this.getCalificaciones().add(unaCalificacion);
 	}
 	
 	@Override

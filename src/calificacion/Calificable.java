@@ -1,12 +1,11 @@
 package calificacion;
 
 import java.util.List;
-import usuario.Usuario;
+
 
 public interface Calificable {
 	
-	public void setCalificacion(Usuario unUsuario, String comentario, int puntaje);
-
+	public void setCalificacion(Calificacion unaCalificaion);
 	public List <Calificacion> getCalificaciones();
 
 }

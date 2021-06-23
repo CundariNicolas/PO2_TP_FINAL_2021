@@ -10,10 +10,11 @@ import java.util.Calendar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import calificacion.Calificacion;
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
-import sitio.Calificacion;
+
 
 class UsuarioTest {
 	private Usuario pedroRuiz;
@@ -93,14 +94,14 @@ class UsuarioTest {
 
 	@Test
 	void testGetCalificaciones() {
-		pedroRuiz.addCalificacion(calificacion1);
+		pedroRuiz.setCalificacion(calificacion1);
 		assertEquals(pedroRuiz.getCalificaciones().size(), 1);
 	}
 
 	@Test
 	void testAddCalificacion() {
-		pedroRuiz.addCalificacion(calificacion1);
-		pedroRuiz.addCalificacion(calificacion2);
+		pedroRuiz.setCalificacion(calificacion1);
+		pedroRuiz.setCalificacion(calificacion2);
 		assertEquals(pedroRuiz.getCalificaciones().size(), 2);
 	}
 
