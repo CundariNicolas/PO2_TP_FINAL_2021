@@ -13,7 +13,7 @@ class FormaDePagoTestCase {
 	@BeforeEach
 	void setUp() throws Exception {
 	
-		formaDePago = new FormaDePago("unCodigo","Tarjeta de Debito");
+		formaDePago = new FormaDePago("unCodigo","Tarjeta de Debito"); 
 	}
 
 	@Test

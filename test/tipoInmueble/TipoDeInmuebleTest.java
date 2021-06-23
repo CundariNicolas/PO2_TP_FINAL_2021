@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class TipoDeInmuebleTest {
 
-	TipoDeInmueble casa;
+	TipoDeInmueble casa; 
 	
 	@BeforeEach
 	void setUp() throws Exception {
