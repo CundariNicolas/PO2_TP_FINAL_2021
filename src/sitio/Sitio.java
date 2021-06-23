@@ -106,8 +106,7 @@ public class Sitio {
 	
 	public void  calificar (Calificable calificable ,Reserva unaReserva, Calificacion unaCalificacion ) {
 		if(unaReserva.estaFinalizada()) {
-
-			/** unaCategoria.setCalificacion(unaReserva.getInquilino(), unaCalificacion); */
+			calificable.setCalificacion(unaCalificacion);
 		}
 	}
 	
