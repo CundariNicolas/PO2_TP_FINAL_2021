@@ -7,6 +7,11 @@ public class EstadoCondicional extends EstadoReserva{
 		super(descripcion);
 	}
 
+	/**
+	 * Devuleve la instancia única de estado condicional
+	 * 
+	 * @return EstadoCondicional
+	 */
 	public static EstadoCondicional getInstance() {
 		if (estado == null) {
 			estado = new EstadoCondicional("Condicional");
@@ -14,6 +19,11 @@ public class EstadoCondicional extends EstadoReserva{
 		return estado;
 	}
 	@Override
+	/**
+	 * Transiciona a consolidada la reserva
+	 * 
+	 * @param reserva Reserva
+	 */
 	protected void aceptar(Reserva reserva) {
 		super.aceptar(reserva);
 		this.notificarCodicionalAceptada(reserva);
@@ -32,6 +42,9 @@ public class EstadoCondicional extends EstadoReserva{
 	}
 
 	@Override
+	/**
+	 * Evalua si la reserva es condiciona
+	 */
 	protected Boolean esCondicional() {
 		return true;
 	}

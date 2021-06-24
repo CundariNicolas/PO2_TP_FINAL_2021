@@ -11,6 +11,11 @@ public class EstadoConsolidado extends EstadoReserva{
 		super(descripcion);
 	}
 
+	/**
+	 * Devuleve la instancia única de estado consolidado
+	 * 
+	 * @return EstadoConsolidado
+	 */
 	public static EstadoConsolidado getInstance() {
 		if (estado == null) {
 			estado = new EstadoConsolidado("Consolidado");
@@ -19,11 +24,19 @@ public class EstadoConsolidado extends EstadoReserva{
 	}
 	
 	@Override
+	/**
+	 * Metodo sin efecto en este estado
+	 */
 	protected void aceptar(Reserva reserva) {
 		// Nada para hacer
 	}
 
 	@Override
+	/**
+	 * Transicion a estado cancelado la reserva
+	 * 
+	 * @param reserva Reserva
+	 */
 	protected void cancelar(Reserva reserva) {
 		super.cancelar(reserva);
 		Sitio.procesarReservaCancelada(reserva);
@@ -44,6 +57,11 @@ public class EstadoConsolidado extends EstadoReserva{
 	}
 	
 	@Override
+	/**
+	 * Evalua si la reserva esta finalizada
+	 * 
+	 * @param reserva Reserva
+	 */
 	protected Boolean estaFinalizada(Reserva reserva) {
 		return     reserva.getFechaFin().before(Calendar.getInstance()) 
 				&& reserva.getPublicacion().getInmueble().getCheckOUT() < Calendar.getInstance().HOUR_OF_DAY;
@@ -51,6 +69,9 @@ public class EstadoConsolidado extends EstadoReserva{
 	}
 	
 	@Override
+	/**
+	 * Evalua se la reserva se concreto
+	 */
 	public Boolean seConcreto() {
 		return true;
 	}

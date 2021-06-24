@@ -19,6 +19,11 @@ public class ObserverManager {
 		ObserverManager.setObservadoresReserva( new ArrayList<>() );
 	}
 	
+	/**
+	 * devuleve al instancia unica de observer manager
+	 * 
+	 * @return ObserverManager
+	 */
 	public static ObserverManager getInstance() {
 		if (manager == null) {
 			manager = new ObserverManager();
@@ -50,18 +55,38 @@ public class ObserverManager {
 		observadoresReserva = observadores;
 	}
 	
+	/**
+	 * Agraga un observador a la lista de observadores de cancelacio
+	 * 
+	 * @param observador Observador
+	 */
 	public void suscribirACancelacion(Observador observador) {
 		ObserverManager.observadoresCancelacion.add(observador);
 	}
 	
+	/**
+	 * Agraga un observador a la lista de observadores de baja de precio
+	 * 
+	 * @param observador Observador
+	 */
 	public void suscribirABajaDePrecio(Observador observador) {
 		ObserverManager.observadoresPrecio.add(observador);
 	}
 	
+	/**
+	 * Agraga un observador a la lista de observadores de reservaso
+	 * 
+	 * @param observador Observador
+	 */
 	public void suscribirReserva(Observador observador) {
 		ObserverManager.observadoresReserva.add(observador);
 	}
 	
+	/**
+	 * Avisa a los obsrvadores de la reserva que esta fue cancelada
+	 * 
+	 * @param reserva Reserva
+	 */
 	public void alertarCancelacion(Reserva reserva) {
 		List<Observador> subList = new ArrayList<>(); 
 		ObserverManager.getObservadoresCancelacion().size();
@@ -72,12 +97,22 @@ public class ObserverManager {
 		this.notificarCambio(subList);
 	}
 	
+	/**
+	 * Avisa a los observadores de baja de precio que la publicacion bajo de precio
+	 * 
+	 * @param publicacion Publicacion
+	 */
 	public void alertarBajaDePrecio(Publicacion publicacion) {
 		List<Observador> subList = new ArrayList<>(); 
 		subList = ObserverManager.getObservadoresPrecio().stream().filter(observador -> observador.getPublicacion().getInmueble().equals( publicacion.getInmueble()) ).collect(Collectors.toList());
 		this.notificarCambio(subList);
 	}
 	
+	/**
+	 * Avisa a los observadores de nuevas reservas que la publicacion fue reservada
+	 * 
+	 * @param publicacion Publicacion
+	 */
 	public void alertarReserva(Publicacion publicacion) {
 		this.notificarCambio(ObserverManager.getObservadoresReserva());
 	}
