@@ -46,6 +46,7 @@ class PublicacionTestCase {
 	PrecioDiaOcupacion dia3;
 	PrecioDiaOcupacion dia4;
 	PrecioDiaOcupacion dia5;
+	PrecioDiaOcupacion dia6;
 	
 	Reserva reserva;
 	PoliticaDeCancelacion politica;
@@ -85,6 +86,8 @@ class PublicacionTestCase {
 	dia3 = new PrecioDiaOcupacion(fecha3, 200);
 	dia4 = new PrecioDiaOcupacion(fecha4, 200);
 	dia5 = new PrecioDiaOcupacion(fecha5, 400);
+	//para modificar precio
+	dia6 = new PrecioDiaOcupacion(fecha3, 500);
 	
 	precioPorDia.add(dia1);
 	precioPorDia.add(dia2);
@@ -205,6 +208,12 @@ class PublicacionTestCase {
 		ArrayList<PrecioDiaOcupacion> precios1 = new ArrayList<PrecioDiaOcupacion>();
 		publicacion1.setPrecioPeriodo(precios1);
 		assertEquals(precios1, publicacion1.getPrecio());
+	}
+	
+	@Test
+	void testModificarPrecio() {
+		publicacion1.modificarPrecio(dia6);
+		assertEquals(500, publicacion1.precioEnPeriodo(fecha3, fecha3));
 	}
 	
 }
