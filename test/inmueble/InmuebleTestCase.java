@@ -5,6 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,13 +41,13 @@ class InmuebleTestCase {
 	Calificacion unaCalificacion;
 	Calificacion otraCalificacion;
 	
-	ArrayList<Servicio> servicios;
-	ArrayList <Calificacion> calificacion;
+	Set<Servicio> servicios;
+	Set <Calificacion> calificacion;
 	double superficie;
 	int capacidad;
 	int checkIN;
 	int checkOUT;
-	ArrayList<FormaDePago> formasDePago;
+	Set<FormaDePago> formasDePago;
 	String pais;
 	String ciudad;
 	String direccion;
@@ -56,7 +58,7 @@ class InmuebleTestCase {
 		agua = mock(Servicio.class);
 		luz = mock(Servicio.class);
 		gas = mock(Servicio.class);
-		servicios = new ArrayList<Servicio>();
+		servicios = new HashSet<Servicio>();
 		servicios.add(agua);
 		servicios.add(gas);
 		
@@ -66,7 +68,7 @@ class InmuebleTestCase {
 		mercadoPago = mock(FormaDePago.class);
 		tarjetaDeCredito = mock(FormaDePago.class);
 		debito = mock(FormaDePago.class);
-		formasDePago = new ArrayList<FormaDePago>();
+		formasDePago = new HashSet<FormaDePago>();
 		formasDePago.add(debito);
 		formasDePago.add(tarjetaDeCredito);
 		
@@ -224,7 +226,7 @@ class InmuebleTestCase {
 		FormaDePago forma2 = mock (FormaDePago.class);
 		FormaDePago forma3 = mock (FormaDePago.class);
 		FormaDePago forma4 = mock (FormaDePago.class);
-		ArrayList <FormaDePago> formas = new ArrayList<>();
+		Set <FormaDePago> formas = new HashSet<>();
 		formas.add(forma1);
 		unInmueble.setFormaDePago(formas);
 		assertEquals(1, unInmueble.getFormaDePago().size());

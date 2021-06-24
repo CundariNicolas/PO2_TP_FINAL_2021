@@ -16,13 +16,13 @@ import servicios.Servicio;
 public class Inmueble implements Calificable{
 	
 	private ArrayList<Calificacion> calificaciones; 
-	private ArrayList<FormaDePago> formaDePago;
+	private Set<FormaDePago> formaDePago;
 	private TipoDeInmueble tipoInmueble; 
 	private Double superficie;
 	private String pais;
 	private String ciudad;
 	private String direccion ;
-	private ArrayList<Servicio> servicios;
+	private Set<Servicio> servicios;
 	private Integer capacidad; 
 	private int checkIN;
 	private int checkOUT;
@@ -33,7 +33,7 @@ public class Inmueble implements Calificable{
 	
 	public Inmueble(TipoDeInmueble tipoInmueble, Double superficie, String pais, String ciudad, String direccion,
 			Integer capacidad, int checkIN, int checkOUT,PoliticaDeCancelacion politicaCancelacion,
-			ArrayList<FormaDePago> formasDePago,ArrayList<Servicio> serviciosDisponibles) {
+			Set<FormaDePago> formasDePago,Set<Servicio> serviciosDisponibles) {
 		super();
 		calificaciones = new ArrayList<Calificacion>();
 		this.setFormaDePago(formasDePago);
@@ -83,7 +83,7 @@ public class Inmueble implements Calificable{
 	}
 	
 	
-	public ArrayList<FormaDePago> getFormaDePago() {
+	public Set<FormaDePago> getFormaDePago() {
 		return this.formaDePago;
 	}
 	
@@ -107,7 +107,7 @@ public class Inmueble implements Calificable{
 	}
 
 
-	public ArrayList<Servicio> getServicios() {
+	public Set<Servicio> getServicios() {
 		return this.servicios;
 	}
 	
@@ -147,7 +147,7 @@ public class Inmueble implements Calificable{
 		this.politicaCancelacion = politicaCancelacion;
 	} 
 	
-	public void setFormaDePago(ArrayList<FormaDePago> formaDePago) {
+	public void setFormaDePago(Set<FormaDePago> formaDePago) {
 		this.formaDePago = formaDePago;
 	}
 	
@@ -165,7 +165,7 @@ public class Inmueble implements Calificable{
 		this.direccion = direccion;
 	}
 	
-	public void setServicios(ArrayList<Servicio> servicios) {
+	public void setServicios(Set<Servicio> servicios) {
 		this.servicios = servicios;
 	}
 	

@@ -2,6 +2,7 @@ package publicacion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import formasDePago.FormaDePago;
@@ -59,7 +60,7 @@ public class Publicacion {
 	}
 	
 	
-	public ArrayList<FormaDePago> medioDePagoHabilitado(){
+	public Set<FormaDePago> medioDePagoHabilitado(){
 		return inmueble.getFormaDePago();
 	}
 	
