@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"calificacion"},{"l":"categoria"},{"l":"formaDePagoTestCase"},{"l":"formasDePago"},{"l":"inmueble"},{"l":"politicaCancelacion"},{"l":"publicacion"},{"l":"reserva"},{"l":"servicios"},{"l":"sitio"},{"l":"tipoInmueble"},{"l":"usuario"}];updateSearchResults();
