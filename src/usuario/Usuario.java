@@ -15,7 +15,7 @@ import publicacion.Publicacion;
 import reserva.Reserva;
 
 
-public class Usuario implements Calificable, Comparable{
+public class Usuario implements Calificable, Comparable<Usuario>{
 	private String nombre;
 	private String apellido;
 	private String domicilio;
@@ -107,7 +107,7 @@ public class Usuario implements Calificable, Comparable{
 		this.calificaciones = calificaciones;
 	}
 
-	// Agrega una Publicaci�n a la lista
+	// Agrega una Publicacion a la lista
 	public void addPublicacion(Publicacion publicacion) {
 		this.publicaciones.add(publicacion);
 	}
@@ -165,9 +165,19 @@ public class Usuario implements Calificable, Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		Usuario otro = (Usuario) o;
-		return this.cantidadDeAlquileres().compareTo(otro.cantidadDeAlquileres());
+	public int compareTo(Usuario o) {
+		if(this.cantidadDeAlquileres() < o.cantidadDeAlquileres()) {
+			return 1;
+		}
+		else if(this.cantidadDeAlquileres() > o.cantidadDeAlquileres()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
+	
+	
+
 }
 

@@ -180,10 +180,25 @@ public class Sitio {
 		//return this.getUsuario().stream().sorted(Comparator.comparing(Usuario::cantidadTotalDeAlquileres).reversed()).limit(10).collect(Collectors.toList());
 		//return this.getUsuario().stream().sorted().limit(10).collect(Collectors.toList());//.subList(0, limite);
 		
-		this.getUsuario().sort((usuario1, usuario2) -> usuario1.compareTo(usuario2));
-		Collections.sort(this.getUsuario(), Collections.reverseOrder());
+		//this.getUsuario().sort((usuario1, usuario2) -> usuario1.compareTo(usuario2));
+		//Collections.sort(this.getUsuario(), Collections.reverseOrder());
 		
-		return this.getUsuario().stream().limit(10).collect(Collectors.toList());
+		//return this.getUsuario().stream().limit(10).collect(Collectors.toList());
+		List<Usuario> topten = this.getUsuario();
+		topten.sort((u1, u2) -> this.compare(u1, u2));
+		Collections.reverse(topten);
+		return topten.stream().limit(10).toList();
 	}
-}
+	
+	  public int compare(Usuario o1, Usuario o2) {
+	        Usuario persona1 = (Usuario)o1;
+	        Usuario persona2 = (Usuario)o2;
+	        return persona1.cantidadDeAlquileres().
+	                compareTo(persona2.cantidadDeAlquileres());
+	               
+	    }
+	
+	
+	}
+
 
