@@ -192,16 +192,16 @@ public class Sitio {
 	}
 	
 	
-	public double tasaDeOcupacion() {
-		return (this.todasLasPublicaciones() - this.cantidadDeDisponiblesHoy()) / this.todasLasPublicaciones();
+	public double tasaDeOcupacion(Calendar fechaHoy) {
+		return (this.todasLasPublicaciones() - this.cantidadDeDisponiblesHoy(fechaHoy)) / this.todasLasPublicaciones();
 	}
 	
-	public long todasLasPublicaciones() {
+	public double todasLasPublicaciones() {
 		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).count();
 	}
 	
-	public long cantidadDeDisponiblesHoy() {
-		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).filter(p -> p.disponibleHoy(Calendar.getInstance())).count();
+	public double cantidadDeDisponiblesHoy(Calendar fechaHoy) {
+		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).filter(p -> p.disponibleHoy(fechaHoy)).count();
 	}
 	
 	  public int compare(Usuario o1, Usuario o2) {

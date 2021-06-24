@@ -103,14 +103,13 @@ class SitioTest {
 	}
 	
 	@Test
-	void testCantidadDeDisponiblesHoy() {
+	void testTasaDeOcupacion() {
 		
 		
 		
 		Sitio sitio1 = Sitio.getInstance();
 		
 		Calendar fecha1 = mock(Calendar.class);
-		Calendar fecha2 = mock(Calendar.class);
 		
 		Usuario usuario1 = mock(Usuario.class);
 		Usuario usuario2 = mock(Usuario.class);
@@ -132,10 +131,10 @@ class SitioTest {
 		when(usuario3.getPublicaciones()).thenReturn(publicaciones3);
 		when(usuario4.getPublicaciones()).thenReturn(publicaciones4);
 		
-		when(publicacion1.disponibleHoy(fecha1)).thenReturn(true);
-		when(publicacion2.disponibleHoy(fecha2)).thenReturn(true);
-		when(publicacion3.disponibleHoy(fecha2)).thenReturn(true);
-		when(publicacion4.disponibleHoy(fecha2)).thenReturn(true);
+		when(publicacion1.disponibleHoy(fecha1)).thenReturn(false);
+		when(publicacion2.disponibleHoy(fecha1)).thenReturn(true);
+		when(publicacion3.disponibleHoy(fecha1)).thenReturn(true);
+		when(publicacion4.disponibleHoy(fecha1)).thenReturn(true);
 	
 		
 		
@@ -145,10 +144,15 @@ class SitioTest {
 		sitio1.addUsuario(usuario3);
 		sitio1.addUsuario(usuario4);
 		
-		assertEquals(1, sitio1.cantidadDeDisponiblesHoy());
+		assertEquals(3, sitio1.cantidadDeDisponiblesHoy(fecha1));
+		assertEquals(4, sitio1.todasLasPublicaciones());
+		assertEquals(0.25, sitio1.tasaDeOcupacion(fecha1));
 		
 		
 		
 	}
+	
+	
+	
 
 }
