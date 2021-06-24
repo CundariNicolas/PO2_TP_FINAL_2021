@@ -279,7 +279,7 @@ public class Usuario implements Calificable, Comparable<Usuario>{
 
 	@Override
 	/**
-	 * Se usa para poder ordenar
+	 * Se usa para poder ordenar los usuarios por la cantidad de alquileres
 	 * 
 	 * @param o Object
 	 */

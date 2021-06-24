@@ -246,5 +246,44 @@ class UsuarioTest {
 		pedroRuiz.addReserva(reserva9);
 		assertEquals(pedroRuiz.cantidadDeAlquileres(), 4);
 	}
+	@Test
+	void testCompareTo() {
+		Usuario otroUsuario = mock(Usuario.class);
+		
+		reserva1 = mock(Reserva.class);
+		reserva2 = mock(Reserva.class);
+		reserva3 = mock(Reserva.class);
+		Reserva reserva4 = mock(Reserva.class);
+		Reserva reserva5 = mock(Reserva.class);
+		Reserva reserva6 = mock(Reserva.class);
+		Reserva reserva7 = mock(Reserva.class);
+		Reserva reserva8 = mock(Reserva.class);
+		Reserva reserva9 = mock(Reserva.class);
+		
+		when(reserva1.seConcreto()).thenReturn(true);
+		when(reserva2.seConcreto()).thenReturn(true);
+		when(reserva3.seConcreto()).thenReturn(false);
+		when(reserva4.seConcreto()).thenReturn(false);
+		when(reserva5.seConcreto()).thenReturn(true);
+		when(reserva6.seConcreto()).thenReturn(false);
+		when(reserva7.seConcreto()).thenReturn(false);
+		when(reserva8.seConcreto()).thenReturn(true);
+		when(reserva9.seConcreto()).thenReturn(false);
+		
+		pedroRuiz.addReserva(reserva1);
+		pedroRuiz.addReserva(reserva2);
+		pedroRuiz.addReserva(reserva3);
+		pedroRuiz.addReserva(reserva4);
+		pedroRuiz.addReserva(reserva5);
+		pedroRuiz.addReserva(reserva6);
+		pedroRuiz.addReserva(reserva7);
+		pedroRuiz.addReserva(reserva8);
+		pedroRuiz.addReserva(reserva9);
+		
+		assertEquals(1, otroUsuario.compareTo(pedroRuiz));
+		assertEquals(0, pedroRuiz.compareTo(pedroRuiz));
+		assertEquals(-1, pedroRuiz.compareTo(otroUsuario));
+		
+	}
 
 }
