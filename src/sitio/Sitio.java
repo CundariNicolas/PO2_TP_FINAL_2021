@@ -176,34 +176,50 @@ public class Sitio {
 		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
 	}
 	
+	/**
+	 * Retorna los 10 primeros inquilinos que mas alquilaron sus inmuebles
+	 * @return List<Usuario>
+	 */
 	public List<Usuario> topTenInquilinos() {
 		
-		//return this.getUsuario().stream().sorted(Comparator.comparing(Usuario::cantidadTotalDeAlquileres).reversed()).limit(10).collect(Collectors.toList());
-		//return this.getUsuario().stream().sorted().limit(10).collect(Collectors.toList());//.subList(0, limite);
-		
-		//this.getUsuario().sort((usuario1, usuario2) -> usuario1.compareTo(usuario2));
-		//Collections.sort(this.getUsuario(), Collections.reverseOrder());
-		
-		//return this.getUsuario().stream().limit(10).collect(Collectors.toList());
 		List<Usuario> topten = this.getUsuario();
 		topten.sort((u1, u2) -> this.compare(u1, u2));
 		Collections.reverse(topten);
 		return topten.stream().limit(10).toList();
 	}
 	
-	
+	/**
+	 * Retorna la tasa de ocupacion (inmuebles ocupados sobre todos los inmuebles) en la fecha dada (actual)
+	 * @param fechaHoy Calendar
+	 * @return double
+	 */
 	public double tasaDeOcupacion(Calendar fechaHoy) {
 		return (this.todasLasPublicaciones() - this.cantidadDeDisponiblesHoy(fechaHoy)) / this.todasLasPublicaciones();
 	}
 	
+	/**
+	 * Retorna la cantidad de publicaciones/inmuebles del sitio
+	 * @return double
+	 */
 	public double todasLasPublicaciones() {
 		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).count();
 	}
 	
+	/**
+	 * Retorna la cantidad de inmuebles disponibles en la fecha dada (actual)
+	 * @param fechaHoy
+	 * @return double
+	 */
 	public double cantidadDeDisponiblesHoy(Calendar fechaHoy) {
 		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).filter(p -> p.disponibleHoy(fechaHoy)).count();
 	}
 	
+	  /**
+	   * Compara dos usuarios a traves de la cantidad de sus alquileres concretados
+	   * @param o1 Usuario
+	   * @param o2 Usuario
+	   * @return int
+	   */
 	  public int compare(Usuario o1, Usuario o2) {
 	        Usuario persona1 = (Usuario)o1;
 	        Usuario persona2 = (Usuario)o2;
