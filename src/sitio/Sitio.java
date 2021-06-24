@@ -1,4 +1,3 @@
-
 package sitio;
 
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import calificacion.Calificable;
 import calificacion.Calificacion;
 import categoria.Categoria;
 import formasDePago.FormaDePago;
+import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
 import usuario.Usuario;

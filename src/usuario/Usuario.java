@@ -8,10 +8,7 @@ import java.util.stream.Collectors;
 
 import calificacion.Calificable;
 import calificacion.Calificacion;
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/heads/nuevaRamaDamian
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
@@ -271,7 +268,6 @@ public class Usuario implements Calificable, Comparable<Usuario>{
 		this.getCalificaciones().add(unaCalificacion);
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * Devuelve la cantidad de veces que alquilo propiedades efectivamente (con reservas consolidadas)
 	 * 
@@ -298,9 +294,6 @@ public class Usuario implements Calificable, Comparable<Usuario>{
 			return 0;
 		}
 	}
-=======
-	
-	
->>>>>>> refs/heads/nuevaRamaDamian
+
 }
 
