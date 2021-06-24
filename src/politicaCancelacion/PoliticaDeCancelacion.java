@@ -7,22 +7,7 @@ import reserva.Reserva;
 
 public abstract class PoliticaDeCancelacion {
 	
-	/**
-	 * El sistema permite indicar diferentes formas de resarcimiento que un
-		propietario puede percibir en caso que un inquilino cancele una reserva. Esto se
-		llama política de cancelación. Cada propietario puede indicar cual será la política de
-		cancelación que aplica sobre la propiedad que publica. En principio hay tres tipos de
-		políticas de cancelación, aunque podrían sumarse otras:
-			
-			● Cancelación gratuita hasta 10 días antes de la fecha de inicio de la
-		ocupación y luego abona el equivalente a dos días de reserva.
-			
-			● Sin cancelación: en caso de cancelar el usuario de todas formas paga
-		los días que había reservado.
-			
-			● Intermedia: Hasta 20 días antes es gratuita, entre el día 19 anterior y el
-		día 10 anterior paga el 50 %, después del 10mo día paga la totalidad.
-	 */
+	
 	
 	//private String descripcion;
 	
@@ -36,8 +21,16 @@ public abstract class PoliticaDeCancelacion {
 	
 	abstract protected void setMulta(Reserva reserva);
 	abstract protected boolean condicion ();	
-	
+	/**
+	 * 
+	 * Aplica la politica de cancelacion si corresponde
+	 *@param reserva una reserva
+	 *@return double
+	 *
+	 *
+	 */
 	public double aplicar (Reserva reserva) {
+		
 		this.setDiferenciaEnDias(reserva);
 		if (this.condicion()) {
 			//this.setMulta(this.multa(reserva)); 

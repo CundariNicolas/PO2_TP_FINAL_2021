@@ -31,6 +31,12 @@ public class PrecioDiaOcupacion {
 		/** cambia el precio por dia */
 		this.precio = precio;
 	}
+	public void setPrecio(double precio, Publicacion publicacion) {
+		if(precio <= this.getPrecio()) {
+			publicacion.notificarBajaEnPrecio();
+		}
+		this.setPrecio(precio);
+	}
 	
 	public void setOcupado() {
 		/** cambia el estado a ocupado */
