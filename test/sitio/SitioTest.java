@@ -279,6 +279,38 @@ class SitioTest {
 		
 	}
 	
+	@Test
+	void testPromedioPorCategoria() {
+		Calificacion calif1 = mock(Calificacion.class);
+		Calificacion calif2 = mock(Calificacion.class);
+		Calificacion calif3 = mock(Calificacion.class);
+		
+		Categoria categoria1 = mock(Categoria.class);
+		Categoria categoria2 = mock(Categoria.class);
+		
+		
+		Usuario usuario = mock(Usuario.class);
+		Double valor = 0.0;
+		List<Calificacion> list = new ArrayList<Calificacion>();
+		
+		when(calif1.getPuntaje()).thenReturn(10);
+		when(calif2.getPuntaje()).thenReturn(4);
+		when(calif3.getPuntaje()).thenReturn(3);
+		when(calif1.getCategoria()).thenReturn(categoria1);
+		when(calif2.getCategoria()).thenReturn(categoria1);
+		when(calif3.getCategoria()).thenReturn(categoria2);
+		when(usuario.getCalificaciones()).thenReturn(list);
+
+		list.add(calif1);
+		list.add(calif2);
+		list.add(calif3);
+		
+		assertEquals(2, sitio.promedioPorCategoria(usuario).size());
+		assertEquals(7, sitio.promedioPorCategoria(usuario).get(categoria1).byteValue());
+		assertEquals(3, sitio.promedioPorCategoria(usuario).get(categoria2).byteValue());
+		
+	}
+	
 	
 	
 }
