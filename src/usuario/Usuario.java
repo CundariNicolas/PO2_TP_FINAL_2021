@@ -292,7 +292,5 @@ public class Usuario implements Calificable, Comparable<Usuario>{
 			return 0;
 		}
 	}
-	
-
 }
 
