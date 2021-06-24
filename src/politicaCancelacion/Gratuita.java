@@ -13,16 +13,20 @@ public class Gratuita extends PoliticaDeCancelacion {
 
 	@Override
 	protected void setMulta(Reserva reserva) {
-		this.multaAplicada = reserva.valorEnCantidadDeDias(this.diasDeMulta);
+		this.setMultaAplicada(reserva.valorEnCantidadDeDias(this.getCantiadaDeDias()));
 	}
 
 	public void setCantidadDiasDeMultas(int dias) {
 		this.diasDeMulta = dias;
 	}
+	
+	public int getCantiadaDeDias() {
+		return this.diasDeMulta;
+	}
 
 	@Override
 	protected boolean condicion() {
-		return  (this.diferenciaEnDias >= 10 && this.diferenciaEnDias < 2) || (this.diferenciaEnDias >= 2 );
+		return  (this.diferenciaEnDias <= 10);
 	}
 
 }

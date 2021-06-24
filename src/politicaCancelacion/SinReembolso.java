@@ -14,5 +14,4 @@ public class SinReembolso extends PoliticaDeCancelacion {
 		return true;
 	}
 
-
 }

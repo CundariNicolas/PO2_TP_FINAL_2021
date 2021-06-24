@@ -16,7 +16,7 @@ public abstract class PoliticaDeCancelacion {
 	
 	PoliticaDeCancelacion () {
 		super();
-		this.multaAplicada = 0.0; 
+		multaAplicada = 0.0;
 	}
 	
 	abstract protected void setMulta(Reserva reserva);
@@ -29,27 +29,26 @@ public abstract class PoliticaDeCancelacion {
 	 *
 	 *
 	 */
+	
 	public double aplicar (Reserva reserva) {
-		
 		this.setDiferenciaEnDias(reserva);
 		if (this.condicion()) {
 			this.setMulta(reserva);
 		}
-		return this.getMultaAplicada();
+		return this.multaAplicada;
 	}
 
 	protected void setDiferenciaEnDias(Reserva reserva) {
 		Calendar fechaActual = new GregorianCalendar();
-		long diferencia = fechaActual.getTimeInMillis() - reserva.getFechaInicio().getTimeInMillis();
-		this.diferenciaEnDias =(int) diferencia/1000/60/60/24;
+		fechaActual.get (Calendar.DAY_OF_YEAR);
+		int diferencia = reserva.getFechaInicio().get(Calendar.DAY_OF_YEAR) -  fechaActual.get (Calendar.DAY_OF_YEAR);
+		this.diferenciaEnDias= diferencia; 
 	}
 	
-	protected int getDiferenciaEnDias() {
-		return this.diferenciaEnDias;
-	}
 	
-	protected Double getMultaAplicada() {
-		return this.multaAplicada;
+	
+	protected void setMultaAplicada(double unValor) {
+		this.multaAplicada = unValor;
 	}
 	
 	
