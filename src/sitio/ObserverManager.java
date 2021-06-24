@@ -64,6 +64,7 @@ public class ObserverManager {
 	
 	public void alertarCancelacion(Reserva reserva) {
 		List<Observador> subList = new ArrayList<>(); 
+		ObserverManager.getObservadoresCancelacion().size();
 		subList = ObserverManager.getObservadoresCancelacion()
 				.stream()
 				.filter(observador -> observador.getPublicacion().getInmueble().equals(reserva.getPublicacion().getInmueble()) )

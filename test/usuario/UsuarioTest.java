@@ -27,7 +27,6 @@ class UsuarioTest {
 	private Publicacion publicacion3;
 	private Inmueble inmueble1;
 	private Inmueble inmueble2;
-	private Inmueble inmueble3;
 	private Calificacion calificacion1;
 	private Calificacion calificacion2;
 
@@ -136,25 +135,18 @@ class UsuarioTest {
 
 	@Test
 	void testReservasEnCiudad() {
-		publicacion1 = mock(Publicacion.class);
-		publicacion2 = mock(Publicacion.class);
-		publicacion3 = mock(Publicacion.class);
 		reserva1 = mock(Reserva.class);
 		reserva2 = mock(Reserva.class);
 		reserva3 = mock(Reserva.class);
 		
-		when(publicacion1.getCiudadInmueble()).thenReturn("Cordoba");
-		when(publicacion2.getCiudadInmueble()).thenReturn("Rosario");
-		when(publicacion3.getCiudadInmueble()).thenReturn("Rio");
-				
-		when(reserva1.getPublicacion()).thenReturn(publicacion1);
-		when(reserva2.getPublicacion()).thenReturn(publicacion2);
-		when(reserva3.getPublicacion()).thenReturn(publicacion3);
+		when(reserva1.esDeCiudad("Cordoba")).thenReturn(true);
+		when(reserva2.esDeCiudad("Cordoba")).thenReturn(true);
+		when(reserva3.esDeCiudad("Cordoba")).thenReturn(false);
 		
 		pedroRuiz.addReserva(reserva1);
 		pedroRuiz.addReserva(reserva2);
 		pedroRuiz.addReserva(reserva3);
-		assertEquals(pedroRuiz.ciudadesDondeReservo().size(), 3);
+		assertEquals(pedroRuiz.reservasEnCiudad("Cordoba").size(), 2);
 	}
 
 	@Test
@@ -219,6 +211,40 @@ class UsuarioTest {
 		pedroRuiz.addPublicacion(publicacion1);
 		pedroRuiz.addPublicacion(publicacion2);
 		assertEquals(pedroRuiz.cantidadTotalDeAlquileres(), 33);
+	}
+	
+	@Test
+	void testCantidadDeAlquileres() {
+		reserva1 = mock(Reserva.class);
+		reserva2 = mock(Reserva.class);
+		reserva3 = mock(Reserva.class);
+		Reserva reserva4 = mock(Reserva.class);
+		Reserva reserva5 = mock(Reserva.class);
+		Reserva reserva6 = mock(Reserva.class);
+		Reserva reserva7 = mock(Reserva.class);
+		Reserva reserva8 = mock(Reserva.class);
+		Reserva reserva9 = mock(Reserva.class);
+		
+		when(reserva1.seConcreto()).thenReturn(true);
+		when(reserva2.seConcreto()).thenReturn(true);
+		when(reserva3.seConcreto()).thenReturn(false);
+		when(reserva4.seConcreto()).thenReturn(false);
+		when(reserva5.seConcreto()).thenReturn(true);
+		when(reserva6.seConcreto()).thenReturn(false);
+		when(reserva7.seConcreto()).thenReturn(false);
+		when(reserva8.seConcreto()).thenReturn(true);
+		when(reserva9.seConcreto()).thenReturn(false);
+		
+		pedroRuiz.addReserva(reserva1);
+		pedroRuiz.addReserva(reserva2);
+		pedroRuiz.addReserva(reserva3);
+		pedroRuiz.addReserva(reserva4);
+		pedroRuiz.addReserva(reserva5);
+		pedroRuiz.addReserva(reserva6);
+		pedroRuiz.addReserva(reserva7);
+		pedroRuiz.addReserva(reserva8);
+		pedroRuiz.addReserva(reserva9);
+		assertEquals(pedroRuiz.cantidadDeAlquileres(), 4);
 	}
 
 }

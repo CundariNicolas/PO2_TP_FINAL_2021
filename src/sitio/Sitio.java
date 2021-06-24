@@ -3,6 +3,7 @@ package sitio;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -174,5 +175,15 @@ public class Sitio {
 		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
 	}
 	
+	public List<Usuario> topTenInquilinos() {
+		
+		//return this.getUsuario().stream().sorted(Comparator.comparing(Usuario::cantidadTotalDeAlquileres).reversed()).limit(10).collect(Collectors.toList());
+		//return this.getUsuario().stream().sorted().limit(10).collect(Collectors.toList());//.subList(0, limite);
+		
+		this.getUsuario().sort((usuario1, usuario2) -> usuario1.compareTo(usuario2));
+		Collections.sort(this.getUsuario(), Collections.reverseOrder());
+		
+		return this.getUsuario().stream().limit(10).collect(Collectors.toList());
+	}
 }
 

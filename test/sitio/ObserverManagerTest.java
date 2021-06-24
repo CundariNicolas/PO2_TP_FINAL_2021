@@ -9,8 +9,11 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.platform.engine.support.hierarchical.Node.ExecutionMode;
 
 import inmueble.Inmueble;
 import publicacion.Foto;
@@ -26,7 +29,8 @@ class ObserverManagerTest {
 	PaginaWeb pag = mock(PaginaWeb.class);
 	Reserva reserva = mock(Reserva.class);
 	Publicacion publicacion = mock(Publicacion.class);
-	Inmueble inmueble = mock(Inmueble.class);	
+	Inmueble inmueble = mock(Inmueble.class);
+	
 	
 	@BeforeEach
 	void setUP() {
@@ -39,23 +43,7 @@ class ObserverManagerTest {
 	}
 
 	@Test
-	void testSuscribirACancelacion() {
-		assertDoesNotThrow(() -> manager.suscribirACancelacion(app));
-	}
-
-	@Test
-	void testSuscribirABajaDePrecio() {
-		assertDoesNotThrow(() -> manager.suscribirABajaDePrecio(pag));
-	}
-
-	@Test
-	void testSuscribirReserva() {
-		assertDoesNotThrow(() -> manager.suscribirACancelacion(app));
-	}
-
-	@Test
 	void testAlertarCancelacion() {
-		 
 		when(app.getPublicacion()).thenReturn(publicacion);
 		when(reserva.getPublicacion()).thenReturn(publicacion);
 		when(publicacion.getInmueble()).thenReturn(inmueble);
@@ -64,6 +52,16 @@ class ObserverManagerTest {
 		manager.alertarCancelacion(reserva);
 		verify(app, times(1)).getPublicacion();
 		verify(app, times(1)).notificar();
+	}
+	
+	@Test
+	void testSuscribirABajaDePrecio() {
+		assertDoesNotThrow(() -> manager.suscribirABajaDePrecio(pag));
+	}
+
+	@Test
+	void testSuscribirReserva() {
+		assertDoesNotThrow(() -> manager.suscribirReserva(app));
 	}
 
 	@Test
@@ -85,5 +83,16 @@ class ObserverManagerTest {
 		verify(pag, times(1)).notificar();
 		assertDoesNotThrow(() -> manager.alertarReserva(publicacion));
 	}
+	
+	@Test
+	void testSuscribirACancelacion() {
+		try {
+            Thread.sleep(20);
+         } catch (Exception e) {
+        	 assertDoesNotThrow(() -> manager.suscribirACancelacion(app));
+         }
+		
+	}
+
 
 }

@@ -33,4 +33,8 @@ public abstract class EstadoReserva  {
 		return false;
 	}
 
+	public Boolean seConcreto() {
+		return false;
+	}
+
 }

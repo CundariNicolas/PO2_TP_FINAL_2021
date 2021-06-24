@@ -23,5 +23,36 @@ class EstadoReservaTest {
 		estado = EstadoRechazado.getInstance();
 		assertEquals(estado.getDescripcion(), "Rechazado");
 	}
+	
+	@Test
+	void testEsCondicional() {
+		estado = EstadoRechazado.getInstance();
+		assertFalse(estado.esCondicional());
+	}
+
+	@Test
+	void testRechazar() {
+		estado = EstadoRechazado.getInstance();
+		assertDoesNotThrow(() -> estado.esCondicional());
+	}
+	
+	@Test
+	void testSeConcreto() {
+		estado = EstadoInicial.getInstance();
+		assertFalse(estado.seConcreto());
+		
+		estado = EstadoConsolidado.getInstance();
+		assertTrue(estado.seConcreto());
+		
+		estado = EstadoCondicional.getInstance();
+		assertFalse(estado.seConcreto());
+		
+		estado = EstadoCancelado.getInstance();
+		assertFalse(estado.seConcreto());
+		
+		estado = EstadoRechazado.getInstance();
+		assertFalse(estado.seConcreto());
+		
+	}
 
 }

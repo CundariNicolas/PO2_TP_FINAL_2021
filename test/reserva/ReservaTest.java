@@ -174,5 +174,10 @@ class ReservaTest {
 		assertEquals(reserva1.valorEnCantidadDeDias(1), 333.33);
 		assertEquals(reserva1.valorEnCantidadDeDias(2), 666.66);
 	}
+	
+	@Test
+	void testSeConcreto() {
+		assertFalse(reserva1.seConcreto());
+	}
 
 }

@@ -49,4 +49,9 @@ public class EstadoConsolidado extends EstadoReserva{
 				&& reserva.getPublicacion().getInmueble().getCheckOUT() < Calendar.getInstance().HOUR_OF_DAY;
 		
 	}
+	
+	@Override
+	public Boolean seConcreto() {
+		return true;
+	}
 }

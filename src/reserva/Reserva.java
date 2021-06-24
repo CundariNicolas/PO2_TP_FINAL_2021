@@ -125,5 +125,9 @@ public class Reserva {
 	public EstadoReserva getEstado() {
 		return this.estado;
 	}
+
+	public Boolean seConcreto() {
+		return this.getEstado().seConcreto();
+	}
 	
 }

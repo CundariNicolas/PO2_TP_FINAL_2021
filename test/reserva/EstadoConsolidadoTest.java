@@ -2,7 +2,6 @@ package reserva;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,10 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
-import politicaCancelacion.PoliticaDeCancelacion;
 import publicacion.PrecioDiaOcupacion;
 import publicacion.Publicacion;
-import sitio.ObserverManager;
 import sitio.Sitio;
 import usuario.Usuario;
 
@@ -58,10 +55,10 @@ class EstadoConsolidadoTest {
 		when(publicacion.getPropietario()).thenReturn(usuario);
 		when(publicacion.getInmueble()).thenReturn(inmueble);
 		when(usuario.geteMail()).thenReturn("pepe@gmailcom");
+		
 		estado.cancelar(reserva);
 		assertEquals(reserva.getEstado().getClass(), EstadoCancelado.class);
-		// esta liena hace que falle todo
-		//verify(sitio, times(1)).procesarReservaCancelada(reserva);
+		verify(publicacion, times(1)).registrarCancelacion(fechaIN, fechaOUT);
 	}
 
 	@Test
