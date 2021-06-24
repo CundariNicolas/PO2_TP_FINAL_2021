@@ -5,16 +5,29 @@ import publicacion.Publicacion;
 public class PaginaWeb implements Observador{
 	private Publicacion publicacion;
 
+	/**
+	 * Craa una paina web con la publicacion por la cual se suscribe
+	 * 
+	 * @param PaginaWeb
+	 */
 	public PaginaWeb(Publicacion publicacion) {
 		this.publicacion = publicacion;
 	}
 
 	@Override
+	/**
+	 * Devuleve la pubicacion suscripta
+	 * 
+	 * @re Publicacion
+	 */
 	public Publicacion getPublicacion() {
 		return this.publicacion;
 	}
 
 	@Override
+	/**
+	 * Notifica al "sistema externo" el cambio 
+	 */
 	public void notificar() {
 		String mensaje = "";
 		mensaje = "No te pierdas esta oferta Un inmueble ";

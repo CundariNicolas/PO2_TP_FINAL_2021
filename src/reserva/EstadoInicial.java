@@ -7,7 +7,12 @@ public class EstadoInicial extends EstadoReserva{
 		super(descripcion);
 	}
 
-	public static EstadoReserva getInstance() {
+	/**
+	 * Devuleve la instancia única de estado inicial
+	 * 
+	 * @return EstadoInicial
+	 */
+	public static EstadoInicial getInstance() {
 		if (estado == null) {
 			estado = new EstadoInicial("Inicial");
 		}
@@ -15,12 +20,22 @@ public class EstadoInicial extends EstadoReserva{
 	}
 
 	@Override
+	/**
+	 * Transicion a estado aceptado
+	 * 
+	 * @param reserva Reserva
+	 */
 	protected void aceptar(Reserva reserva) {
 		super.aceptar(reserva);
 		this.notificarAceptacion(reserva);
 	}
 
 	@Override
+	/**
+	 * Transiciona estado rechazado
+	 * 
+	 * @param reserva Reserva
+	 */
 	protected void rechazar(Reserva reserva) {
 		reserva.setEstado(EstadoRechazado.getInstance());
 	}
