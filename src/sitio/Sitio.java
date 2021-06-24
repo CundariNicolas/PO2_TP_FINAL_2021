@@ -18,6 +18,7 @@ import calificacion.Calificacion;
 import categoria.Categoria;
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
+import publicacion.PrecioDiaOcupacion;
 import publicacion.Publicacion;
 import reserva.Reserva;
 import usuario.Usuario;
@@ -176,26 +177,17 @@ public class Sitio {
 	
 	}
 	
-	
-	
 	public List <Inmueble> inmueblesLibresHoy() {
-		List<Inmueble> inmueblesLibres= new ArrayList<Inmueble>();
-		List<Publicacion> publicacionesDeUsuario =new ArrayList<Publicacion>();
-		Calendar hoy =  Calendar.getInstance();
 		
-		for (Usuario unUsuario : Sitio.usuario) {
-			
-				unUsuario.getPublicaciones().forEach(unaPublicacion-> publicacionesDeUsuario.add(unaPublicacion));
-				
-				for(Publicacion unaPublicacion: publicacionesDeUsuario ) {
-					 if (unaPublicacion.disponibleHoy(hoy)) {
-						 
-						 inmueblesLibres.add(unaPublicacion.getInmueble());
-					 } 
-				 }
-		}
-		
-		return inmueblesLibres;
+		List<Inmueble> inmueblesLibresHoy = new ArrayList<>(); 
+			for (Usuario unUsuario: Sitio.usuario) {
+				for (Publicacion unaPublicacion : unUsuario.getPublicaciones()) {
+					if (unaPublicacion.disponibleHoy()) {
+						inmueblesLibresHoy.add(unaPublicacion.getInmueble());
+					}
+				}
+			}
+		return inmueblesLibresHoy;		
 	}
 	
 	/**

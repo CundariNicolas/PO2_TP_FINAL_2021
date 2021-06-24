@@ -26,25 +26,12 @@ class SitioTesCaseLibreInmueble {
 	}
 
 	@Test
-	final void test() {
-		Calendar unaFecha =  Calendar.getInstance();
-		unaFecha.add(Calendar.DAY_OF_YEAR, -50);
-		
+	void testInmueblesLibreshoy() {
+		// 3 inmuebles libres
 		Inmueble inmueble1 = mock (Inmueble.class);
 		Inmueble inmueble2 = mock (Inmueble.class);
 		Inmueble inmueble3 = mock (Inmueble.class);
-		Inmueble inmueble4 = mock (Inmueble.class);
-		Inmueble inmueble5 = mock (Inmueble.class);
-		Inmueble inmueble6 = mock (Inmueble.class);
-		Inmueble inmueble7 = mock (Inmueble.class);
-		Inmueble inmueble8 = mock (Inmueble.class);
-		Inmueble inmueble9 = mock (Inmueble.class);
-		Inmueble inmueble10 = mock (Inmueble.class);
-		Inmueble inmueble11 = mock (Inmueble.class);
-		Inmueble inmueble12 = mock (Inmueble.class);
-		Inmueble inmueble13 = mock (Inmueble.class);
 		
-
 		Usuario usuario1 = mock(Usuario.class);
 		Usuario usuario2 = mock(Usuario.class);
 		Usuario usuario3 = mock(Usuario.class);
@@ -65,7 +52,7 @@ class SitioTesCaseLibreInmueble {
 		List<Publicacion> lista2 = new ArrayList<>();
 		Publicacion publicacion2 = mock(Publicacion.class);
 		Publicacion publicacion3 = mock(Publicacion.class);
-		when(publicacion2.disponibleHoy(unaFecha)).thenReturn(true);
+		when(publicacion2.disponibleHoy()).thenReturn(true);
 		when(publicacion1.getInmueble()).thenReturn(inmueble1);
 		lista2.add(publicacion2);
 		lista2.add(publicacion3);
@@ -91,28 +78,26 @@ class SitioTesCaseLibreInmueble {
 		when(usuario3.getPublicaciones()).thenReturn(lista3);
 		when(usuario4.getPublicaciones()).thenReturn(lista4);
 		
-		when(publicacion6.disponibleHoy(unaFecha)).thenReturn(true);
 		
-		when(publicacion6.getInmueble()).thenReturn(inmueble3);
+		when(publicacion6.disponibleHoy()).thenReturn(true);
+		when(publicacion1.disponibleHoy()).thenReturn(true);
+		when(publicacion3.disponibleHoy()).thenReturn(true);
 		
-		when(publicacion1.disponibleHoy(unaFecha)).thenReturn(true);
+		
+		when(publicacion6.getInmueble()).thenReturn(inmueble3);		
 		when(publicacion1.getInmueble()).thenReturn(inmueble1);
-		
-		when(publicacion3.disponibleHoy(unaFecha)).thenReturn(true);
 		when(publicacion3.getInmueble()).thenReturn(inmueble2);
 		
 		
-		when(publicacion2.disponibleHoy(null)).thenReturn(false);
-		when(publicacion4.disponibleHoy(null)).thenReturn(false);
-		when(publicacion5.disponibleHoy(null)).thenReturn(false);
-		when(publicacion7.disponibleHoy(null)).thenReturn(false);
-		when(publicacion8.disponibleHoy(null)).thenReturn(false);
-		when(publicacion9.disponibleHoy(null)).thenReturn(false);
-	
-
+		when(publicacion2.disponibleHoy()).thenReturn(false);
+		when(publicacion4.disponibleHoy()).thenReturn(false);
+		when(publicacion5.disponibleHoy()).thenReturn(false);
+		when(publicacion7.disponibleHoy()).thenReturn(false);
+		when(publicacion8.disponibleHoy()).thenReturn(false);
+		when(publicacion9.disponibleHoy()).thenReturn(false);
 		
 		
-		assertEquals(0, sitio.inmueblesLibresHoy().size());
+		assertEquals(3, sitio.inmueblesLibresHoy().size());
 	}
 
 }
