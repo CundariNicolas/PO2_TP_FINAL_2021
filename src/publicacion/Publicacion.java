@@ -2,12 +2,14 @@ package publicacion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import formasDePago.FormaDePago;
 import inmueble.Inmueble;
 import reserva.Reserva;
 import sitio.Observador;
+import sitio.Sitio;
 import usuario.Usuario;
 
 public class Publicacion {
@@ -16,7 +18,6 @@ public class Publicacion {
 	private Calendar fechaFin;
 	private ArrayList<Foto> fotos;
 	private ArrayList<PrecioDiaOcupacion> preciopordiaocupado;
-	private ArrayList<Observador> observadorBajaPrecio;
 	private Usuario propietario;
 	
 	public Publicacion(Usuario propietario, Inmueble inmueble, Calendar inicio, Calendar fin, ArrayList<Foto> fotos, ArrayList<PrecioDiaOcupacion> precio) {
@@ -26,7 +27,6 @@ public class Publicacion {
 		this.fechaFin = fin;
 		this.setFotos(fotos);
 		this.preciopordiaocupado = precio;
-		this.observadorBajaPrecio = new ArrayList<Observador>();
 		
 	}
 	
@@ -65,12 +65,17 @@ public class Publicacion {
 	
 	
 	public void notificarBajaEnPrecio() {
-		
+		Sitio.procesarBajaDePrecio(this);
 		
 	}
 	
 	public void setPrecioPeriodo(ArrayList<PrecioDiaOcupacion> precio2) {
-		this.preciopordiaocupado = precio2; // revisar
+		
+		this.preciopordiaocupado = precio2;
+	}
+	
+	public void modificarPrecio(PrecioDiaOcupacion dia ) {
+		this.preciopordiaocupado.stream().filter(d -> d.getFecha().equals(dia.getFecha())).findFirst().get().setPrecio(dia.getPrecio(), this);;
 	}
 	
 	
@@ -137,6 +142,7 @@ public class Publicacion {
 		
 		return propietario;
 	}
+
 
 
 	
