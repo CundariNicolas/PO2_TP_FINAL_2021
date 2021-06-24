@@ -108,8 +108,7 @@ public class Sitio {
 	
 	public void  calificar (Calificable calificable ,Reserva unaReserva, Calificacion unaCalificacion ) {
 		if(unaReserva.estaFinalizada()) {
-
-			/** unaCategoria.setCalificacion(unaReserva.getInquilino(), unaCalificacion); */
+			calificable.setCalificacion(unaCalificacion);
 		}
 	}
 	
@@ -174,6 +173,29 @@ public class Sitio {
 
 	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
 		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
+	
+	}
+	
+	
+	
+	public List <Inmueble> inmueblesLibresHoy() {
+		List<Inmueble> inmueblesLibres= new ArrayList<Inmueble>();
+		List<Publicacion> publicacionesDeUsuario =new ArrayList<Publicacion>();
+		Calendar hoy =  Calendar.getInstance();
+		
+		for (Usuario unUsuario : Sitio.usuario) {
+			
+				unUsuario.getPublicaciones().forEach(unaPublicacion-> publicacionesDeUsuario.add(unaPublicacion));
+				
+				for(Publicacion unaPublicacion: publicacionesDeUsuario ) {
+					 if (unaPublicacion.disponibleHoy(hoy)) {
+						 
+						 inmueblesLibres.add(unaPublicacion.getInmueble());
+					 } 
+				 }
+		}
+		
+		return inmueblesLibres;
 	}
 	
 	/**

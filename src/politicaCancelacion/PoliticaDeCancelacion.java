@@ -33,7 +33,6 @@ public abstract class PoliticaDeCancelacion {
 		
 		this.setDiferenciaEnDias(reserva);
 		if (this.condicion()) {
-			//this.setMulta(this.multa(reserva)); 
 			this.setMulta(reserva);
 		}
 		return this.getMultaAplicada();

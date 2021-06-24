@@ -1,9 +1,9 @@
 package inmueble;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
+
 import calificacion.Calificable;
 import calificacion.Calificacion;
 import formasDePago.FormaDePago;
@@ -16,134 +16,174 @@ import servicios.Servicio;
 public class Inmueble implements Calificable{
 	
 	private ArrayList<Calificacion> calificaciones; 
-	private ArrayList<FormaDePago> formaDePago;
-	private TipoDeInmueble tipo; 
-	private Integer superficie;
+	private Set<FormaDePago> formaDePago;
+	private TipoDeInmueble tipoInmueble; 
+	private Double superficie;
 	private String pais;
 	private String ciudad;
 	private String direccion ;
-	private ArrayList <Servicio> servicios;
+	private Set<Servicio> servicios;
 	private Integer capacidad; 
 	private int checkIN;
 	private int checkOUT;
 	private Integer cantidadDeVecesAlquilado;
 	private PoliticaDeCancelacion politicaCancelacion;
 
-	public Inmueble(TipoDeInmueble tipoInmueble,double superficie, 
-			String pais, String ciudad,String direccion, 
-			ArrayList<Servicio> servicios, int capacidad) {
-	}
-	
-	public void setModoDePago (ArrayList <FormaDePago> formasDePago) {
-			
-		this.formaDePago = formasDePago;
-	}
-	
-	public void aumentarCantidadVecesAlquilado() {
-		this.cantidadDeVecesAlquilado = this.getCantidadDeVecesAlquilado() + 1;
-	}
-
-	public Integer getCantidadVecesAlquilado() {
-		return this.cantidadDeVecesAlquilado;
-	}
-	
-
-	public ArrayList<FormaDePago> getFormaDePago() {
-		return formaDePago;
-	}
 	
 	
-	public void setFormaDePago(ArrayList<FormaDePago> formaDePago) {
-		this.formaDePago = formaDePago;
+	public Inmueble(TipoDeInmueble tipoInmueble, Double superficie, String pais, String ciudad, String direccion,
+			Integer capacidad, int checkIN, int checkOUT,PoliticaDeCancelacion politicaCancelacion,
+			Set<FormaDePago> formasDePago,Set<Servicio> serviciosDisponibles) {
+		super();
+		calificaciones = new ArrayList<Calificacion>();
+		this.setFormaDePago(formasDePago);
+		this.setTipo(tipoInmueble);
+		this.setSuperficie (superficie);
+		this.setPais (pais);
+		this.setCiudad (ciudad);
+		this.setDireccion (direccion);
+		this.setServicios (serviciosDisponibles);
+		this.setCapacidad (capacidad);
+		this.setCheckIN (checkIN);
+		this.setCheckOUT (checkOUT);
+		this.setCantidadDeVecesAlquilado (0);
+		this.setPoliticaCancelacion (politicaCancelacion);
 	}
 	
-	public TipoDeInmueble getTipo() {
-		return tipo;
+	private boolean existeLaCalificacionDelUsuario(Usuario unUsuario) {
+		return this.calificaciones
+				.stream()
+				.anyMatch(usuario-> usuario.getOrigen().equals(unUsuario));
 	}
-
-	
-	public void setTipo(TipoDeInmueble tipo) {
-		this.tipo = tipo;
-	} 
-		
-	public Integer getSuperficie() {
-		return superficie;
-	}
-
-	public void setSuperficie(Integer superficie) {
-		this.superficie = superficie;
-	}
-
-	public String getPais() {
-		return pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-
-	public String getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public ArrayList<Servicio> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.servicios = servicios;
-	}
-
-	public Integer getCapacidad() {
-		return capacidad;
-	}
-
-	public void setCapacidad(Integer capacidad) {
-		this.capacidad = capacidad;
-	}
-
-	public Integer getCantidadDeVecesAlquilado() {
-		return cantidadDeVecesAlquilado;
-	}
-
-	public void setCantidadDeVecesAlquilado(Integer cantidadDeVecesAlquilado) {
-		this.cantidadDeVecesAlquilado = cantidadDeVecesAlquilado;
-	}
-
-	public PoliticaDeCancelacion getPoliticaCancelacion() {
-		return politicaCancelacion;
-	}
-
-	public void setPoliticaCancelacion(PoliticaDeCancelacion politicaCancelacion) {
-		this.politicaCancelacion = politicaCancelacion;
-	} 
 	
 	@Override
 	public void setCalificacion(Calificacion unaCalificacion) {
-		this.getCalificaciones().add(unaCalificacion);
+		if (!this.existeLaCalificacionDelUsuario(unaCalificacion.getOrigen()))
+			{
+				this.getCalificaciones().add(unaCalificacion);
+			}	
 	}
 	
 	@Override
 	public List <Calificacion> getCalificaciones() {
-		return this.getCalificaciones();
+		return this.calificaciones;
 		
 	}
 
+	public void aumentarCantidadVecesAlquilado() {
+		this.cantidadDeVecesAlquilado = this.getCantidadDeVecesAlquilado() + 1;
+	}	
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	
+	
+	public Set<FormaDePago> getFormaDePago() {
+		return this.formaDePago;
+	}
+	
+	public TipoDeInmueble getTipo() {
+		return this.tipoInmueble;
+	}		
+	public Double getSuperficie() {
+		return this.superficie;
+	}
+	
+	public String getCiudad() {
+		return this.ciudad;
+	}
+
+	public String getPais() {
+		return this.pais;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+
+	public Set<Servicio> getServicios() {
+		return this.servicios;
+	}
+	
+	public Integer getCantidadDeVecesAlquilado() {
+		return this.cantidadDeVecesAlquilado;
+	}
+
+	public PoliticaDeCancelacion getPoliticaCancelacion() {
+		return this.politicaCancelacion;
+	}
+	
+	public Integer getCapacidad() {
+		return this.capacidad;
+	}
+	
 	public int getCheckOUT() {
 		return this.checkOUT;
 	}
+	public int getCheckIn() {
+		return this.checkIN;
+	}
 	
+	public void setCheckIN(int unCheckIn) {
+		if (this.esHorarioValido(unCheckIn)) {
+			this.checkIN = unCheckIn;	
+		}
+		
+	}
+	
+	public void setCheckOUT (int unCheckout) {
+		if (this.esHorarioValido(unCheckout)) {			
+			this.checkOUT = unCheckout;
+		}
+	}
+	
+	public void setPoliticaCancelacion(PoliticaDeCancelacion politicaCancelacion) {
+		this.politicaCancelacion = politicaCancelacion;
+	} 
+	
+	public void setFormaDePago(Set<FormaDePago> formaDePago) {
+		this.formaDePago = formaDePago;
+	}
+	
+	public void setTipo(TipoDeInmueble tipo) {
+		this.tipoInmueble = tipo;
+	} 
+	
+	public void setSuperficie(Double superficie) {
+		if (superficie > 0) {
+			this.superficie = superficie;	
+		}
+		
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	
+	public void setServicios(Set<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+	
+	
+	public void setCapacidad(Integer capacidad) {
+		if (capacidad > 0) {
+			this.capacidad = capacidad;	
+		}
+		
+	}
+	private void setCantidadDeVecesAlquilado(Integer cantidadDeVecesAlquilado) {
+		if (cantidadDeVecesAlquilado >= 0) {
+			this.cantidadDeVecesAlquilado = cantidadDeVecesAlquilado;
+		}
+	}
+	
+	private boolean esHorarioValido(int horario) {
+		return horario >= 0 && horario < 24;
+	}
 	
 }

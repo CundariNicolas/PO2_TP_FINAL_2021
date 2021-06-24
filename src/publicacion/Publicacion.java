@@ -2,7 +2,11 @@ package publicacion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+<<<<<<< HEAD
 import java.util.stream.Collectors;
+=======
+import java.util.Set;
+>>>>>>> refs/heads/nuevaRamaDamian
 import java.util.stream.Stream;
 
 import formasDePago.FormaDePago;
@@ -90,11 +94,16 @@ public class Publicacion {
 		return getPeriodoEspecificado(fechaDesde, fechaHasta).allMatch( p -> !p.estaOcupado());
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * Retorna los medios de pago habilitados para el inmueble de la publicacion
 	 * @return ArrayList<FormaDePago>
 	 */
 	public ArrayList<FormaDePago> medioDePagoHabilitado(){
+=======
+	
+	public Set<FormaDePago> medioDePagoHabilitado(){
+>>>>>>> refs/heads/nuevaRamaDamian
 		return inmueble.getFormaDePago();
 	}
 	
