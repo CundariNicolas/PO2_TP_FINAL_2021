@@ -59,5 +59,10 @@ class CalificacacionTestCase {
 		assertEquals(puntajeCorrecto, calificacion.getPuntaje());
 		
 	}
+	
+	@Test
+	void seObtieneLaCategoriaCreada() {
+		assertEquals(unaCategoria, calificacion.getCategoria());
+	}
 
 }
