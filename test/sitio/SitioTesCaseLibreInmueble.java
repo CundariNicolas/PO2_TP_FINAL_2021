@@ -25,94 +25,79 @@ class SitioTesCaseLibreInmueble {
 		sitio= Sitio.getInstance();
 	}
 
-	@Test
-	final void test() {
-		Calendar unaFecha =  Calendar.getInstance();
-		unaFecha.add(Calendar.DAY_OF_YEAR, -50);
-		
-		Inmueble inmueble1 = mock (Inmueble.class);
-		Inmueble inmueble2 = mock (Inmueble.class);
-		Inmueble inmueble3 = mock (Inmueble.class);
-		Inmueble inmueble4 = mock (Inmueble.class);
-		Inmueble inmueble5 = mock (Inmueble.class);
-		Inmueble inmueble6 = mock (Inmueble.class);
-		Inmueble inmueble7 = mock (Inmueble.class);
-		Inmueble inmueble8 = mock (Inmueble.class);
-		Inmueble inmueble9 = mock (Inmueble.class);
-		Inmueble inmueble10 = mock (Inmueble.class);
-		Inmueble inmueble11 = mock (Inmueble.class);
-		Inmueble inmueble12 = mock (Inmueble.class);
-		Inmueble inmueble13 = mock (Inmueble.class);
-		
-
-		Usuario usuario1 = mock(Usuario.class);
-		Usuario usuario2 = mock(Usuario.class);
-		Usuario usuario3 = mock(Usuario.class);
-		Usuario usuario4 = mock(Usuario.class);
-		Usuario usuario5 = mock(Usuario.class);
-		
-		sitio.addUsuario(usuario1);
-		sitio.addUsuario(usuario2);
-		sitio.addUsuario(usuario3);
-		sitio.addUsuario(usuario4);
-		sitio.addUsuario(usuario5);
-		
-		
-		List<Publicacion> lista1 = new ArrayList<>();
-		Publicacion publicacion1 = mock(Publicacion.class);
-		lista1.add(publicacion1);
-		
-		List<Publicacion> lista2 = new ArrayList<>();
-		Publicacion publicacion2 = mock(Publicacion.class);
-		Publicacion publicacion3 = mock(Publicacion.class);
-		when(publicacion2.disponibleHoy(unaFecha)).thenReturn(true);
-		when(publicacion1.getInmueble()).thenReturn(inmueble1);
-		lista2.add(publicacion2);
-		lista2.add(publicacion3);
-		
-		List<Publicacion> lista3 = new ArrayList<>();
-		Publicacion publicacion4= mock(Publicacion.class);
-		Publicacion publicacion5 = mock(Publicacion.class);
-		Publicacion publicacion6= mock(Publicacion.class);
-		Publicacion publicacion7= mock(Publicacion.class);
-		lista3.add(publicacion7);
-		lista3.add(publicacion6);
-		lista3.add(publicacion5);
-		lista3.add(publicacion4);
-		
-		List<Publicacion> lista4 = new ArrayList<>();
-		Publicacion publicacion8 = mock(Publicacion.class);
-		Publicacion publicacion9 = mock(Publicacion.class);
-		lista4.add(publicacion8);
-		lista4.add(publicacion9);
-		
-		when(usuario1.getPublicaciones()).thenReturn(lista1);
-		when(usuario2.getPublicaciones()).thenReturn(lista2);
-		when(usuario3.getPublicaciones()).thenReturn(lista3);
-		when(usuario4.getPublicaciones()).thenReturn(lista4);
-		
-		when(publicacion6.disponibleHoy(unaFecha)).thenReturn(true);
-		
-		when(publicacion6.getInmueble()).thenReturn(inmueble3);
-		
-		when(publicacion1.disponibleHoy(unaFecha)).thenReturn(true);
-		when(publicacion1.getInmueble()).thenReturn(inmueble1);
-		
-		when(publicacion3.disponibleHoy(unaFecha)).thenReturn(true);
-		when(publicacion3.getInmueble()).thenReturn(inmueble2);
-		
-		
-		when(publicacion2.disponibleHoy(null)).thenReturn(false);
-		when(publicacion4.disponibleHoy(null)).thenReturn(false);
-		when(publicacion5.disponibleHoy(null)).thenReturn(false);
-		when(publicacion7.disponibleHoy(null)).thenReturn(false);
-		when(publicacion8.disponibleHoy(null)).thenReturn(false);
-		when(publicacion9.disponibleHoy(null)).thenReturn(false);
-	
-
-		
-		
-		assertEquals(0, sitio.inmueblesLibresHoy().size());
+		@Test
+		void testInmueblesLibreshoy() {
+			// 3 unInmuebles libres
+			Inmueble unInmueble1 = mock (Inmueble.class);
+			Inmueble unInmueble2 = mock (Inmueble.class);
+			Inmueble unInmueble3 = mock (Inmueble.class);
+			
+			Usuario unUsuario1 = mock(Usuario.class);
+			Usuario unUsuario2 = mock(Usuario.class);
+			Usuario unUsuario3 = mock(Usuario.class);
+			Usuario unUsuario4 = mock(Usuario.class);
+			Usuario unUsuario5 = mock(Usuario.class);
+			
+			sitio.addUsuario(unUsuario1);
+			sitio.addUsuario(unUsuario2);
+			sitio.addUsuario(unUsuario3);
+			sitio.addUsuario(unUsuario4);
+			sitio.addUsuario(unUsuario5);
+			
+			
+			List<Publicacion> unaLista1 = new ArrayList<>();
+			Publicacion unaPublicacion1 = mock(Publicacion.class);
+			unaLista1.add(unaPublicacion1);
+			
+			List<Publicacion> unaLista2 = new ArrayList<>();
+			Publicacion unaPublicacion2 = mock(Publicacion.class);
+			Publicacion unaPublicacion3 = mock(Publicacion.class);
+			when(unaPublicacion2.disponibleHoy()).thenReturn(true);
+			when(unaPublicacion1.getInmueble()).thenReturn(unInmueble1);
+			unaLista2.add(unaPublicacion2);
+			unaLista2.add(unaPublicacion3);
+			
+			List<Publicacion> unaLista3 = new ArrayList<>();
+			Publicacion unaPublicacion4= mock(Publicacion.class);
+			Publicacion unaPublicacion5 = mock(Publicacion.class);
+			Publicacion unaPublicacion6= mock(Publicacion.class);
+			Publicacion unaPublicacion7= mock(Publicacion.class);
+			unaLista3.add(unaPublicacion7);
+			unaLista3.add(unaPublicacion6);
+			unaLista3.add(unaPublicacion5);
+			unaLista3.add(unaPublicacion4);
+			
+			List<Publicacion> unaLista4 = new ArrayList<>();
+			Publicacion unaPublicacion8 = mock(Publicacion.class);
+			Publicacion unaPublicacion9 = mock(Publicacion.class);
+			unaLista4.add(unaPublicacion8);
+			unaLista4.add(unaPublicacion9);
+			
+			when(unUsuario1.getPublicaciones()).thenReturn(unaLista1);
+			when(unUsuario2.getPublicaciones()).thenReturn(unaLista2);
+			when(unUsuario3.getPublicaciones()).thenReturn(unaLista3);
+			when(unUsuario4.getPublicaciones()).thenReturn(unaLista4);
+			
+			
+			when(unaPublicacion6.disponibleHoy()).thenReturn(true);
+			when(unaPublicacion1.disponibleHoy()).thenReturn(true);
+			when(unaPublicacion3.disponibleHoy()).thenReturn(true);
+			
+			
+			when(unaPublicacion6.getInmueble()).thenReturn(unInmueble3);		
+			when(unaPublicacion1.getInmueble()).thenReturn(unInmueble1);
+			when(unaPublicacion3.getInmueble()).thenReturn(unInmueble2);
+			
+			
+			when(unaPublicacion2.disponibleHoy()).thenReturn(false);
+			when(unaPublicacion4.disponibleHoy()).thenReturn(false);
+			when(unaPublicacion5.disponibleHoy()).thenReturn(false);
+			when(unaPublicacion7.disponibleHoy()).thenReturn(false);
+			when(unaPublicacion8.disponibleHoy()).thenReturn(false);
+			when(unaPublicacion9.disponibleHoy()).thenReturn(false);
+			
+			
+			assertEquals(3, sitio.inmueblesLibresHoy().size());
 	}
 
 }

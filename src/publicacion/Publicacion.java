@@ -2,6 +2,7 @@ package publicacion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
 import java.util.Set;
 
@@ -137,6 +138,15 @@ public class Publicacion {
 	public boolean disponibleHoy(Calendar fechaActual) {
 		return !this.preciopordiaocupado.stream().filter(d -> d.getFecha().equals(fechaActual)).findFirst().get().estaOcupado();
 	}
+	
+	public boolean disponibleHoy() {
+		System.out.println("Entro a Disponible");
+		Calendar hoy = new GregorianCalendar();
+		//return !this.preciopordiaocupado.stream().filter(d -> d.getFecha(Calendar.DAY_OF_YEAR).equals(fechaActual)).findFirst().get().estaOcupado();
+		return !this.preciopordiaocupado.stream().filter(d -> d.getFecha().get(Calendar.DAY_OF_YEAR) == (hoy.get(Calendar.DAY_OF_YEAR))).findFirst().get().estaOcupado();
+		
+	}
+	
 	
 	/**
 	 * Retorna el precio total en un periodo dado

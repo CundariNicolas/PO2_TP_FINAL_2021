@@ -8,10 +8,12 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
 import usuario.Usuario;
@@ -102,6 +104,10 @@ class SitioTest {
 		assertEquals(sitio.topTenInquilinos().get(3).cantidadDeAlquileres(), 202);
 	}
 	
+	
+	
+	
+	
 	@Test
 	void testTasaDeOcupacion() {
 		
@@ -147,12 +153,6 @@ class SitioTest {
 		assertEquals(3, sitio1.cantidadDeDisponiblesHoy(fecha1));
 		assertEquals(4, sitio1.todasLasPublicaciones());
 		assertEquals(0.25, sitio1.tasaDeOcupacion(fecha1));
-		
-		
-		
-	}
-	
-	
-	
 
+	}
 }
