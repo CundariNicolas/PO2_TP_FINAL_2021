@@ -109,11 +109,10 @@ class SitioTesCaseLibreInmueble {
 		when(publicacion8.disponibleHoy(null)).thenReturn(false);
 		when(publicacion9.disponibleHoy(null)).thenReturn(false);
 	
-		Calendar fechaActual =  Calendar.getInstance();
-		fechaActual.add(Calendar.DAY_OF_MONTH, -50);
+
 		
 		
-		assertEquals(0, sitio.inmueblesLibresHoy(fechaActual).size());
+		assertEquals(0, sitio.inmueblesLibresHoy().size());
 	}
 
 }
