@@ -185,7 +185,7 @@ public class Sitio {
 		List<Usuario> topten = this.getUsuario();
 		topten.sort((u1, u2) -> this.compare(u1, u2));
 		Collections.reverse(topten);
-		return topten.stream().limit(10).toList();
+		return topten.stream().limit(10).collect(Collectors.toList());
 	}
 	
 	/**
