@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +19,7 @@ import inmueble.Inmueble;
 import politicaCancelacion.PoliticaDeCancelacion;
 import reserva.Reserva;
 import sitio.Observador;
+import sitio.Sitio;
 import usuario.Usuario;
 
 class PublicacionTestCase {
@@ -89,7 +91,7 @@ class PublicacionTestCase {
 	
 	/* Test registrarOcupacion */
 	@Test
-	void registrarOcupacion() {
+	void testRegistrarOcupacion() {
 		publicacion1.registrarOcupacion(fecha2, fecha3);
 		assertFalse(dia1.estaOcupado());
 		assertTrue(dia2.estaOcupado());
@@ -99,7 +101,7 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	void registrarCancelacion() {
+	void testRegistrarCancelacion() {
 		publicacion1.registrarOcupacion(fecha1, fecha4);
 		publicacion1.registrarCancelacion(fecha2, fecha3);
 		assertTrue(dia1.estaOcupado());
@@ -109,43 +111,39 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	void noEstaLibreEntre() {
+	void testNoEstaLibreEntre() {
 		publicacion1.registrarOcupacion(fecha1, fecha4);
 		assertFalse(publicacion1.estaLibreEntre(fecha2, fecha3));
 	}
 	
 	@Test
-	void estaLibreEntre() {
+	void testEstaLibreEntre() {
 		assertTrue(publicacion1.estaLibreEntre(fecha2, fecha4));
 	}
 	
 	@Test
-	void medioDePagoHabilitado() {
+	void testMedioDePagoHabilitado() {
 		publicacion1.medioDePagoHabilitado();
 		verify(inmueble, atLeast(1)).getFormaDePago();
 	}
 	
-	@Test
-	void notificarBajaDePrecio() {
-		
-	}
 	
 	@Test
-	void disponibleHoy() {
+	void testDisponibleHoy() {
 		assertTrue(publicacion1.disponibleHoy(fecha2));
 	}
 	@Test
-	void noDisponibleHoy() {
+	void testNoDisponibleHoy() {
 		publicacion1.registrarOcupacion(fecha1, fecha3);
 		assertFalse(publicacion1.disponibleHoy(fecha2));
 	}
 	
 	@Test
-	void precioEnPeriodo() {
+	void testPrecioEnPeriodo() {
 		assertEquals(800, publicacion1.precioEnPeriodo(fecha1, fecha4));
 	}
 	@Test
-	void aplicarPoliticaCancelacion() {
+	void testAplicarPoliticaCancelacion() {
 		Reserva reserva = mock(Reserva.class);
 		PoliticaDeCancelacion politica = mock(PoliticaDeCancelacion.class);
 		
@@ -158,31 +156,31 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	void getInmueble() {
+	void testGetInmueble() {
 		assertEquals(inmueble, publicacion1.getInmueble());
 	}
 	
 	@Test
-	void getFechaInicioPublicacion() {
+	void testGetFechaInicioPublicacion() {
 		assertEquals(inicio, publicacion1.getFechaInicioPublicacion());
 	}
 
 	@Test
-	void getFechaFin() {
+	void testGetFechaFin() {
 		assertEquals(fin, publicacion1.getFechaFin());
 	}
 	
 	@Test
-	void getFotos() {
+	void testGetFotos() {
 		assertEquals(fotos, publicacion1.getFotos());
 	}
 	
 	@Test
-	void getPrecio() {
+	void testGetPrecio() {
 		assertEquals(precioPorDia, publicacion1.getPrecio());
 	}
 	@Test
-	void getCiudadInmueble() {
+	void testGetCiudadInmueble() {
 		when(inmueble.getCiudad()).thenReturn("Quilmes");
 		publicacion1.getCiudadInmueble();
 		verify(inmueble,atLeast(1)).getCiudad();
@@ -190,7 +188,32 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	void getPropietario() {
+	void testGetPropietario() {
 		assertEquals(usuario, publicacion1.getPropietario());
+	}
+	
+	@Test
+	void testNotificarBajaEnPrecio() {
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			Sitio sitio;
+			sitio = mock(Sitio.class);
+			Usuario usuario;
+			usuario = mock(Usuario.class);
+			PrecioDiaOcupacion preciosPorDia = mock(PrecioDiaOcupacion.class);
+			
+			usuario.addPublicacion(publicacion1);
+			sitio.addUsuario(usuario);
+			
+			preciosPorDia.setPrecio(10, publicacion1);
+			verify(sitio, times(1));
+			Sitio.procesarBajaDePrecio(publicacion1);;
+		}
+		
+		
+		
+		
+		
 	}
 }

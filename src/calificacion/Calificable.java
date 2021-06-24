@@ -7,5 +7,6 @@ public interface Calificable {
 	
 	public void setCalificacion(Calificacion unaCalificaion);
 	public List <Calificacion> getCalificaciones();
+	
 
 }
