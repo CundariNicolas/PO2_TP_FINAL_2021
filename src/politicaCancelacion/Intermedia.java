@@ -12,6 +12,11 @@ public class Intermedia extends PoliticaDeCancelacion {
 		super();
 	}
 
+	 /**
+	  * Hasta 20 dias antes es gratuita, entre el dia 19 anterior y el
+	  *	dia 10 anterior paga el 50 %, después del 10mo dia paga la totalidad
+	  * {@link PoliticaDeCancelacion}
+	  */
 	@Override
 	protected void setMulta(Reserva reserva) {
 		if (this.diferenciaEnDias >= 10) {
@@ -21,6 +26,9 @@ public class Intermedia extends PoliticaDeCancelacion {
 
 	}
 
+	/**
+	 * {@link PoliticaDeCancelacion}
+	 */
 	@Override
 	protected boolean condicion() {
 		return (this.diferenciaEnDias < 20);
