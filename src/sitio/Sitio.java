@@ -2,14 +2,15 @@
 package sitio;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import calificacion.Calificable;
 import calificacion.Calificacion;
 import categoria.Categoria;
 import formasDePago.FormaDePago;
+import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
 import usuario.Usuario;
@@ -172,8 +174,33 @@ public class Sitio {
 	}
 
 	public ArrayList<Publicacion> buscarPublicacion(CriterioBasico criterio){
+	
 		return criterio.lasQueCumplen(usuario.stream().flatMap(u -> u.getPublicaciones().stream()).collect(Collectors.toCollection(ArrayList::new)));
+	
 	}
+	
+	
+	
+	public List <Inmueble> inmueblesLibresHoy() {
+		List<Inmueble> inmueblesLibres= new ArrayList<Inmueble>();
+		List<Publicacion> publicacionesDeUsuario =new ArrayList<Publicacion>();
+		Calendar hoy =  Calendar.getInstance();
+		
+		for (Usuario unUsuario : Sitio.usuario) {
+			
+				unUsuario.getPublicaciones().forEach(unaPublicacion-> publicacionesDeUsuario.add(unaPublicacion));
+				
+				for(Publicacion unaPublicacion: publicacionesDeUsuario ) {
+					 if (unaPublicacion.disponibleHoy(hoy)) {
+						 
+						 inmueblesLibres.add(unaPublicacion.getInmueble());
+					 } 
+				 }
+		}
+		
+		return inmueblesLibres;
+	}
+		
 	
 }
 

@@ -4,18 +4,17 @@ package usuario;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import calificacion.Calificable;
 import calificacion.Calificacion;
-import categoria.Categoria;
+
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
 
 
-public class Usuario implements Calificable, Comparable{
+public class Usuario implements Calificable{
 	private String nombre;
 	private String apellido;
 	private String domicilio;
@@ -154,17 +153,14 @@ public class Usuario implements Calificable, Comparable{
 		}
 		return cuenta;
 	}
+	
 
 	@Override
 	public void setCalificacion(Calificacion unaCalificacion) {
 		this.getCalificaciones().add(unaCalificacion);
 	}
-
-	@Override
-	public int compareTo(Object o) {
-		Usuario otroUsuario = (Usuario) o;
-		
-		return this.cantidadTotalDeAlquileres().compareTo(otroUsuario.cantidadTotalDeAlquileres());
-	}
+	
+	
+	
 }
 

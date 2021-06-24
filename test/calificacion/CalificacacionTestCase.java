@@ -43,12 +43,20 @@ class CalificacacionTestCase {
 	
 	@Test
 	void noSePuedeCalificarFueraDelRango() {
-		int puntaje = 4;
+		int puntajeCorrecto = 4;
 		int valorErroneo1 = 0;
 		int valorErroneo2 = 6;
 		int valorErroneo3 = -1;
-		calificacion.setPuntaje(puntaje);
-		assertEquals(puntaje, calificacion.getPuntaje());
+		calificacion.setPuntaje(puntajeCorrecto);
+		
+		calificacion.setPuntaje(valorErroneo1);
+		assertEquals(puntajeCorrecto, calificacion.getPuntaje());
+		
+		calificacion.setPuntaje(valorErroneo2);
+		assertEquals(puntajeCorrecto, calificacion.getPuntaje());
+		
+		calificacion.setPuntaje(valorErroneo3);
+		assertEquals(puntajeCorrecto, calificacion.getPuntaje());
 		
 	}
 
