@@ -6,6 +6,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +22,11 @@ class SitioTest {
 	Reserva reserva = mock(Reserva.class);
 	Publicacion publicacion = mock(Publicacion.class);
 	ObserverManager manager = mock(ObserverManager.class);
+	
+	Publicacion publicacion1 = mock(Publicacion.class);
+	Publicacion publicacion2 = mock(Publicacion.class);
+	Publicacion publicacion3 = mock(Publicacion.class);
+	Publicacion publicacion4 = mock(Publicacion.class);
 
 	@BeforeEach
 	void setUP() {
@@ -85,18 +93,62 @@ class SitioTest {
 		sitio.addUsuario(usuario10);
 		sitio.addUsuario(usuario11);
 		sitio.addUsuario(usuario12);
-		
-		System.out.println("size " + sitio.topTenInquilinos().size());
-		System.out.println("0 cantidad=" + sitio.topTenInquilinos().get(0).cantidadDeAlquileres());
-		System.out.println("1 cantidad=" + sitio.topTenInquilinos().get(1).cantidadDeAlquileres());
-		System.out.println("2 cantidad=" + sitio.topTenInquilinos().get(2).cantidadDeAlquileres());
-		System.out.println("3 cantidad=" + sitio.topTenInquilinos().get(3).cantidadDeAlquileres());
+	
 		
 		assertEquals(sitio.topTenInquilinos().size(), 10);
 		assertEquals(sitio.topTenInquilinos().get(0).cantidadDeAlquileres(), 2000);
 		assertEquals(sitio.topTenInquilinos().get(1).cantidadDeAlquileres(), 404);
 		assertEquals(sitio.topTenInquilinos().get(2).cantidadDeAlquileres(), 400);
 		assertEquals(sitio.topTenInquilinos().get(3).cantidadDeAlquileres(), 202);
+	}
+	
+	@Test
+	void testCantidadDeDisponiblesHoy() {
+		
+		
+		
+		Sitio sitio1 = Sitio.getInstance();
+		
+		Calendar fecha1 = mock(Calendar.class);
+		Calendar fecha2 = mock(Calendar.class);
+		
+		Usuario usuario1 = mock(Usuario.class);
+		Usuario usuario2 = mock(Usuario.class);
+		Usuario usuario3 = mock(Usuario.class);
+		Usuario usuario4 = mock(Usuario.class);
+		
+		ArrayList<Publicacion> publicaciones1= new ArrayList<Publicacion>();
+		ArrayList<Publicacion> publicaciones2= new ArrayList<Publicacion>();
+		ArrayList<Publicacion> publicaciones3= new ArrayList<Publicacion>();
+		ArrayList<Publicacion> publicaciones4= new ArrayList<Publicacion>();
+		
+		publicaciones1.add(publicacion1);
+		publicaciones2.add(publicacion2);
+		publicaciones3.add(publicacion3);
+		publicaciones4.add(publicacion4);
+		
+		when(usuario1.getPublicaciones()).thenReturn(publicaciones1);
+		when(usuario2.getPublicaciones()).thenReturn(publicaciones2);
+		when(usuario3.getPublicaciones()).thenReturn(publicaciones3);
+		when(usuario4.getPublicaciones()).thenReturn(publicaciones4);
+		
+		when(publicacion1.disponibleHoy(fecha1)).thenReturn(true);
+		when(publicacion2.disponibleHoy(fecha2)).thenReturn(true);
+		when(publicacion3.disponibleHoy(fecha2)).thenReturn(true);
+		when(publicacion4.disponibleHoy(fecha2)).thenReturn(true);
+	
+		
+		
+		
+		sitio1.addUsuario(usuario1);
+		sitio1.addUsuario(usuario2);
+		sitio1.addUsuario(usuario3);
+		sitio1.addUsuario(usuario4);
+		
+		assertEquals(1, sitio1.cantidadDeDisponiblesHoy());
+		
+		
+		
 	}
 
 }

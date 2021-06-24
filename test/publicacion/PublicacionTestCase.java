@@ -194,24 +194,8 @@ class PublicacionTestCase {
 	
 	@Test
 	void testNotificarBajaEnPrecio() {
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			Sitio sitio;
-			sitio = mock(Sitio.class);
-			Usuario usuario;
-			usuario = mock(Usuario.class);
-			PrecioDiaOcupacion preciosPorDia = mock(PrecioDiaOcupacion.class);
-			
-			usuario.addPublicacion(publicacion1);
-			sitio.addUsuario(usuario);
-			
-			preciosPorDia.setPrecio(10, publicacion1);
-			verify(sitio, times(1));
-			Sitio.procesarBajaDePrecio(publicacion1);;
-		}
 		
-		
+			
 		
 		
 		

@@ -2,6 +2,7 @@
 package sitio;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -56,7 +57,7 @@ public class Sitio {
 		Sitio.gestorDeNotificaciones = gestorDeNotificaciones;
 	}
 
-	private List<Usuario> getUsuario() {
+	public List<Usuario> getUsuario() {
 		return usuario;
 	}
 
@@ -188,6 +189,19 @@ public class Sitio {
 		topten.sort((u1, u2) -> this.compare(u1, u2));
 		Collections.reverse(topten);
 		return topten.stream().limit(10).toList();
+	}
+	
+	
+	public double tasaDeOcupacion() {
+		return (this.todasLasPublicaciones() - this.cantidadDeDisponiblesHoy()) / this.todasLasPublicaciones();
+	}
+	
+	public long todasLasPublicaciones() {
+		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).count();
+	}
+	
+	public long cantidadDeDisponiblesHoy() {
+		return this.getUsuario().stream().flatMap(u -> u.getPublicaciones().stream()).filter(p -> p.disponibleHoy(Calendar.getInstance())).count();
 	}
 	
 	  public int compare(Usuario o1, Usuario o2) {
