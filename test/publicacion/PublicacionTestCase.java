@@ -19,6 +19,7 @@ import inmueble.Inmueble;
 import politicaCancelacion.PoliticaDeCancelacion;
 import reserva.Reserva;
 import sitio.Observador;
+import sitio.ObserverManager;
 import sitio.Sitio;
 import usuario.Usuario;
 
@@ -193,11 +194,10 @@ class PublicacionTestCase {
 	}
 	
 	@Test
-	void testNotificarBajaEnPrecio() {
-		
-			
-		
-		
-		
+	void testSetPrecio() {
+		ArrayList<PrecioDiaOcupacion> precios1 = new ArrayList<PrecioDiaOcupacion>();
+		publicacion1.setPrecioPeriodo(precios1);
+		assertEquals(precios1, publicacion1.getPrecio());
 	}
+	
 }

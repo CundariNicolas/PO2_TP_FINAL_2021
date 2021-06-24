@@ -242,6 +242,10 @@ public List <Inmueble> inmueblesLibresHoy() {
 	                compareTo(persona2.cantidadDeAlquileres());
 	               
 	    }
+	  
+	  public Set<FormaDePago> getFormasDePago(){
+		  return this.formasDePago;
+	  }
 	
 	
 	}

@@ -8,14 +8,20 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import calificacion.Calificacion;
+import categoria.Categoria;
+import formasDePago.FormaDePago;
 import inmueble.Inmueble;
 import publicacion.Publicacion;
 import reserva.Reserva;
+import servicios.Servicio;
+import tipoInmueble.TipoDeInmueble;
 import usuario.Usuario;
 
 class SitioTest {
@@ -155,4 +161,55 @@ class SitioTest {
 		assertEquals(0.25, sitio1.tasaDeOcupacion(fecha1));
 
 	}
+	
+	@Test
+	void testGetFormasDePago() {
+		HashSet<FormaDePago> formadepagos = new HashSet<FormaDePago>();
+		FormaDePago formadepago1 = mock(FormaDePago.class);
+		sitio.addFormaDePago(formadepago1);
+		formadepagos.add(formadepago1);
+		assertEquals(formadepagos, sitio.getFormasDePago());
+	}
+	
+	@Test
+	void testGetTiposDeInmueble() {
+		HashSet<TipoDeInmueble> inmuebles = new HashSet<TipoDeInmueble>();
+		TipoDeInmueble inmueble = mock(TipoDeInmueble.class);
+		sitio.addTipoInmueble(inmueble);
+		inmuebles.add(inmueble);
+		assertEquals(inmuebles, sitio.getTiposDeInmuebles());
+	}
+	
+	@Test
+	void testCalificar() {
+		Usuario usuario = mock(Usuario.class);
+		Calificacion calificacion = mock(Calificacion.class);
+		when(reserva.estaFinalizada()).thenReturn(true);
+		
+		sitio.calificar(usuario, reserva, calificacion);
+		verify(usuario, times(1)).setCalificacion(calificacion);
+		verify(reserva, times(1)).estaFinalizada();
+	}
+	
+	@Test
+	void testGetServicioe() {
+		HashSet<Servicio> inmuebles = new HashSet<Servicio>();
+		Servicio servicio = mock(Servicio.class);
+		sitio.addServicio(servicio);
+		inmuebles.add(servicio);
+		assertEquals(inmuebles, sitio.getServicios());
+	}
+	
+	
+	@Test
+	void testAddCategoria() {
+		Categoria  categoria = mock(Categoria.class);
+		
+		assertDoesNotThrow(() -> sitio.addCategoria(categoria));
+		
+	}
+	
+	
+	
+	
 }
