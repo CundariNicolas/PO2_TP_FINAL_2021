@@ -1,8 +1,13 @@
 package publicacion;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,12 +22,18 @@ class PrecioDiaOcupacionTestCase {
 	boolean ocupado;
 	double precio;
 	
+	Publicacion publicacion;
+	
+	
 
 	@BeforeEach
 	void setUp() throws Exception {
 		precio = 20;
 		fecha = mock(Calendar.class);
 		preciosPorDia = new PrecioDiaOcupacion(fecha, precio);
+		publicacion = mock(Publicacion.class);
+		
+		
 		
 	}
 
@@ -63,5 +74,20 @@ class PrecioDiaOcupacionTestCase {
 		assertFalse(preciosPorDia.estaOcupado());
 		
 	}
+	
+	@Test
+	void testSetPrecioMenor() {
+		preciosPorDia.setPrecio(10, publicacion);
+		verify(publicacion, times(1)).notificarBajaEnPrecio();;
+		
+		
+	}
+	@Test
+	void testSetPrecioNoMenor() {
+		preciosPorDia.setPrecio(30, publicacion);
+		verify(publicacion, times(0)).notificarBajaEnPrecio();;
+		
+	}
+
 
 }
