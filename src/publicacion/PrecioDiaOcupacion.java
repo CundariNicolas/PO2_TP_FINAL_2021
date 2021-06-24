@@ -7,30 +7,63 @@ public class PrecioDiaOcupacion {
 	private boolean ocupado;
 	private double precio;
 	
+	
+	/**
+	 * Retorna una instancia de PrecioDiaOcupacion
+	 * @param fecha Calendar
+	 * @param precio double
+	 * @return PrecioDiaOcupacion
+	 */
 	public PrecioDiaOcupacion(Calendar fecha, double precio) {
-		/** constructor de un dia con su precio */
+		
 		this.fecha = fecha;
 		this.precio = precio;
 		this.ocupado = false;
 	}
+	
+	/**
+	 * Indica si esta ocupado el inmueble al que esta asociado
+	 * @return boolean
+	 */
 	public boolean estaOcupado() {
-		/** retorna  si el dia esta ocupado */
+		
 		return ocupado;
 	}
+	
+	/**
+	 * Retorna la fecha del dia que representa
+	 * @return Calendar
+	 */
 	public Calendar getFecha() {
-		/** la fecha de el dia representado */
+		
 		return fecha;
 	}
 	
+	/**
+	 * Retorna el precio del dia representado
+	 * @return double
+	 */
 	public double getPrecio() {
-		/** el precio del dia representado */
+		
 		return precio;
 	}
 	
+	/**
+	 * Setea el precio
+	 * @param precio double
+	 * @return void
+	 */
 	public void setPrecio(double precio) {
-		/** cambia el precio por dia */
+		
 		this.precio = precio;
 	}
+	
+	/**
+	 * Cambia el precio de un dia dado y si es menor al anterior, la publicacion notifica la baja de precio
+	 * @param precio double
+	 * @param publicacion Publicacion
+	 * @return void
+	 */
 	public void setPrecio(double precio, Publicacion publicacion) {
 		if(precio <= this.getPrecio()) {
 			publicacion.notificarBajaEnPrecio();
@@ -38,12 +71,19 @@ public class PrecioDiaOcupacion {
 		this.setPrecio(precio);
 	}
 	
+	
+	/**Cambia el estado a ocupado
+	 * @return void
+	 */
 	public void setOcupado() {
-		/** cambia el estado a ocupado */
 		this.ocupado = true;
 	}
+	
+	/**Cambia el estado a libre
+	 * @return void
+	 */
 	public void setLibre() {
-		/** cambia el estado a desocupado */
+		
 		this.ocupado = false;
 	}
 }
