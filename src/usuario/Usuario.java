@@ -15,7 +15,7 @@ import publicacion.Publicacion;
 import reserva.Reserva;
 
 
-public class Usuario implements Calificable{
+public class Usuario implements Calificable, Comparable{
 	private String nombre;
 	private String apellido;
 	private String domicilio;
@@ -158,6 +158,13 @@ public class Usuario implements Calificable{
 	@Override
 	public void setCalificacion(Calificacion unaCalificacion) {
 		this.getCalificaciones().add(unaCalificacion);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Usuario otroUsuario = (Usuario) o;
+		
+		return this.cantidadTotalDeAlquileres().compareTo(otroUsuario.cantidadTotalDeAlquileres());
 	}
 }
 

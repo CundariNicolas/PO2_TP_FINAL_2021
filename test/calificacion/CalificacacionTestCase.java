@@ -15,7 +15,7 @@ class CalificacacionTestCase {
 	Categoria unaCategoria;//DOC
 	Usuario unUsuario; //DOC
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception { 
 		unaCategoria = mock(Categoria.class);
 		unUsuario = mock (Usuario.class);
 		calificacion = new Calificacion(unaCategoria);
@@ -30,7 +30,7 @@ class CalificacacionTestCase {
 	
 	@Test
 	void sePuedeSetearUnPuntaje() {
-		int puntaje = 10;
+		int puntaje = 5;
 		calificacion.setPuntaje(puntaje);
 		assertEquals(puntaje, calificacion.getPuntaje());
 	}
@@ -39,6 +39,17 @@ class CalificacacionTestCase {
 	void sePuedeSetearUnUsuario() {
 		calificacion.setOrigen(unUsuario);
 		assertEquals(unUsuario, calificacion.getOrigen());
+	}
+	
+	@Test
+	void noSePuedeCalificarFueraDelRango() {
+		int puntaje = 4;
+		int valorErroneo1 = 0;
+		int valorErroneo2 = 6;
+		int valorErroneo3 = -1;
+		calificacion.setPuntaje(puntaje);
+		assertEquals(puntaje, calificacion.getPuntaje());
+		
 	}
 
 }

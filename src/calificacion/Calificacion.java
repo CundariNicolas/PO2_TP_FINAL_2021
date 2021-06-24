@@ -21,11 +21,13 @@ public class Calificacion  {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	public Integer getPuntaje() {
+	public Integer getPuntaje() { 
 		return puntaje;
 	}
 	public void setPuntaje(Integer puntaje) {
-		this.puntaje = puntaje;
+		if (this.puntajeAdmitido(puntaje)) {
+			this.puntaje = puntaje;	
+		}
 	}
 	public String getComentario() {
 		return comentario;
@@ -38,6 +40,11 @@ public class Calificacion  {
 	}
 	public void setOrigen(Usuario origen) {
 		this.origen = origen;
+	}
+	
+	private boolean puntajeAdmitido(int puntaje) {
+		return puntaje > 0 && puntaje <= 5;
+		
 	}
 }
 	
