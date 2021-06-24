@@ -39,11 +39,13 @@ class PublicacionTestCase {
 	Calendar fecha2;
 	Calendar fecha3;
 	Calendar fecha4;
+	Calendar fecha5;
 	
 	PrecioDiaOcupacion dia1;
 	PrecioDiaOcupacion dia2;
 	PrecioDiaOcupacion dia3;
 	PrecioDiaOcupacion dia4;
+	PrecioDiaOcupacion dia5;
 	
 	Reserva reserva;
 	PoliticaDeCancelacion politica;
@@ -76,15 +78,19 @@ class PublicacionTestCase {
 	
 	fecha4.set(2000, 6, 13, 10, 10, 10);
 	
+	fecha5 = Calendar.getInstance();
+	
 	dia1 = new PrecioDiaOcupacion(fecha1, 200);
 	dia2 = new PrecioDiaOcupacion(fecha2, 200);
 	dia3 = new PrecioDiaOcupacion(fecha3, 200);
 	dia4 = new PrecioDiaOcupacion(fecha4, 200);
+	dia5 = new PrecioDiaOcupacion(fecha5, 400);
 	
 	precioPorDia.add(dia1);
 	precioPorDia.add(dia2);
 	precioPorDia.add(dia3);
 	precioPorDia.add(dia4);
+	precioPorDia.add(dia5);
 	// SUT
 		publicacion1 = new Publicacion(usuario, inmueble, inicio, fin, fotos, precioPorDia);
 
@@ -132,6 +138,7 @@ class PublicacionTestCase {
 	@Test
 	void testDisponibleHoy() {
 		assertTrue(publicacion1.disponibleHoy(fecha2));
+		assertTrue(publicacion1.disponibleHoy());
 	}
 	@Test
 	void testNoDisponibleHoy() {

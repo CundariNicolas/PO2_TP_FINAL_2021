@@ -209,6 +209,20 @@ class SitioTest {
 		
 	}
 	
+	@Test
+	void testProcesarBajaDePrecio() {
+		PaginaWeb pagina = mock(PaginaWeb.class);
+		Inmueble inmueble = mock(Inmueble.class);
+		manager = ObserverManager.getInstance();
+		
+		when(publicacion.getInmueble()).thenReturn(inmueble);
+		when(pagina.getPublicacion()).thenReturn(publicacion);
+		manager.suscribirABajaDePrecio(pagina);
+		
+		sitio.procesarBajaDePrecio(publicacion);
+		verify(publicacion, times(2)).getInmueble();
+	}
+	
 	
 	
 	

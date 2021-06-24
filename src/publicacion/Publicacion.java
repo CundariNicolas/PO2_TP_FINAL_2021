@@ -140,7 +140,7 @@ public class Publicacion {
 	}
 	
 	public boolean disponibleHoy() {
-		System.out.println("Entro a Disponible");
+		
 		Calendar hoy = new GregorianCalendar();
 		//return !this.preciopordiaocupado.stream().filter(d -> d.getFecha(Calendar.DAY_OF_YEAR).equals(fechaActual)).findFirst().get().estaOcupado();
 		return !this.preciopordiaocupado.stream().filter(d -> d.getFecha().get(Calendar.DAY_OF_YEAR) == (hoy.get(Calendar.DAY_OF_YEAR))).findFirst().get().estaOcupado();
@@ -174,7 +174,7 @@ public class Publicacion {
 	 * @return Stream<PrecioDiaOcupacion>
 	 */
 	private Stream<PrecioDiaOcupacion> getPeriodoEspecificado(Calendar inicio, Calendar fin){
-		return this.preciopordiaocupado.stream().filter(p -> p.getFecha().after(inicio) || p.getFecha().equals(inicio) && p.getFecha().before(fin) || p.getFecha().equals(fin));
+		return this.preciopordiaocupado.stream().filter(p -> (p.getFecha().after(inicio) || p.getFecha().equals(inicio)) && (p.getFecha().before(fin) || p.getFecha().equals(fin)));
 	}
 	
 
