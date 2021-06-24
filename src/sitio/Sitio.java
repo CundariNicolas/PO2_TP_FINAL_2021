@@ -140,7 +140,7 @@ public class Sitio {
 	
 	}
 	
-	private double promedioDe(Calificable calificable, Categoria unaCategoria) {
+	public double promedioDe(Calificable calificable, Categoria unaCategoria) {
 		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 		double acumuladorDePuntaje = 0.0;
 		calificaciones = calificable.getCalificaciones().stream().

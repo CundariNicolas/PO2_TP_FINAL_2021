@@ -42,17 +42,11 @@ class SitioTestBuscarPublicacion {
 		Calendar fecha2;
 		Usuario usuario;
 		
-		Inmueble inmueble1;
-		Inmueble inmueble2;
-		
-		CriterioHuesped criterioHuesped;
-		CriterioPrecio criterioPrecio;
+	
 		
 		fecha1 = mock(Calendar.class);
 		fecha2 = mock(Calendar.class);
 		
-		inmueble1 = mock(Inmueble.class);
-		inmueble2 = mock(Inmueble.class);
 		
 		usuario = mock(Usuario.class);
 
@@ -64,10 +58,9 @@ class SitioTestBuscarPublicacion {
 		publicaciones.add(publicacion4);
 
 		
-		//SUT
+		
 		criterio = new CriterioBasico("Quilmes", fecha1, fecha2);
-		criterioHuesped = new CriterioHuesped(4);
-		criterioPrecio = new CriterioPrecio(10.0, 100.0);
+
 		
 		when(publicacion1.getCiudadInmueble()).thenReturn("Quilmes");
 		when(publicacion2.getCiudadInmueble()).thenReturn("Quilmes");
