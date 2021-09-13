@@ -10,7 +10,8 @@ import categoria.Categoria;
 import usuario.Usuario;
 //Test Prueba
 class CalificacacionTestCase {
-
+//Sigo Probando cosas
+	
 	Calificacion calificacion;//SUT
 	Categoria unaCategoria;//DOC
 	Usuario unUsuario; //DOC
