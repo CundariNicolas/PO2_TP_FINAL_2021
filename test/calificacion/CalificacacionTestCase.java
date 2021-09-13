@@ -11,6 +11,7 @@ import usuario.Usuario;
 //Test Prueba
 class CalificacacionTestCase {
 //Sigo Probando cosas
+//Sigo aqui probando
 	
 	Calificacion calificacion;//SUT
 	Categoria unaCategoria;//DOC
@@ -19,8 +20,7 @@ class CalificacacionTestCase {
 	void setUp() throws Exception { 
 		unaCategoria = mock(Categoria.class);
 		unUsuario = mock (Usuario.class);
-		calificacion = new Calificacion(unaCategoria);
-		
+		calificacion = new Calificacion(unaCategoria);	
 	}
 
 	@Test
