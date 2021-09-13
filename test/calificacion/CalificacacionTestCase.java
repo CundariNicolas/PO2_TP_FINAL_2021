@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import categoria.Categoria;
 import usuario.Usuario;
-
+//Test Prueba
 class CalificacacionTestCase {
 
 	Calificacion calificacion;//SUT
